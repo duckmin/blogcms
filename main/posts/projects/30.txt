@@ -1,0 +1,2 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:27:"The River Delta **EDITIED**";}i:1;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:37:"this will be a new post
+will I edit??";}i:2;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:52:"http://localhost/templater/main/pics/test/amazon.jpg";}}

@@ -1,0 +1,1 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:8:"cszxczcz";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:54:"http://localhost/templater/main/pics/amazon/mememe.jpg";}i:2;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:32:"This dude really loves Jenikwa!!";}}

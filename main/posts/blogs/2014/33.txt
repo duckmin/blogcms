@@ -1,0 +1,1 @@
+a:2:{i:0;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:45:"I have canceled edit mode now make a new post";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:82:"http://localhost/templater/main/pics/amazon/endangered-animals-in-the-amazon-8.jpg";}}

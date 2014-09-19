@@ -1,0 +1,41 @@
+
+body {
+
+}
+ 
+
+ul.tab-top{
+	list-style-type:none;
+	margin:10px 0 0 0;
+	padding:5px;
+}
+
+ul.tab-top > li{
+	display:inline;
+	padding:5px;
+	background-color:lightblue;
+	border-top:1px solid black;
+	border-left:1px solid black;
+	border-right:1px solid black;
+	border-bottom:1px solid black;
+}
+
+ul.tab-top > li:hover{
+	cursor:pointer;
+}
+
+ul.tab-top > li.selected-tab{
+	border-bottom:1px solid lightblue;
+}
+
+[data-tabsection]{
+	min-height:300px;
+	border:1px solid black;
+	display:none;
+	background-color:lightblue;
+	padding-bottom:10px;
+}
+
+section.selected-section{
+	display:block;
+}

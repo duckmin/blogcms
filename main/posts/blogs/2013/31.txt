@@ -1,0 +1,1 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:22:"Now EEL Cal Editer****";}i:1;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:73:"The EEl cal I edited a post now i create this one!! EDDDIIIITT  EDDDIITTT";}i:2;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:57:"http://localhost/templater/main/pics/test/electricell.jpg";}}

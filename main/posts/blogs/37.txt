@@ -1,0 +1,5 @@
+a:4:{i:0;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:31:"fvsvfsdfdsf dsf
+ds f
+dsf
+dsf
+sd";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:54:"http://localhost/templater/main/pics/amazon/monkey.jpg";}i:2;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:56:"http://localhost/templater/main/pics/newfolder/zebra.jpg";}i:3;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:9:"Save Edit";}}

@@ -1,0 +1,1 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:5:"video";s:3:"src";s:40:"http://www.youtube.com/embed/o9POJ2-n0Cs";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:79:"http://localhost/templater/main/pics/amazon/amazon-jungle-vacation-21360833.jpg";}i:2;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:32:"This will go in videos BABABEE!!";}}

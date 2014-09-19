@@ -1,0 +1,7 @@
+<div class="post">
+	<ul>
+		<li><b><a href="{{ base }}/post.php?id={{ id }}">{{ title }}</a></b></li>
+		<li>{{ created }}</li>
+	</ul>
+	{{ inner }}
+</div>

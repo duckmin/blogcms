@@ -1,0 +1,1 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:35:" asdas dsa dfghfjjk kjkhj  kkgj kjk";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:75:"http://localhost/templater/main/pics/amazon/Golden_lion_tamarin-620x350.jpg";}i:2;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:29:"sdas sdasdasdasasdas as das d";}}

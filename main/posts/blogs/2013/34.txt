@@ -1,0 +1,4 @@
+a:3:{i:0;a:2:{s:13:"data-posttype";s:7:"heading";s:4:"text";s:9:"Diggies!!";}i:1;a:2:{s:13:"data-posttype";s:5:"image";s:3:"src";s:30:"http://i.imgur.com/ItkXsmA.jpg";}i:2;a:2:{s:13:"data-posttype";s:9:"paragraph";s:4:"text";s:570:"Correct. I live in Wales, and there are a few farms near me which still use corgis to herd cattle. They bark (constantly) and nip at the heels of the cows, while being low and agile enough to dodge the inevitable kicks. It's quite a sight; a tiny dog rounding up 40+ massive cows.
+
+Quite often they're paired with border collies, which keep their distance more and dictate direction, while the corgis get in close to "drive" the cattle forward. That said, plenty just use corgis; they seem to be equally fine on their own, just a tad slower... the perils of short legs.
+";}}

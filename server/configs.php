@@ -3,10 +3,14 @@ session_start();
 date_default_timezone_set('UTC');
 
 $GLOBALS['index_path'] = dirname(__FILE__)."/../main";
-$GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST']."/templater/main";
+$GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST']."/blogcms/main";
 $GLOBALS['max_kb_img_upload']=500;
 
-$GLOBALS['amount_on_main_page'] = 3;
+$GLOBALS['db_server'] = "localhost";
+$GLOBALS['db_user'] = "root";
+$GLOBALS['db_pw'] = "";
+
+$GLOBALS['amount_on_main_page'] = 4;
 $GLOBALS['amount_on_manger_tab'] = 5;
 
 $GLOBALS['max_category_length'] = 500;

@@ -1,4 +1,4 @@
-window.base_url=window.location.protocol+"//"+window.location.host+"/templater/main";
+window.base_url=window.location.protocol+"//"+window.location.host+"/blogcms/main";
 window.constants={
 	"base_url":base_url,
 	"ajax_url":base_url+"/ajax.php",
@@ -66,32 +66,4 @@ function removeInlineStyle( element, property ){
 	}
 }
 
-/*
-window.input_actions={
-	"centerMessageDisplay":function ( message ){  //only called on manage page uses class from create_style.php
-		var div=createElement('div',{
-			"class":"fixed-message",
-			"child":createElement('h1',{
-				"text":message
-			})
-		});
-		var append=document.body.appendChild( div );//,
-		elm_width=append.clientWidth,
-		height=(append.clientHeight/2)*-1,
-		width=(elm_width/2)*-1;
-		append.style.width=elm_width+'px';
-		append.style.marginTop=height+'px';
-		append.style.marginLeft=width+'px';
-		setTimeout( function(){
-			append.remove();
-		},1800 )
-	},
-	
-	"dispayFormErrorMessageInLoginError":function( form, message ){
-		var login_error=form.getElementsByClassName("login-error");
-		if( login_error.length > 0 ){
-			var text_node=textNode( message );
-			login_error[0].removeChildren().appendChild( text_node );
-		}
-	}
-}*/
+

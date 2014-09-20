@@ -12,7 +12,7 @@
 	class DBHelper
 	{
 		static public function dbConnection(){
-			$conn = new PDO('mysql:host=localhost;dbname=blog', 'root', 'primo1');
+			$conn = new PDO('mysql:host='.$GLOBALS['db_server'].';dbname=blog', $GLOBALS['db_user'], $GLOBALS['db_pw']);
 			//$conn = new PDO('mysql:host=205.178.146.110;dbname=php_blog', 'rogordon', 'Weezer25');
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $conn;

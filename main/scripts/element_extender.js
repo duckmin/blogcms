@@ -632,7 +632,7 @@ function gEBI(id)
 			else if( xmlHttp.status>200 ){
 				if(obj.hasOwnProperty('error') ){
 					if( typeof obj.error==='function' ){
-						obj.error( xmlHttp.status, statusText  )
+						obj.error( xmlHttp.status,  xmlHttp.statusText  )
 					}
 				}
 			}  
@@ -640,3 +640,7 @@ function gEBI(id)
 	}
 
 })( window );
+
+
+
+

@@ -3,7 +3,7 @@ session_start();
 date_default_timezone_set('UTC');
 
 $GLOBALS['index_path'] = dirname(__FILE__)."/../main";
-$GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST']."/blogcms/main";
+$GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST'];
 $GLOBALS['max_kb_img_upload']=500;
 
 $GLOBALS['db_server'] = "localhost";

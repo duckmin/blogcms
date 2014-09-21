@@ -4,7 +4,7 @@
 	$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
-
+	
 	if( /*!$cache->urlInCache()*/true ){
 		
 		if( !isset( $_GET['p'] ) ){ 
@@ -13,7 +13,8 @@
 			$page=(int)$_GET['p'];
 		}
 		
-		$cat = ( isset( $_GET['cat'] ) )? $_GET['cat'] : null;
+		$post_views = new PostViews();		
+		$cat = ( isset( $_GET['cat'] ) )? $_GET['cat'] : $GLOBALS['post_categories'][0];
 		$search = ( isset( $_GET['s'] ) )? $_GET['s'] : null;
 		
 		$tmplt_data = array();
@@ -22,10 +23,10 @@
 		$tmplt_data["styles"] = "";
 		$tmplt_data["scripts"] = "";
 		$tmplt_data["base"] = $base;
+		$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 		
 		$db = DBHelper::dbConnection();
 		$db_getter = new DbGetter( $db );
-		$post_views = new PostViews();
 		$post_controller = new PostController( $db_getter, $post_views );	
 		
 		$tmplt_data["body"] = "<section class='main'>".$post_controller->getHomePagePosts( $page, $cat, $search )."</section>";

@@ -9,12 +9,12 @@ header h1 {
 	font-weight:100;
 }
 
-header > ul > li{
+header > ul > li, section.main > ul.paginator > li{
 	padding:0 0.5rem;
 	border:1px dotted black;
 }
 
-header > ul > li.current-cat{
+header > ul > li.current-cat, section.main > ul.paginator > li.current-cat{
 	border:none;
 }
 
@@ -124,9 +124,14 @@ section.main > ul.paginator > li {
 section.main > ul.paginator > li:nth-child(1){
 	margin-left:1rem;
 }
-
+/*
 section.main > ul.paginator > li:nth-child(2){
 	margin-left:20px;
+}
+*/
+
+section.main > ul.paginator > li.current-page-select{
+	background-color:blue;
 }
 
 

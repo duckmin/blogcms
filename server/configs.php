@@ -51,11 +51,12 @@ function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base
 	$paginator="<ul class='paginator' >";
 	if( $page_num>1 ){
 		$back=$page_num-1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$back."' >Page ".$back."</a></li>";
+		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$back."' >".$back."</a></li>";
 	}
+	$paginator.="<li class='current-cat' >".$page_num."</li>";
 	if( $amount_retrieved > $amount_per_page ){
 		$forward=$page_num+1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$forward."' >Page ".$forward."</a></li>";
+		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$forward."' >".$forward."</a></li>";
 	}
 	return $paginator."</ul>";
 }

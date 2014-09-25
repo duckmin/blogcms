@@ -8,13 +8,15 @@ to set up blog DB and the posts table with some sample data.
 This is the base URL.
 
 *All configs for the application are in /server/configs.php
-find the variable $GLOBALS['base_url'] and change it to the URL you are using to access the index.php page
+-find the variable $GLOBALS['base_url'] and change it to the URL you are using to access the index.php page
+-set $GLOBALS['db_user'] & $GLOBALS['db_password']  to whichever user pw combo you setup for your DB installation
 -example $GLOBALS['base_url'] = "http://localhost:8080/blogcms/main/"
 
-*also set, var base_url = <example>; to the same url you set in the configs file in the javascript file globals.js  
+*also set, var base_url = <example>; to the same url you set as base_url in the configs file in the javascript file /scripts/globals.js  
 
 *you can add/edit/delete postings in the manager.php page
-users for this page are set in the configs file edit that to set your user using the examples provided as a template
+users and passwords for this page are set in the configs.php file 
+edit that variable to set your username and password used to login to manager page using the examples provided as a template
 
 *postings made are sorted by category allowing you to have posts only show up in one category at a time
  you can add as many categories as you wish through the configs file

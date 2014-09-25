@@ -1,3 +1,5 @@
+Mongo Branch will port blogcms to Mongo DB instead of MySql
+
 Blog CMS is a way to manage a blog ( or any paginated content ) through a GUI interface.
 To get setup you want Mysql 5+ PHP5+ and A web server ( I recommend Apache ).
 

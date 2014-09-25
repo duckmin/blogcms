@@ -5,19 +5,12 @@
        
         public function __construct( $template_name ){
             $this->template_name = $template_name;
-        }
-       
-        private function getTemplate(){
-            $tmplt = dirname(__FILE__)."/../templates/".$this->template_name.".txt";
-			if( file_exists( $tmplt ) ){
-				return file_get_contents( $tmplt );
-			}else{
-				return false;
-			}
+			$this->template_file =   dirname(__FILE__)."/../templates/".$this->template_name.".txt";     
+            $this->template = ( file_exists( $this->template_file ) )? file_get_contents( $this->template_file ) : "No template ".$template_name." exists";
         }
 		
 		public function bindTemplate( $data ){
-            $tmplt = $this->getTemplate();
+            $tmplt =  $this->template;
 			if( $tmplt ){
 				$binded = preg_replace_callback( "/{{\s*([A-z_]+)\s*}}/", function( $m ) use( $data ){
 					$key = strtolower( $m[1] );

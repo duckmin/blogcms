@@ -7,12 +7,16 @@
 	$items = $getter->getHomePagePostsFromDbByCategory( 1, "blog" );
 	$formatter = new PostViews();
 	foreach ($items as $document) {
-    	echo print_r( $document );
+    	//echo print_r( $document );
     	//echo $formatter->makePostHtmlFromData( $document );
 		//$i = new MongoId( $document["_id"] );    	
     	//echo $i->__toString()."<br>";
     	//echo $i->getTimestamp()."<br>";
-	}	
+	}
+	
+	$date =1344988800;
+	$dt = new DateTime("@$date");
+	echo $dt->format('Y-m-d H:i:s');
 	//echo var_dump( $items );
 	/*$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];

@@ -8,8 +8,10 @@
 		
 		public function makePostHtmlFromData( $row ){
 			$structure = array();		
-			$id = new MongoId( $row["_id"] );    	  	    
-			$structure["created"] = $id->getTimestamp();			
+			$id = new MongoId( $row["_id"] ); 
+			$time_stamp = $id->getTimestamp();
+			$dt = new DateTime("@$time_stamp");	   	  	    
+			$structure["created"] = $dt->format('m-d-Y H:i:s');		
 			$structure["title"] = $row["title"];    	    
     	    $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
 			$structure["id"] = $id->__toString();

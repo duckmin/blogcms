@@ -6,21 +6,22 @@
 		
 		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
 		
-		public function makePostHtmlFromData( $row, $post_data  ){
-			if( $post_data !== false ){
-				$row["inner"] = $this::formatSinglePost( $post_data );
-				$row["base"] = $GLOBALS['base_url'];
-				$post_tmplt = new TemplateBinder( "blog_post" );
-				return $post_tmplt->bindTemplate( $row );
-			}else{
-				return "";
-			}
+		public function makePostHtmlFromData( $row ){
+			$structure = array();		
+			$id = new MongoId( $row["_id"] );    	  	    
+			$structure["created"] = $id->getTimestamp();			
+			$structure["title"] = $row["title"];    	    
+    	    $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
+			$structure["id"] = $id->__toString();
+			$structure["base"] = $GLOBALS['base_url'];
+			$post_tmplt = new TemplateBinder( "blog_post" );
+			return $post_tmplt->bindTemplate( $structure );	
 		}
 		
-		public function getPostHTMLFromDBData( $row ){
+		/*public function getPostHTMLFromDBData( $row ){
 			$post_data = $this->getPostFileArrayData( $row );
 			return $this->makePostHtmlFromData( $row, $post_data );
-		}
+		}*/
 		
 		public function getCatHeaderList( $cat = "" ){
 			$str = "";			

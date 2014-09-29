@@ -10,8 +10,8 @@ $GLOBALS['db_server'] = "localhost";
 $GLOBALS['db_user'] = "root";
 $GLOBALS['db_pw'] = "";
 
-$GLOBALS['amount_on_main_page'] = 4;
-$GLOBALS['amount_on_manger_tab'] = 5;
+$GLOBALS['amount_on_main_page'] = 2;
+$GLOBALS['amount_on_manger_tab'] = 2;
 
 $GLOBALS['max_category_length'] = 500;
 $GLOBALS['max_title_length'] = 500;

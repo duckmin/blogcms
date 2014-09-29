@@ -15,10 +15,10 @@
 	}
 	
 	try{		
-		$db_conn = DBHelper::dbConnection();
-		$db_getter = new DbGetter( $db_conn );
-		$posts = $db_getter->getBlogManagePosts( $page_num );
-
+		$db = new MongoClient();
+		$db_getter = new MongoGetter( $db );
+		$posts = iterator_to_array ( $db_getter->getBlogManagePosts( $page_num ) );
+		
 		if( count( $posts ) > $GLOBALS['amount_on_manger_tab'] ){
 			array_pop( $posts );
 			$next=true;
@@ -27,9 +27,12 @@
 		}
 		
 		$modified_array=array();
-		foreach( $posts as $post ){ 
-			$post["post_type_options"] = getSelectedOption( $post['category'] );
-			array_push( $modified_array, $post );
+		foreach( $posts as $row ){ 			
+			$row["post_type_options"] = getSelectedOption( $row['category'] );
+			$id = new MongoId( $row["_id"] );    	  	    
+			$row["created"] = $id->getTimestamp();			    	    
+			$row["id"] = $id->__toString();			
+			array_push( $modified_array, $row );
 			//echo print_r($post);			
 		}
 		//echo print_r($modified_array);

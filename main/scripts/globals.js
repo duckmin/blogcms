@@ -1,4 +1,4 @@
-window.base_url=window.location.protocol+"//"+window.location.host+"/blogcms/main";
+window.base_url=window.location.protocol+"//"+window.location.host ;
 window.constants={
 	"base_url":base_url,
 	"ajax_url":base_url+"/ajax.php",

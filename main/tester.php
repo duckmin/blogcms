@@ -1,10 +1,23 @@
 <?php
 	$server = dirname(__FILE__)."/../server";
+	
 	include_once $server."/configs.php";
-	$base = $GLOBALS['base_url'];
+	$db = new MongoClient();
+	$getter = new MongoGetter( $db );
+	$items = $getter->getHomePagePostsFromDbByCategory( 1, "blog" );
+	$formatter = new PostViews();
+	foreach ($items as $document) {
+    	echo print_r( $document );
+    	//echo $formatter->makePostHtmlFromData( $document );
+		//$i = new MongoId( $document["_id"] );    	
+    	//echo $i->__toString()."<br>";
+    	//echo $i->getTimestamp()."<br>";
+	}	
+	//echo var_dump( $items );
+	/*$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
-	if( /*!$cache->urlInCache()*/true ){
+	if( !$cache->urlInCache()true ){
 		
 		if( !isset( $_GET['p'] ) ){ 
 			$page=1;
@@ -24,8 +37,8 @@
 		$tmplt_data["base"] = $base;
 		$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 		
-		$db = new MongoClient();
-		$db_getter = new MongoGetter( $db );
+		$db = DBHelper::dbConnection();
+		$db_getter = new DbGetter( $db );
 		$post_controller = new PostController( $db_getter, $post_views );	
 		
 		$tmplt_data["body"] = "<section class='main'>".$post_controller->getHomePagePosts( $page, $cat, $search )."</section>";
@@ -39,5 +52,5 @@
 	
 		echo $cache->pullUrlContentFromCache();
 		
-	}
+	}*/
 ?>

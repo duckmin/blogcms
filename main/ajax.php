@@ -12,7 +12,8 @@ switch ($i) {
         $file = '/post_folder_service.php';
 		break;
 	case 3:
-        $file = '/save_post.php';
+       // $file = '/save_post.php';
+       $file = '/save_mongo.php';
 		break;
 	case 4:
         $file = '/get_post_info.php';

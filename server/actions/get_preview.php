@@ -4,10 +4,9 @@
 	$json = json_decode( $_POST['json'], true );
 	$post_view = new PostViews();
 	$single = array();
-	$single["id"] ="#"; 
-	$single["tags"] = "";
-	$single["created"] = "2014-08-14 21:17:42";
+	$single["_id"] ="5428784f7f8b9afe1a779e93"; 
 	$single["title"] = "Preview";
-	echo $post_view->makePostHtmlFromData( $single, $json  );
+	$single["post_data"] = $json;
+	echo $post_view->makePostHtmlFromData( $single  );
 
 ?>

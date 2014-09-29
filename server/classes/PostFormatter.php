@@ -44,7 +44,7 @@
 	
 	class PostFormatter
 	{
-		public function getPostFileArrayData( $row ){
+		/*public function getPostFileArrayData( $row ){
 			$file = $GLOBALS['index_path'].$row['folder_path']."/".$row['id'].".txt";
 			if( file_exists( $file ) ){
 				$contents = unserialize( file_get_contents($file) );
@@ -63,7 +63,7 @@
 			}else{
 				return false;
 			}
-		}
+		}*/
 		
 		public function formatSinglePost( $data ){
 			$count = count( $data );

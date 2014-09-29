@@ -255,7 +255,7 @@
 		values = form_class.getValues();
 		console.log( values );
 		
-		if( values.folder_path.length > 0 && post_data.length > 0/*safty check*/ ){
+		if( post_data.length > 0/*safty check*/ ){
 			values.post_data = post_data;
 			controller.postJson( constants.ajax_url+'?action=3&procedure=1', values, function(d){
 				var resp = JSON.parse( d);
@@ -339,10 +339,10 @@
 	"<td><textarea name='description' >{{ description }}</textarea></td>"+
 	"<td>"+
 		"<input type='hidden' name='id' value='{{ id }}' />"+
-		"<input type='hidden' name='folder_path' value='{{ folder_path }}' />"+
+		//"<input type='hidden' name='folder_path' value='{{ folder_path }}' />"+
 		"<input type='text' name='title' value='{{ title }}' />"+
 	"</td>"+	
-	"<td><input type='text' name='tags' value='{{ tags }}' /></td>"+
+	"<td><input type='text' value='del me' /></td>"+
 	"<td class='date' >{{ created }}</td>"+
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+

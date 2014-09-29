@@ -7,27 +7,16 @@
 	
 		$json = json_decode( $_POST['json'], true );
 		$id = $json["id"];
-		$path = $json["folder_path"];
 		
 		try{	
-			$db_conn=DBHelper::dbConnection();
-			$db_getter = new DbGetter( $db_conn );	
-			$db_conn->beginTransaction();
-			$deleted = $db_getter->deletePost( $id, $path );
-			
-			if( $deleted ){
-				$db_conn->commit();
-				$result = true;
-				$message = 'Deleted';
-			}else{
-				$db_conn->rollback();
-				$message = $json["folder_path"].' Does Not Exist';
-			}
+			$db = new MongoClient();
+			$db_getter = new MongoGetter( $db );
+			$deleted = $db_getter->removeSingleRowById( $id );
+			$result = true;
+			$message = 'Deleted';
 		
-		}
-		catch(PDOException $e) {
-			$db_conn->rollback();
-			$message = 'ERROR:'.$e->getMessage();
+		} catch( MongoCursorException $e ) {;
+			$message = "error message: ".$e->getMessage()."\n";
 		}
 	
 	}

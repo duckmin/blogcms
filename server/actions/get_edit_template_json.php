@@ -2,11 +2,12 @@
 	include_once dirname(__FILE__)."/../configs.php";
 	$json = json_decode( $_POST['json'], true );
 	$id = $json["id"];
-	$path = $json["folder_path"];
-	
+	//$path = $json["folder_path"];
+	$db = new MongoClient();
+	$db_getter = new MongoGetter( $db );
 	$post_formatter = new PostFormatter();		
-	$data = $post_formatter->getPostFileArrayData( array( "folder_path"=>$path, "id"=>$id ) );
-	$ret = ( $data )? json_encode( $data ) : "";
+	$data = $db_getter->getSinglePostDataById( $id );
+	$ret = json_encode( $data["post_data"] );
 	echo $ret;
 
 ?>

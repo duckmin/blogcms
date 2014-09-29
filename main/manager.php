@@ -164,7 +164,7 @@
 		<label>Description:</label>
 		<textarea name="description" ></textarea>
 		
-		<label>Tags:</label>
+		<!--label>Tags:</label>
 		<input type="text" name="tags" />
 		
 		<ul class='folders'>
@@ -174,7 +174,7 @@
 		<ul>
 		
 		<label>Folder:</label>
-		<input type="text" readonly name="folder_path" />
+		<input type="text" readonly name="folder_path" /-->
 		
 		<ul class="button-list" >
 			<li data-templateaction="save-new-post" >

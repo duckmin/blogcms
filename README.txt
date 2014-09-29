@@ -1,10 +1,10 @@
 Mongo Branch will port blogcms to Mongo DB instead of MySql
 
 Blog CMS is a way to manage a blog ( or any paginated content ) through a GUI interface.
-To get setup you want Mysql 5+ PHP5+ and A web server ( I recommend Apache ).
+To get setup you want MongoDB PHP5+ and A web server ( I recommend Apache ).
 
-*Once everything is installed and started you need to create your DB follow the mysql_instructions.txt for all the commands you need 
-to set up blog DB and the posts table with some sample data.
+*Once everything is installed and started you need to create your DB 
+-import blog_db_bkup.json file into MongoDb with the mongoimport command
 
 *Clone this repo and navigate to the /main/index.php page.
 This is the base URL.

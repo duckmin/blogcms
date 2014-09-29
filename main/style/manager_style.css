@@ -108,6 +108,14 @@
 	padding:0 1em;
 }
 
+[data-tabsection='posts'] > ul {
+	margin:10px;
+}
+
+[data-tabsection='posts'] > ul > li {
+	margin-right:10px;	
+}
+
 .save-preview-popup{
 	/*width:400px;*/
 	max-height:70%;
@@ -158,12 +166,16 @@ td.date {
 	background-color:yellow;
 }
 
-.list-nav{
+.list-nav, .inline-list{
 	list-style-type:none;
 }
 
-.list-nav li{
+.list-nav li, .inline-list li{
 	display:inline-block;
+}
+
+.list-nav li{
+	
 	margin-left:10px;
 	font-size:1.5em;
 	color:blue;

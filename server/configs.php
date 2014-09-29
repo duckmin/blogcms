@@ -24,7 +24,8 @@ $GLOBALS['cache_dir'] = dirname(__FILE__)."/page_cache";
 $GLOBALS['post_categories'] = array(
 	"0"=>"blog",
 	"1"=>"video",
-	"2"=>"project"
+	"2"=>"project",
+	"3"=>"tester"
 );
 
 $GLOBALS['blog_users'] = array(

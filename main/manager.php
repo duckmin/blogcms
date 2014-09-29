@@ -87,13 +87,20 @@
 	</section>
 	
 	<section data-tabsection='posts' >
+		<ul class="inline-list" >
+			<li><input type='radio' name='blog_grid_sort' data-templateaction="select-post-filter" value='' checked="" />all</li>				
+			<?php
+				foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
+					echo "<li><input type='radio' name='blog_grid_sort' data-templateaction='select-post-filter' value='".$post_type."' />".$post_type."</li>";		
+				}
+			?>	
+		</ul>
 		<table class="manage-table">
 			<thead>
 				<tr>
 					<th>Type</th>
 					<th>Description</th>
 					<th>Title</th>
-					<th>Tags</th>
 					<th>Posted</th>
 					<th>Action</th>
 				</tr>

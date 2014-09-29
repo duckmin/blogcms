@@ -3,8 +3,6 @@
 	
 	$json = json_decode( $_POST['json'], true );
 	$procedure = (int)$_GET["procedure"];
-	//echo print_r( $json );
-	//echo $procedure;
 	
 	$success = false; 
 	$message = "";
@@ -42,11 +40,6 @@
 		$valid_inputs = false;
 		$message = "Folder empty or longer than ".$GLOBALS['max_folder_path_length']." characters";
 	}*/
-	
-	if( $valid_inputs && ( $desc_length > $GLOBALS['max_desc_length'] ) ){
-		$valid_inputs = false;
-		$message = "Description longer than ".$GLOBALS['max_desc_length']." characters";
-	}
 	
 	if( $valid_inputs && !isset( $GLOBALS['post_categories'][ $category ] ) ){
 		$valid_inputs = false;
@@ -92,36 +85,6 @@
 				$success = true;
 				$message = "Post Details Edited";
 			}			
-			/*$db_conn = DBHelper::dbConnection(); 
-			$db_conn->beginTransaction();
-			
-			if( $procedure === 1 ){
-				$prep = array( 'category'=>$GLOBALS['post_categories'][ $category ], 'title'=>$title, 'description'=>$desc, 'tags'=>$tags, 'folder_path'=>$folder );
-				DBHelper::inserter( 'posts', $prep, $db_conn );
-				$file_path = $GLOBALS['index_path'].$folder."/".$db_conn->lastInsertId().".txt";
-
-				if( !is_file( $file_path ) ){
-					
-					$new_file = fopen( $file_path, 'w' );  
-					fwrite( $new_file, serialize( $post_data ) );
-					$db_conn->commit();
-					$success = true;
-					$message = "Post Published";
-					
-				}else{
-					$db_conn->rollback();
-				}
-			}
-			
-			if( $procedure === 2 && isset( $json["id"] ) ){
-				$prep = array( 'id'=>trim( $json["id"] ), 'category'=>$GLOBALS['post_categories'][ $category ], 'title'=>$title, 'description'=>$desc, 'tags'=>$tags );
-				DBHelper::upDateByPrimaryKey( 'posts', 'id', $prep, $db_conn );
-				$db_conn->commit();
-				$success = true;
-				$message = "Post Details Edited";
-			}*/
-			
-			
 		
 		} catch( MongoCursorException $e ) {
 			

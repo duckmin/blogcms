@@ -322,6 +322,12 @@
 					var save_form = elm.nearestParentClass( "form" );
 					savePost( save_form );
 				})
+			},
+			"select-post-filter":function(elm){
+				elm.addEvent( "click", function(e){
+					POSTS_TABLE_PAGENUM = 1;
+					loadTablePage();
+				})
 			}
 		})
 	})
@@ -342,7 +348,7 @@
 		//"<input type='hidden' name='folder_path' value='{{ folder_path }}' />"+
 		"<input type='text' name='title' value='{{ title }}' />"+
 	"</td>"+	
-	"<td><input type='text' value='del me' /></td>"+
+	//"<td><input type='text' value='del me' /></td>"+
 	"<td class='date' >{{ created }}</td>"+
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
@@ -354,7 +360,16 @@
 	"</td>";
 	
 	window.loadTablePage = function(){
-		controller.getText( constants.ajax_url+'?action=4&p='+POSTS_TABLE_PAGENUM, function(d){
+		var section = document.querySelector('[data-tabsection=posts]'),
+		tbody = section.querySelector('table > tbody'),
+		nav = section.querySelector('ul.list-nav'),
+		category_selection = section.querySelector('ul.inline-list'),
+		nav_body = documentFragment(),
+		cat_form_class = new FormClass( category_selection ),
+		//get value of the radio filter and add to URL so mongo can sort					
+		cat_value = cat_form_class.getValues().blog_grid_sort;	
+			
+		controller.getText( constants.ajax_url+'?action=4&p='+POSTS_TABLE_PAGENUM+'&cat='+cat_value, function(d){
 			if( d.length > 0 ){
 				var json = JSON.parse( d );
 				if( json.result === true ){
@@ -363,10 +378,6 @@
 					post_data.forEach( function( single_row ){
 						inside_tbody += bindMustacheString( edit_table_template, single_row );
 					})
-					var section = document.querySelector('[data-tabsection=posts]'),
-					tbody = section.querySelector('table > tbody'),
-					nav = section.querySelector('ul.list-nav'),
-					nav_body = documentFragment();
 					
 					if( json.data.prev===true ){
 						var prev=createElement('li',{

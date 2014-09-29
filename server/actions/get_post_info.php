@@ -3,6 +3,7 @@
 	include_once dirname(__FILE__)."/../configs.php";
 	
 	$page_num = $_GET["p"];
+	$cat = $_GET["cat"];
 	
 	function getSelectedOption( $db_post_type ){
 		$options="";
@@ -17,7 +18,7 @@
 	try{		
 		$db = new MongoClient();
 		$db_getter = new MongoGetter( $db );
-		$posts = iterator_to_array ( $db_getter->getBlogManagePosts( $page_num ) );
+		$posts = iterator_to_array ( $db_getter->getBlogManagePosts( $page_num, $cat ) );
 		
 		if( count( $posts ) > $GLOBALS['amount_on_manger_tab'] ){
 			array_pop( $posts );

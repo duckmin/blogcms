@@ -1,5 +1,5 @@
 <?php
-	include_once dirname(__FILE__)."/../../server/classes/directory_getter.php";
+	include_once dirname(__FILE__)."/../../server/configs.php";
 	
 	$upload=$_FILES["new_img"];
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -36,10 +36,12 @@
 	}else{
 		$result = "upload error";
 	}
+	
 ?>
 
 <script language="javascript" type="text/javascript">
-
+		
+	
 	window.top.window.uploadResponseAction(<?php echo json_encode( array( "result"=>$success, "message"=>$result, "data"=>$data ) ); ?> ); 
 
 </script> 

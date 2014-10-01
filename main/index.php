@@ -4,8 +4,8 @@
 	$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
-	if( /*!$cache->urlInCache()*/true ){
-		
+	if( !$cache->urlInCache() || $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) ){
+	    echo var_dump( $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) );
 		if( !isset( $_GET['p'] ) ){ 
 			$page=1;
 		}else{
@@ -32,11 +32,12 @@
 		
 		$base_page = new TemplateBinder( "base_page" );
 		$full_page = $base_page->bindTemplate( $tmplt_data );
-		//$cache->saveUrlContentToCache( $full_page );
+		$cache->saveUrlContentToCache( $full_page );
 		echo $full_page;
 		
 	}else{
-	
+	    echo "pulled from cache";
+	    //$cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] );
 		echo $cache->pullUrlContentFromCache();
 		
 	}

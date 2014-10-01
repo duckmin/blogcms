@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog - Page 1</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="General" name="rating"/>
+	<meta content="English" name="language"/>
+	<meta name="description" content="" >
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<link href='http://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/global_style.css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/tab_style.css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/blog_style.css'>
+	
+	<script src='http://localhost:8080/scripts/element_extender.js' ></script>
+	<script src='http://localhost:8080/scripts/forms.js' ></script>
+	<script src='http://localhost:8080/scripts/globals.js' ></script>
+	<script src='http://localhost:8080/scripts/controllers.js' ></script>
+	
+</head>
+
+<body>
+	<div class='wrapper' >
+		<header>
+			<h1>My Olde Blog</h1>
+			<!--<ul>
+				<li class="" ><a href="http://localhost:8080/blog.php">All</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=blog">Blogs</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=video">Videos</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=project">Projects</a></li>
+			</ul>-->
+			<ul><li  ><a href="/blog?cat=blog">blog</a></li><li class=current-cat ><a href="/blog?cat=video">video</a></li><li  ><a href="/blog?cat=project">project</a></li><li  ><a href="/blog?cat=tester">tester</a></li></ul>
+		</header>
+		<section class='main'><div class="post">
+	<ul>
+		<li><b><a href="http://localhost:8080/post.php?id=5428a8957f8b9af81a779e94">Mt Michell</a></b></li>
+		<li>09-29-2014 00:32:21</li>
+	</ul>
+	<div class='iframe-embed' ><iframe src='http://www.youtube.com/embed/G-2vdEurePA' ></iframe></div><pre>Wow Mt.Mitchell is the highest point East of the Mississippi River in the USA</pre>
+</div><ul class='paginator' ><li class='current-cat' >1</li></ul></section>
+	</div>
+</body>
+</html>

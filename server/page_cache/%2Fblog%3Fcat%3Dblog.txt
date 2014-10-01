@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Blog - Page 1</title>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="General" name="rating"/>
+	<meta content="English" name="language"/>
+	<meta name="description" content="" >
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<link href='http://fonts.googleapis.com/css?family=Raleway+Dots' rel='stylesheet' type='text/css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/global_style.css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/tab_style.css'>
+	<link rel='stylesheet' type='text/css' href='http://localhost:8080/style/blog_style.css'>
+	
+	<script src='http://localhost:8080/scripts/element_extender.js' ></script>
+	<script src='http://localhost:8080/scripts/forms.js' ></script>
+	<script src='http://localhost:8080/scripts/globals.js' ></script>
+	<script src='http://localhost:8080/scripts/controllers.js' ></script>
+	
+</head>
+
+<body>
+	<div class='wrapper' >
+		<header>
+			<h1>My Olde Blog</h1>
+			<!--<ul>
+				<li class="" ><a href="http://localhost:8080/blog.php">All</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=blog">Blogs</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=video">Videos</a></li>
+				<li class="" ><a href="http://localhost:8080/blog.php?cat=project">Projects</a></li>
+			</ul>-->
+			<ul><li class=current-cat ><a href="/blog?cat=blog">blog</a></li><li  ><a href="/blog?cat=video">video</a></li><li  ><a href="/blog?cat=project">project</a></li><li  ><a href="/blog?cat=tester">tester</a></li></ul>
+		</header>
+		<section class='main'><div class="post">
+	<ul>
+		<li><b><a href="http://localhost:8080/post.php?id=5428a70e7f8b9a3a1b779e93">Blue Ridge</a></b></li>
+		<li>09-29-2014 00:25:50</li>
+	</ul>
+	<img src='http://i.imgur.com/A5YcInc.jpg' /><pre>Grandfather is always interesting, although my favorite among the local peaks is probably Mount Mitchell, which is about 35 miles farther down the Blue Ridge. Mitchell is over 1000 feet taller, the tallest mountain in North America east of the Mississippi, and due to that elevation, supports an 'island' ecosystem similar to parts of Canada.
+
+I'm honestly surprised you were that impressed by the Biltmore Estate. I've roamed around your country a bit, and big old houses seemed to be pretty common.
+</pre><img src='http://localhost:8080/pics/amazon/Amazon-Rainforest-Animals.jpg' />
+</div><div class="post">
+	<ul>
+		<li><b><a href="http://localhost:8080/post.php?id=5428a5437f8b9afe1a779e96">The Great Wall!!!!!!!!!!!!!</a></b></li>
+		<li>09-29-2014 00:18:11</li>
+	</ul>
+	<img src='http://i.imgur.com/HDBeGBQ.jpg' /><pre>Depends on the wall and the time period. Contrary to popular belief, the "great wall" isn't a single wall. There are many, many wall sections built over many hundreds of years, the earliest being simple walls built out of mud in the 7th century BC.
+
+The impressive large stone walls that most people are familiar with in pictures and which are most often visited by tourists were built during the Ming dynasty and were lightly manned by sentries to give early warning of invasions. They were not built as a primary fighting structure, but designed to slow down an invasion force and allow time for defending forces to rally to repel invaders.
+</pre>
+</div><ul class='paginator' ><li class='current-cat' >1</li><li><a href='http://localhost:8080/blog.php?cat=blog&p=2' >2</a></li></ul></section>
+	</div>
+</body>
+</html>

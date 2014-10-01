@@ -4,43 +4,59 @@
     class CacheController {
        
         private $cache_dir;
-        private $today;
-        private $todays_dir;
-        private $yesterdays_dir;
         private $url;
         private $cache_file_path;
        
         public function __construct( $cache_dir, $url ){
             $this->cache_dir = $cache_dir;
             $this->url = urlencode( $url );
-            $this->today = date("m-d-y");
-            $this->yesterday = date("m-d-y", time() - 60 * 60 * 24);
-            $this->todays_dir = $this->cache_dir."/".$this->today;
-            $this->yesterdays_dir = $this->cache_dir."/". $this->yesterday;
-            $this->cache_file_path = $this->todays_dir."/".$this->url.".txt";
+            $this->cache_file_path = $this->cache_dir."/".$this->url.".txt";
         }
        
         public function urlInCache(){
             $incache = false; //default
-            if( is_dir( $this->todays_dir ) ){
-                if( file_exists( $this->cache_file_path ) ){
-                    $incache = true;
-                }
+            if( file_exists( $this->cache_file_path ) ){
+                $incache = true;
             }
             return $incache;
         }
+        /*
+         $file = new SplFileInfo( $_SERVER['DOCUMENT_ROOT']."/db_test.php" );
+   //$finfo = finfo_open(FILEINFO_MIME_TYPE);
+   //$mime_type = info_file($finfo, $file);
+   //finfo_close($finfo);
+   $extension = $file->getExtension();
+   $time_created = $file->getMTime ();
+   $now = time();
+   echo var_dump( $extension )."<br>";
+   echo var_dump( $time_created )."<br>";
+   echo var_dump( $now )."<br>";
+   $diff =( $now - $time_created );
+   $minutes_file_is_old = round( $diff/60 );
+   echo $minutes_file_is_old ." Minutes old<br>";
+     */   
+        
+        public function cacheMinutesOverLimit( $max_minutes ){
+            $overtime = false; //default
+            if( file_exists( $this->cache_file_path ) ){
+                $file = new SplFileInfo( $this->cache_file_path );
+                $time_created = $file->getMTime ();
+                $now = time();
+                $diff =( $now - $time_created );
+                $minutes_file_is_old = round( $diff/60 );
+               // echo "<br>now  ".$now."<br>";
+               // echo "<br>".$time_created."<br>";
+                echo "<br>".$minutes_file_is_old."<br>";
+                if( $minutes_file_is_old >= $max_minutes ){
+                    $overtime = true;
+                }
+            }
+            return $overtime;
+        }
        
         public function saveUrlContentToCache( $content ){
-            if( !$this->urlInCache() ){
-                //if todays dir dosnt exist create it
-                if( !is_dir( $this->todays_dir ) ){
-                    mkdir( $this->todays_dir, 0777 );
-                   
-                    //remove yesterdays cache dir we will not use yesterdays dir again
-                    if( is_dir( $this->yesterdays_dir ) ){
-                        $this->removeYesterdaysCacheDir();
-                    }
-                }
+            file_put_contents( $this->cache_file_path, $content );
+            /* if( !$this->urlInCache() ){
                 if( !file_exists( $this->cache_file_path ) ){
                     $cachefile = fopen( $this->cache_file_path, "w" );
                     fwrite( $cachefile, $content  );
@@ -49,7 +65,7 @@
                 }
             }else{
                 trigger_error("File Is Already In Cache", E_USER_ERROR); //cant save new file if already exists
-            }
+            }*/
         }
        
         public function pullUrlContentFromCache(){
@@ -62,9 +78,9 @@
             }
         }
        
-        private function removeYesterdaysCacheDir(){
+        /*private function removeYesterdaysCacheDir(){
             exec( 'rm -rf '.$this->yesterdays_dir);
-        }
+        }*/
 		
 		public function clearCache(){
             if( is_dir( $this->cache_dir ) ){

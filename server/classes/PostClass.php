@@ -1,5 +1,5 @@
 <?php
-	include_once dirname(__FILE__)."/../configs.php";
+	/*include_once dirname(__FILE__)."/../configs.php";
 	
 	class PostClass extends PostFormatter
 	{
@@ -19,7 +19,7 @@
 			return $str;
 		}
 			
-	};
+	};*/
 	
 
 ?>

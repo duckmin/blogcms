@@ -105,7 +105,11 @@
 
 [data-tabsection='preview']{
 	background-color:white;
-	padding:0 1em;
+	padding:2rem 1em 0 1em;
+}
+
+[data-tabsection='preview'] ul.button-list {
+	margin-top:2rem;
 }
 
 [data-tabsection='posts'] > ul {

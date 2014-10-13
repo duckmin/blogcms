@@ -1,0 +1,3 @@
+
+#run this command on created DB to use search
+db.posts.ensureIndex({"post_data.text":"text","title":"text","description":"text"})

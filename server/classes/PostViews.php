@@ -30,7 +30,7 @@
 			for( $i = 0; $i < count( $GLOBALS['post_categories'] ); $i++ ) {
 				$current_cat = $GLOBALS['post_categories'][ $i ];				
 				$added_class = ( $cat === $current_cat )? "class=current-cat" : "";
-				$str.='<li '.$added_class.' ><a href="/blog?cat='.$current_cat.'">'.$current_cat.'</a></li>';
+				$str.='<li '.$added_class.' ><a href="/'.$current_cat.'">'.$current_cat.'</a></li>';
 			}
 			return "<ul>".$str."</ul>";
 		}

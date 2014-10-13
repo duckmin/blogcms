@@ -22,6 +22,8 @@ $GLOBALS['max_folder_path_length'] = 1000;
 $GLOBALS['cache_dir'] = dirname(__FILE__)."/page_cache";
 $GLOBALS['max_page_cache_mins'] = 0;  //minutes until cache file expires
 
+$GLOBALS['url_parts'] = preg_split( "/\//", substr( $_SERVER['REQUEST_URI'], 1 ) );
+
 $GLOBALS['post_categories'] = array(
 	"0"=>"blog",
 	"1"=>"video",
@@ -53,6 +55,20 @@ function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base
 	$paginator="<ul class='paginator' >";
 	if( $page_num>1 ){
 		$back=$page_num-1;
+		$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
+	}
+	$paginator.="<li class='current-cat' >".$page_num."</li>";
+	if( $amount_retrieved > $amount_per_page ){
+		$forward=$page_num+1;
+		$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
+	}
+	return $paginator."</ul>";
+}
+/*
+function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
+	$paginator="<ul class='paginator' >";
+	if( $page_num>1 ){
+		$back=$page_num-1;
 		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$back."' >".$back."</a></li>";
 	}
 	$paginator.="<li class='current-cat' >".$page_num."</li>";
@@ -62,5 +78,5 @@ function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base
 	}
 	return $paginator."</ul>";
 }
-
+*/
 ?>

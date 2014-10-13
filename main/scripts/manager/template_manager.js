@@ -353,7 +353,7 @@
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
 		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+
-		"<a href='"+constants.base_url+"/post.php?id={{ id }}' >"+
+		"<a href='"+constants.base_url+"/post/{{ id }}' >"+
 			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
 		"</a>"+
 		"<img src='"+base_url+"/style/resources/action_delete.png' title='Delete Post' onclick='deletePostAction( this )' />"+

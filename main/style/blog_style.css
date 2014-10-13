@@ -7,14 +7,32 @@ header h1 {
 	font-family: 'Raleway Dots', cursive;
 	font-size:4em;
 	font-weight:100;
+	border:1px dotted black;
+	display: table-cell;
+	padding:0 1rem 0.5rem 1rem;
+}
+
+header > ul {
+	display:inline-block;
+	
+	
 }
 
 header > ul > li, section.main > ul.paginator > li{
 	padding:0 0.5rem;
 	border:1px dotted black;
+	margin-right:4px;
+	position:relative;	
+	top:-1px;
+	background-color: white;
 }
 
-header > ul > li.current-cat, section.main > ul.paginator > li.current-cat{
+header > ul > li.current-cat {
+	border-top:none;
+	padding-top:8px;
+}
+
+section.main > ul.paginator > li.current-cat{
 	border:none;
 }
 
@@ -30,9 +48,10 @@ section.main {
 div.post{
 	/*background-color:orange;*/
 	margin-top:2rem;
-	padding:0em 1rem 0 1rem;
+	padding:0em 1rem 1rem 1rem;
 	/*padding:0.5em 0 0 0;*/
 	border-left:1px dotted black;
+	box-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
 div.post:nth-child(1){
@@ -54,8 +73,8 @@ div.post:nth-child(1){
 
 .main div.post pre{
 	white-space:pre-wrap;
-	max-width:90%;
-	/*margin:0 auto 10px auto;*/
+	/*max-width:90%;
+	margin:0 auto 10px auto;*/
 	font-size:1.5em;
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-weight:100;
@@ -96,7 +115,7 @@ div.post:nth-child(1){
 section.main div.post > ul {
 	border-top:1px dotted black;
 	border-bottom:1px dotted black;
-	margin-left:-1rem;
+	margin:0 -1rem;
 	padding:3px 1rem;
 }
 

@@ -15,11 +15,11 @@
 			$i = 0;
 			if( $cat === null && $search === null ){
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDb( $page_num );
-				$url_add = "?";
+				$url_add = "";
 			}
 			if( $cat !== null && $search === null ){
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
-				$url_add = "?cat=".$cat."&";
+				$url_add = $cat;
 			}
 			//echo print_r( $posts_from_db->count() );
 			$L=count( $posts_from_db );

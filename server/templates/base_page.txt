@@ -16,7 +16,6 @@
 	<script src='{{ base }}/scripts/element_extender.js' ></script>
 	<script src='{{ base }}/scripts/forms.js' ></script>
 	<script src='{{ base }}/scripts/globals.js' ></script>
-	<script src='{{ base }}/scripts/controllers.js' ></script>
 	{{ scripts }}
 </head>
 

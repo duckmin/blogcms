@@ -2,7 +2,7 @@
 	$server = dirname(__FILE__)."/../server";
 	include_once $server."/configs.php";
 	$base = $GLOBALS['base_url'];
-	$id = $_GET['id'];
+	$id = $GLOBALS['url_parts'][1];
 	$db = new MongoClient();
 	$db_getter = new MongoGetter( $db );
 	$post_views = new PostViews();

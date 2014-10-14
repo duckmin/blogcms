@@ -7,29 +7,42 @@ header h1 {
 	font-family: 'Raleway Dots', cursive;
 	font-size:4em;
 	font-weight:100;
-	border:1px dotted black;
-	display: table-cell;
-	padding:0 1rem 0.5rem 1rem;
+	
 }
 
 header > ul {
 	display:inline-block;
+	margin-top:5px;
 	
-	
+}
+
+header > ul > li:last-child {
+	border:none;
+}
+
+header > ul > li > form > input[type="submit"] {
+	background-image: url("resources/search.png");
+	background-repeat: no-repeat;
+	width:16px;
+	border:none;
+	background-color:white;
+	background-position: center center;
+}
+
+input[type="submit"]:hover{
+	cursor:pointer;
 }
 
 header > ul > li, section.main > ul.paginator > li{
 	padding:0 0.5rem;
 	border:1px dotted black;
 	margin-right:4px;
-	position:relative;	
-	top:-1px;
+	
 	background-color: white;
 }
 
 header > ul > li.current-cat {
-	border-top:none;
-	padding-top:8px;
+	border:none;
 }
 
 section.main > ul.paginator > li.current-cat{

@@ -16,7 +16,9 @@
 	
 	$date =1344988800;
 	$dt = new DateTime("@$date");
-	echo $dt->format('Y-m-d H:i:s');
+	//echo $dt->format('Y-m-d H:i:s');
+	//header("location:"."http://www.google.com"."?qsss=sajdsakjd");
+	//echo print_r( $GLOBALS['url_parts'] );	
 	//echo var_dump( $items );
 	/*$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];

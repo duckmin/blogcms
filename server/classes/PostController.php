@@ -14,6 +14,7 @@
 			$str="";
 			$i = 0;
 			if( $cat === null && $search === null ){
+				//this is not used ecaue we only show from posts for specific category now				
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDb( $page_num );
 				$url_add = "";
 			}

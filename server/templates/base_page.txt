@@ -23,13 +23,15 @@
 	<div class='wrapper' >
 		<header>
 			<h1>My Olde Blog</h1>
-			<!--<ul>
-				<li class="" ><a href="{{ base }}/blog.php">All</a></li>
-				<li class="" ><a href="{{ base }}/blog.php?cat=blog">Blogs</a></li>
-				<li class="" ><a href="{{ base }}/blog.php?cat=video">Videos</a></li>
-				<li class="" ><a href="{{ base }}/blog.php?cat=project">Projects</a></li>
-			</ul>-->
-			{{ header }}
+			<ul>
+				{{ header }}
+				<li>
+					<form method="GET" action="{{ base }}/pages/search.php" >
+						<input type="text" name="search" />
+						<input type="submit" value="" />
+					</form>
+				</li>
+			</ul>
 		</header>
 		{{ body }}
 	</div>

@@ -6,15 +6,12 @@
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
 	if( !$cache->urlInCache() || $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) ){
 	    //echo var_dump( $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) );
+		$cat = $_GET['cat'];		
+		$page = $_GET['page'];
 		
-		if( !isset( $GLOBALS['url_parts'][1] ) ){ 
-			$page=1;
-		}else{
-			$page=(int)$GLOBALS['url_parts'][1];
-		}
 		
 		$post_views = new PostViews();		
-		$cat = ( isset( $GLOBALS['url_parts'][0] ) && $GLOBALS['url_parts'][0] !== "" )? $GLOBALS['url_parts'][0] : $GLOBALS['post_categories'][0];
+		
 		$search = ( isset( $_GET['s'] ) )? $_GET['s'] : null;
 		
 		$tmplt_data = array();

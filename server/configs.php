@@ -27,8 +27,7 @@ $GLOBALS['url_parts'] = preg_split( "/\//", substr( $_SERVER['REQUEST_URI'], 1 )
 $GLOBALS['post_categories'] = array(
 	"0"=>"blog",
 	"1"=>"video",
-	"2"=>"project",
-	"3"=>"tester"
+	"2"=>"project"
 );
 
 $GLOBALS['blog_users'] = array(

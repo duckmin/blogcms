@@ -15,6 +15,7 @@
 	$tmplt_data["scripts"] = "";
 	$tmplt_data["base"] = $base;
 	$tmplt_data["header"] = $post_views->getCatHeaderList( $single_post_data["category"] );
+	$tmplt_data["search_cat"] = $single_post_data["category"];
 	$tmplt_data["body"] = "<section class='main'>".$post_views->makePostHtmlFromData( $single_post_data )."</section>";
 	
 	$base_page = new TemplateBinder( "base_page" );

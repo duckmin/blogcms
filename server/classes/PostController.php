@@ -13,14 +13,20 @@
 		public function getHomePagePosts( $page_num, $cat, $search ){
 			$str="";
 			$i = 0;
-			if( $cat === null && $search === null ){
-				//this is not used ecaue we only show from posts for specific category now				
+			/*if( $cat === null && $search === null ){
+				//this is not used becaue we only show from posts for specific category now				
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDb( $page_num );
 				$url_add = "";
-			}
-			if( $cat !== null && $search === null ){
+			}*/
+			if( $search === null ){
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
 				$url_add = $cat;
+			}
+			
+			if( $search !== null ){
+				echo $search;				
+				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
+				$url_add = $cat."/".$search;
 			}
 			//echo print_r( $posts_from_db->count() );
 			$L=count( $posts_from_db );

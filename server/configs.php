@@ -20,7 +20,7 @@ $GLOBALS['max_tags_length'] = 1000;
 $GLOBALS['max_folder_path_length'] = 1000;
 
 $GLOBALS['cache_dir'] = dirname(__FILE__)."/page_cache";
-$GLOBALS['max_page_cache_mins'] = 0;  //minutes until cache file expires
+$GLOBALS['max_page_cache_mins'] = -5;  //minutes until cache file expires
 
 $GLOBALS['url_parts'] = preg_split( "/\//", substr( $_SERVER['REQUEST_URI'], 1 ) );
 

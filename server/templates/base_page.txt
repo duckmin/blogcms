@@ -27,6 +27,7 @@
 				{{ header }}
 				<li>
 					<form method="GET" action="{{ base }}/pages/search.php" >
+						<input type="hidden" name="cat" value="{{ search_cat }}" />						
 						<input type="text" name="search" />
 						<input type="submit" value="" />
 					</form>

@@ -11,19 +11,27 @@
 			$this->db = $this->mongo_conn->blog;
 		}
 		
-		public function getHomePagePostsFromDb( $page_num ){
+		/*public function getHomePagePostsFromDb( $page_num ){
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;
 			$collection = $this->db->posts;			
 			$cursor = $collection->find()->limit($skip)->skip($count)->sort( array( '_id' => -1 ) );
 			return $cursor;
-		}
+		}*/
 		
 		public function getHomePagePostsFromDbByCategory( $page_num, $cat ){
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;
 			$collection = $this->db->posts;			
 			$cursor = $collection->find( array( "category"=>$cat ) )->limit($skip)->skip($count)->sort( array( '_id' => -1 ) );
+			return $cursor;
+		}
+		
+		public function getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search ){
+			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
+			$skip = $GLOBALS['amount_on_main_page']+1;
+			$collection = $this->db->posts;			
+			$cursor = $collection->find( array( "category"=>$cat, '$text'=>array( '$search'=>$search ) ) )->limit($skip)->skip($count)->sort( array( '_id' => -1 ) );
 			return $cursor;
 		}
 		

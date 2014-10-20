@@ -10,6 +10,20 @@
 			$this->post_views = $post_views;
 		}
 		
+		private function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
+			$paginator="<ul class='paginator' >";
+			if( $page_num>1 ){
+				$back=$page_num-1;
+				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
+			}
+			$paginator.="<li class='current-cat' >".$page_num."</li>";
+			if( $amount_retrieved > $amount_per_page ){
+				$forward=$page_num+1;
+				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
+			}
+			return $paginator."</ul>";
+		}		
+		
 		public function getHomePagePosts( $page_num, $cat, $search ){
 			$str="";
 			$i = 0;
@@ -29,16 +43,32 @@
 				$url_add = $cat."/".$search;
 			}
 			//echo print_r( $posts_from_db->count() );
-			$L=count( $posts_from_db );
-			foreach( $posts_from_db as $single ){				
-				if( $i < $GLOBALS['amount_on_main_page'] ){
-					$post_html = $this->post_views->makePostHtmlFromData( $single );
-					$str.=$post_html;
-					$i++;
+			$L=$posts_from_db->count(true);
+			
+			if( $L > 0 ){			
+				foreach( $posts_from_db as $single ){				
+					if( $i < $GLOBALS['amount_on_main_page'] ){
+						$post_html = $this->post_views->makePostHtmlFromData( $single );
+						$str.=$post_html;
+						$i++;
+					}
+				}
+				$str.=$this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
+				return $str;
+			}else{
+				if( $search !== null ){
+					if( $page_num ===1 ){					
+						//if search is set and count is 0 and page = one then search return no n results show them a non result page
+						return "<h1>Search not found</h1>";
+					}else{
+						//if page > 1 and search is set something is wrong send to 404						
+						return false;
+					}
+				}else{
+					//if result set is 0 and seach is not set return false and take action on page					
+					return false;
 				}
 			}
-			$str.=paginator( $page_num, $posts_from_db->count(true), $GLOBALS['amount_on_main_page'], $url_add );
-			return $str;
 		}
 		
 		public function getZoomedPost( $page_num ){

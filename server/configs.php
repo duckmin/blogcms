@@ -50,19 +50,12 @@ function myAutoloader( $className )
     include $path.$className.'.php';
 }
 
-function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
-	$paginator="<ul class='paginator' >";
-	if( $page_num>1 ){
-		$back=$page_num-1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
-	}
-	$paginator.="<li class='current-cat' >".$page_num."</li>";
-	if( $amount_retrieved > $amount_per_page ){
-		$forward=$page_num+1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
-	}
-	return $paginator."</ul>";
+function goTo404(){
+	$redirect_url = $GLOBALS['index_path']."/pages/404.php";
+	header( $_SERVER["SERVER_PROTOCOL"]." 404 Not Found" );	
+	include($redirect_url );	
 }
+
 /*
 function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
 	$paginator="<ul class='paginator' >";

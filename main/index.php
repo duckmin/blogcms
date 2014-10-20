@@ -4,7 +4,7 @@
 	include_once $server."/configs.php";
 	 
 	//echo var_dump( $GLOBALS['url_parts'][0]==="" ).'<br>';	
-	echo print_r( $GLOBALS['url_parts'] );
+	//echo print_r( $GLOBALS['url_parts'] );
 	$url_parts = $GLOBALS['url_parts'];	
 	$part_count = count( $url_parts );
 	
@@ -24,5 +24,10 @@
 		}
 	}
 	
-	( $file !== "" )? include_once( $main.$file ) : header( $_SERVER["SERVER_PROTOCOL"]." 404 Not Found" ); 
+	if( $file !== "" ){
+		include_once( $main.$file ); 
+	}else{
+		goTo404();
+		die();
+	} 
 ?>

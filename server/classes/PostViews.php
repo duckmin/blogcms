@@ -6,7 +6,7 @@
 		
 		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
 		
-		public function makePostHtmlFromData( $row ){
+		public function makePostHtmlFromData( $row ){		
 			$structure = array();		
 			$id = new MongoId( $row["_id"] ); 
 			$time_stamp = $id->getTimestamp();

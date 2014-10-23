@@ -37,8 +37,7 @@
 				$url_add = $cat;
 			}
 			
-			if( $search !== null ){
-				echo $search;				
+			if( $search !== null ){				
 				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
 				$url_add = $cat."/".$search;
 			}
@@ -59,7 +58,7 @@
 				if( $search !== null ){
 					if( $page_num ===1 ){					
 						//if search is set and count is 0 and page = one then search return no n results show them a non result page
-						return "<h1>Search not found</h1>";
+						return "<div class='post'><h1>Search ".$search." not found</h1></p>";
 					}else{
 						//if page > 1 and search is set something is wrong send to 404						
 						return false;

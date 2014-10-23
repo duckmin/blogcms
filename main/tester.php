@@ -4,19 +4,19 @@
 	include_once $server."/configs.php";
 	$db = new MongoClient();
 	$getter = new MongoGetter( $db );
-	$items = $getter->getHomePagePostsFromDbByCategory( 1, "blog" );
-	$formatter = new PostViews();
+	$items = $getter->getHomePagePostsFromDbByCategory( 1, "video" );	
+	//$formatter = new PostViews();
 	foreach ($items as $document) {
-    	//echo print_r( $document );
+    	//echo print_r( $document )."<br>";
     	//echo $formatter->makePostHtmlFromData( $document );
-		//$i = new MongoId( $document["_id"] );    	
+		$i = new MongoId( $document["_id"] );    	
     	//echo $i->__toString()."<br>";
-    	//echo $i->getTimestamp()."<br>";
+    	echo $i->getTimestamp()."<br>";
 	}
 	
 	$date =1344988800;
-	$dt = new DateTime("@$date");
-	//echo $dt->format('Y-m-d H:i:s');
+	//$dt = new DateTime("@$date");
+	echo date('Y-m-d H:i:s', 1413857240 );
 	//header("location:"."http://www.google.com"."?qsss=sajdsakjd");
 	//echo print_r( $GLOBALS['url_parts'] );	
 	//echo var_dump( $items );

@@ -37,6 +37,7 @@
 				$cache->saveUrlContentToCache( $full_page );
 				echo $full_page;
 			}else{
+				//if mongo results are false go to 404	logivc in getHomePagePosts Funtion			
 				goTo404();
 			}
 		}catch( MongoException $e ){

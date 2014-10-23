@@ -24,10 +24,11 @@ $GLOBALS['max_page_cache_mins'] = -5;  //minutes until cache file expires
 
 $GLOBALS['url_parts'] = preg_split( "/\//", substr( $_SERVER['REQUEST_URI'], 1 ) );
 
+//categories are how posts will be sorted edit with care !!
 $GLOBALS['post_categories'] = array(
-	"0"=>"blog",
-	"1"=>"video",
-	"2"=>"project"
+	"blog",
+	"video",
+	"project"
 );
 
 $GLOBALS['blog_users'] = array(

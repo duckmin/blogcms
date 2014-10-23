@@ -337,7 +337,7 @@
 //posts edit section
 (function(window){
 
-	var POSTS_TABLE_PAGENUM = 1;
+	window.POSTS_TABLE_PAGENUM = 1;
 	var edit_table_template="<tr data-postid='{{ id }}' >"+
 	"<td>"+
 		"<select name='category' >{{ post_type_options }}</select>"+

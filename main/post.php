@@ -7,7 +7,7 @@
 	try{	
 		$db = new MongoClient();
 		$db_getter = new MongoGetter( $db );
-		$post_views = new PostViews();
+		$post_views = new PostViews( new Parsedown );
 		$single_post_data = $db_getter->getSingleRowById( $id );
 		
 		if( $single_post_data ){

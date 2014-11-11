@@ -48,16 +48,10 @@
 				<img src="style/resources/expand.png" />
 				Template Item
 				<ul>
-					<li data-templateaction="additem" data-action="heading" >
-						<span>
-							<img src="style/resources/document-small.png" />
-							Heading
-						</span>
-					</li>
 					<li data-templateaction="additem" data-action="paragraph" >
 						<span>
 							<img src="style/resources/document-text.png" />
-							Paragraph
+							Markdown
 						</span>
 					</li>
 					<li data-templateaction="additem" data-action="image" >

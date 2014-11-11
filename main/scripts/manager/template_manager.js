@@ -83,7 +83,7 @@
 		var container = element.nearestParent('div'),
 		textarea = container.querySelectorAll('textarea[name=text]')[0],
 		value = textarea.value;
-		textarea.value = value + " [link]#[/link]";
+		textarea.value = value + " []()";
 	}
 	
 	function previewImage( e ){
@@ -121,7 +121,7 @@
 		"paragraph":function( text ){
 			return post( "paragraph", multiFragment({
 				"heading":createElement('h5',{
-					"text":"Paragraph"
+					"text":"Markdown"
 				}),
 				"input":createElement('textarea',{
 					"name":"text"
@@ -136,17 +136,6 @@
 							}
 						})
 					})
-				})
-			}))
-		},
-		"heading":function( text ){
-			return post( "heading", multiFragment({
-				"heading":createElement('h5',{
-					"text":"Heading"
-				}),
-				"input":createElement('input',{
-					"type":"text",
-					"name":"text"
 				})
 			}))
 		},
@@ -204,15 +193,13 @@
 		"enable":function( id, folder ){
 			EDIT_MODE = true;
 			ID_IN_EDIT = id; 
-			FOLDER_PATH_IN_EDIT = folder; 
 		},
 		"disable":function(){
 			EDIT_MODE = false;
 			ID_IN_EDIT = null; 
-			FOLDER_PATH_IN_EDIT = null; 
 		},
 		"active":function(){
-			return ( EDIT_MODE === false && ID_IN_EDIT === null && FOLDER_PATH_IN_EDIT === null )?
+			return ( EDIT_MODE === false && ID_IN_EDIT === null )?
 			false : true;
 		}
 	}
@@ -345,10 +332,8 @@
 	"<td><textarea name='description' >{{ description }}</textarea></td>"+
 	"<td>"+
 		"<input type='hidden' name='id' value='{{ id }}' />"+
-		//"<input type='hidden' name='folder_path' value='{{ folder_path }}' />"+
 		"<input type='text' name='title' value='{{ title }}' />"+
 	"</td>"+	
-	//"<td><input type='text' value='del me' /></td>"+
 	"<td class='date' >{{ created }}</td>"+
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
@@ -451,7 +436,7 @@
 	
 	window.editPostAction = function( element ){
 		var form_values=table_actions.getTrValues( element ),
-		send={ "id":form_values.id, "folder_path":form_values.folder_path };
+		send={ "id":form_values.id };
 		controller.postJson( constants.ajax_url+'?action=6', send, function(d){
 			//var resp = JSON.parse( d);
 			if( d !== "" ){
@@ -463,8 +448,9 @@
 					form_class = new FormClass( li );
 					form_class.bindValues( post );
 					frag.appendChild( li );
-					edit_mode.enable( form_values.id, form_values.folder_path );
+					edit_mode.enable( form_values.id );
 				});
+				
 				gEBI("template").removeChildren().appendChild(frag);
 				tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 			}else{
@@ -477,7 +463,7 @@
 	window.saveEditedPostAction = function(){
 		var post_data = getPostDataFromTemplate();
 		if( post_data.length > 0 ){
-			var values = { "id":ID_IN_EDIT, "folder_path":FOLDER_PATH_IN_EDIT, "post_data":post_data }
+			var values = { "id":ID_IN_EDIT, "post_data":post_data }
 			console.log( values );
 			controller.postJson( constants.ajax_url+'?action=7', values, function(d){
 				

@@ -1,8 +1,54 @@
 <?php
 	include_once dirname(__FILE__)."/../configs.php";
 	
-	class PostViews extends PostFormatter
+	class PostViews
 	{
+
+		function __construct( Parsedown $parsedown )
+		{
+			$this->parsedown = $parsedown;
+		}		
+		
+		private function makeItem( $post_data_array ){
+			$element = "";
+			//echo var_dump( $post_data_array );
+			switch( $post_data_array[ "data-posttype" ] ){
+				
+				case "heading":
+					$text = strip_tags( $post_data_array[ "text" ] );
+					$element = "<h1>".$text."</h1>";
+					break;
+				
+				case "paragraph":
+					$parsedown = new Parsedown();				
+					$text = $this->parsedown->text( strip_tags( $post_data_array[ "text" ] ) );
+					$element = $text;
+					break;
+					
+				case "image":
+					$src = strip_tags( $post_data_array[ "src" ] );
+					$element = "<img src='".$src."' />";
+					break;
+					
+				case "video":
+					$src = strip_tags( $post_data_array[ "src" ] );
+					$element = "<div class='iframe-embed' ><iframe src='".$src."' ></iframe></div>";
+					break;
+					
+			}
+			//echo var_dump( $element );
+			return $element;
+		}
+	
+		private function formatSinglePost( $data ){
+			$count = count( $data );
+			$inner_post = "";
+			for( $i = 0; $i < $count; $i++ ){
+				$single_item = $this->makeItem( $data[ $i ] );
+				$inner_post .= $single_item;
+			}
+			return $inner_post;
+		}		
 		
 		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
 		

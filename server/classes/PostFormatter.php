@@ -22,9 +22,9 @@
 				$element = "<h1>".$text."</h1>";
 				break;
 			
-			case "paragraph":
-				$text = formatParagraphTags( strip_tags( $post_data_array[ "text" ] ) );
-				$element = "<pre>".$text."</pre>";
+			case "paragraph":			
+				$text = $parsedown->text( htmlentities( strip_tags( $post_data_array[ "text" ] ) ) );
+				$element = $text;
 				break;
 				
 			case "image":

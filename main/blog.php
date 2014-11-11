@@ -1,6 +1,7 @@
 <?php
 	$server = dirname(__FILE__)."/../server";
-	include_once $server."/configs.php";
+	//include_once $server."/configs.php";
+	//included in index.php which has configs.php included already
 	$base = $GLOBALS['base_url'];
 	$url = $_SERVER["REQUEST_URI"];
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
@@ -15,7 +16,8 @@
 			$cat = $_GET['cat'];		
 			$page = $_GET['page'];
 			$search = $_GET['search'];
-			$post_views = new PostViews();		
+			$parsedown = new Parsedown();				
+			$post_views = new PostViews( $parsedown );		
 			$db = new MongoClient();
 			$db_getter = new MongoGetter( $db );
 			$post_controller = new PostController( $db_getter, $post_views );

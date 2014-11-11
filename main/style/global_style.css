@@ -151,3 +151,9 @@ ul,div,section,a,aside,h1,h2,h3,h4,h5,h6,p,pre,span,li,label,input,button,header
 		width:100%;
 	}
 }  
+
+@media only screen and (max-width: 800px) {
+	body{
+		font-size:60%;
+	}
+}  

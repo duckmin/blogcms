@@ -1,5 +1,5 @@
 <div class="post">
-	<ul>
+	<ul class="post-head" >
 		<li><b><a href="{{ base }}/post/{{ id }}">{{ title }}</a></b></li>
 		<li>{{ created }}</li>
 	</ul>

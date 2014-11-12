@@ -49,7 +49,7 @@ section.main > ul.paginator > li.current-cat{
 	border:none;
 }
 
-header a, section.main div.post > ul a{
+header a, section.main div.post > ul.post-head a{
 	text-decoration:none;
 }
 
@@ -71,10 +71,9 @@ div.post:nth-child(1){
 	margin-top:0;
 }
 
-/*section.main > div:last-child{
-	margin-bottom:0;
-	background-color:blue;
-}*/
+.main div.post p, .main div.post h1, .main div.post h2{
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
 
 .main div.post img{
 	display:block;
@@ -88,7 +87,6 @@ div.post:nth-child(1){
 	/*max-width:90%;
 	margin:0 auto 10px auto;*/
 	font-size:1.5rem;
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-weight:100;
 }
 
@@ -108,6 +106,10 @@ div.post:nth-child(1){
 	display:block;
 }
 
+.main div.post strong{
+	font-weight:700;	
+}
+
 .main div.post h1{
 	line-height:1em;
 	padding-bottom:3px;
@@ -115,7 +117,6 @@ div.post:nth-child(1){
 	/*margin:0 auto 10px auto;*/
 	font-size:2em;
 	font-weight:700;
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 .iframe-embed {

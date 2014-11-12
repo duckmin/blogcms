@@ -118,8 +118,8 @@
 	}
 	
 	window.templatetype = {
-		"paragraph":function( text ){
-			return post( "paragraph", multiFragment({
+		"markdown":function( text ){
+			return post( "markdown", multiFragment({
 				"heading":createElement('h5',{
 					"text":"Markdown"
 				}),

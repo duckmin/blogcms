@@ -3,8 +3,7 @@
 	$json = json_decode( $_POST['json'], true );
 	$id = $json["id"];
 	$db = new MongoClient();
-	$db_getter = new MongoGetter( $db );
-	$post_formatter = new PostFormatter();		
+	$db_getter = new MongoGetter( $db );	
 	$data = $db_getter->getSinglePostDataById( $id );
 	$ret = json_encode( $data["post_data"] );
 	echo $ret;

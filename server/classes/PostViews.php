@@ -19,8 +19,7 @@
 					$element = "<h1>".$text."</h1>";
 					break;
 				
-				case "paragraph":
-					$parsedown = new Parsedown();				
+				case "markdown":			
 					$text = $this->parsedown->text( strip_tags( $post_data_array[ "text" ] ) );
 					$element = $text;
 					break;

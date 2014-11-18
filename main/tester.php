@@ -3,7 +3,8 @@
 	
 	include_once $server."/configs.php";
 	$db = new MongoClient();file:///home/duckmin/projects/js_libs/libs_in_dev/extender_test.html
-
+	$id2 = new MongoId();
+	echo $id2;
 	/*$count = ( 4-1 )*$GLOBALS['amount_on_main_page'];
 	$skip = $GLOBALS['amount_on_main_page']+1;
 	$collection = $db->blog->posts;			
@@ -29,7 +30,7 @@ munchin ass niga shit mein!
 	
 #_I am a king of this shite_';
 	
-	echo $parser->text( $t );
+	//echo $parser->text( $t );
 
 
 

@@ -40,8 +40,8 @@
 		$valid_inputs = false;
 		$message = "Folder empty or longer than ".$GLOBALS['max_folder_path_length']." characters";
 	}*/
-	
-	if( $valid_inputs && !isset( $GLOBALS['post_categories'][ $category ] ) ){
+
+	if( $valid_inputs && !in_array( $category, $GLOBALS['post_categories'] ) ){ //category not valid give error message
 		$valid_inputs = false;
 		$message = "Category Not Regulated";
 	}
@@ -66,13 +66,16 @@
 			
 			//procedure 1 create new listing with post_data
 			if( $procedure === 1 ){
+				$mongo_id = new MongoId();			
 				$document = array( 
+					'_id'=>$mongo_id,					
 					'category'=>$GLOBALS['post_categories'][ $category ],
 		   	   	 	'title'=>$title,
 			   	 	'description'=>$desc,
 			   	 	'post_data'=> $post_data
 				);
-				$collection->insert($document);
+				$collection->insert($document);				
+				
 				$success = true;
 				$message = "Post Published";
 			}

@@ -105,11 +105,17 @@
 
 [data-tabsection='preview']{
 	background-color:white;
-	padding:2rem 1em 0 1em;
+	padding:0 1em 0 1em;
 }
 
 [data-tabsection='preview'] ul.button-list {
-	margin-top:2rem;
+	margin:10px 0;
+}
+
+[data-tabsection='preview']{
+	border-left:none;
+	border-right:none;
+	border-bottom:none;
 }
 
 [data-tabsection='posts'] > ul {

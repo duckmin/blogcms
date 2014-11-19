@@ -77,6 +77,9 @@
 			<li data-templateaction="preview-post" >
 				Preview
 			</li>
+			<li class="red-button" data-templateaction="cancel-template" >
+				Cancel
+			</li>
 		</ul>
 	</section>
 	
@@ -129,17 +132,15 @@
 	</section>
 	
 	<section data-tabsection='preview' >
-		<section class='main' id='preview' >
-		
-		</section>
 		<ul class="button-list" >
 			<li data-templateaction="save-preview" >
 				Save
 			</li>
-			<li data-templateaction="cancel-preview" >
-				Cancel
-			</li>
-		</ul>
+		</ul>		
+		<section class='main' id='preview' >
+		
+		</section>
+		
 	</section>
 	
 	<section data-tabsection='tab5' >

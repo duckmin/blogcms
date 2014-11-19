@@ -39,6 +39,22 @@ ul,div,section,a,aside,h1,h2,h3,h4,h5,h6,p,pre,span,li,label,input,button,header
 	background-image: linear-gradient(to bottom, #2BF718 0%, #06C730 100%);
 }
 
+.button-list > li.red-button {
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #E3CFD1),
+		color-stop(1, #E3072C)
+	);
+	background-image: -o-linear-gradient(bottom, #E3CFD1 0%, #E3072C 100%);
+	background-image: -moz-linear-gradient(bottom, #E3CFD1 0%, #E3072C 100%);
+	background-image: -webkit-linear-gradient(bottom, #E3CFD1 0%, #E3072C 100%);
+	background-image: -ms-linear-gradient(bottom, #E3CFD1 0%, #E3072C 100%);
+	background-image: linear-gradient(to bottom, #E3CFD1 0%, #E3072C 100%);
+}
+
+
 .button-list > li:hover {
 	cursor:pointer;
 	background-image: -webkit-gradient(
@@ -53,6 +69,21 @@ ul,div,section,a,aside,h1,h2,h3,h4,h5,h6,p,pre,span,li,label,input,button,header
 	background-image: -webkit-linear-gradient(top, #2BF718 0%, #06C730 100%);
 	background-image: -ms-linear-gradient(top, #2BF718 0%, #06C730 100%);
 	background-image: linear-gradient(to top, #2BF718 0%, #06C730 100%);
+}
+
+.button-list > li.red-button:hover {
+	background-image: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		color-stop(0, #E3CFD1),
+		color-stop(0, #E3072C)
+	);
+	background-image: -o-linear-gradient(bottom, #E3CFD1 0%, #E3072C 0%);
+	background-image: -moz-linear-gradient(bottom, #E3CFD1 0%, #E3072C 0%);
+	background-image: -webkit-linear-gradient(bottom, #E3CFD1 0%, #E3072C 0%);
+	background-image: -ms-linear-gradient(bottom, #E3CFD1 0%, #E3072C 0%);
+	background-image: linear-gradient(to bottom, #E3CFD1 0%, #E3072C 0%);
 }
 
 .button-list li.drop:hover{

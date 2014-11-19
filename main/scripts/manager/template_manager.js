@@ -275,14 +275,15 @@
 					previewPost();
 				})
 			},
-			"cancel-preview":function(elm){
+			"cancel-template":function(elm){
 				elm.addEvent( "click", function(e){
-					if( edit_mode.active() ){
-						edit_mode.disable();
-						gEBI("template").removeChildren();
-					}
-					
-					tab_actions.tabShow( document.querySelector('[data-tab=template]') );
+					var edited = edit_mode.active(),
+					message = ( !edited )? "Are you sure you want to clear the template?" : //not in edit
+					"Post is currently being edited and all changes will will lost if canceled are you sure you want to clear the template?";
+					if( confirm( message ) ){
+						( edited )? edit_mode.disable() : false;
+						gEBI("template").removeChildren();	
+					}					
 				})
 			},
 			"save-preview":function(elm){

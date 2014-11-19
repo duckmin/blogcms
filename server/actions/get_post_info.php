@@ -30,8 +30,10 @@
 		$modified_array=array();
 		foreach( $posts as $row ){ 			
 			$row["post_type_options"] = getSelectedOption( $row['category'] );
-			$id = new MongoId( $row["_id"] );    	  	    
-			$row["created"] = $id->getTimestamp();			    	    
+			$id = new MongoId( $row["_id"] );  
+			$time_stamp = $id->getTimestamp();	  	  	    
+			$dt = new DateTime("@$time_stamp");	   	  	    
+			$row["created"] = $dt->format('F d, Y g:i');			    	    
 			$row["id"] = $id->__toString();			
 			array_push( $modified_array, $row );
 			//echo print_r($post);			

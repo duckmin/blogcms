@@ -1,14 +1,10 @@
 <?php
 session_start();
 date_default_timezone_set('UTC');
-
-$GLOBALS['index_path'] = dirname(__FILE__)."/../main";
+$GLOBALS['server_path'] = dirname(__FILE__);
+$GLOBALS['index_path'] = $GLOBALS['server_path']."/../main";
 $GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST'];
 $GLOBALS['max_kb_img_upload']=500;
-
-$GLOBALS['db_server'] = "localhost";
-$GLOBALS['db_user'] = "root";
-$GLOBALS['db_pw'] = "";
 
 $GLOBALS['amount_on_main_page'] = 2;
 $GLOBALS['amount_on_manger_tab'] = 2;
@@ -37,7 +33,7 @@ $GLOBALS['blog_users'] = array(
 );
 
 function returnMessage( $success, $message, $data ){
-	$holder=Array( 'result'=>$success, 'message'=>$message, 'data'=>$data );
+	$holder = Array( 'result'=>$success, 'message'=>$message, 'data'=>$data );
 	return json_encode( $holder );
 };
 	

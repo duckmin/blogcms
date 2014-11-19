@@ -139,13 +139,18 @@
 	border-collapse:collapse;
 }
 
+.manage-table tr td{
+	text-align: center;
+	vertical-align: top;
+	padding:0.5em 0;	
+}
+
 section > table.manage-table {
 	margin-top:0.5rem;
 }
 
 .manage-table input, .manage-table textarea{
 	width:96%;
-	margin:5px 0 5px 2%;
 }
 
 td.date {
@@ -162,8 +167,8 @@ td.date {
 	color:blue;
 }
 
-.manage-table tr:nth-child(even){
-	background-color:lightgray;
+.manage-table tbody tr:nth-child(odd){
+	background-color:white;
 }
 
 .manage-table tbody tr:hover{

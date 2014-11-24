@@ -5,12 +5,22 @@
 	$page_num = $_GET["p"];
 	$cat = $_GET["cat"];
 	
-	function getSelectedOption( $db_post_type ){
+	/*function getSelectedOption( $db_post_type ){
 		$options="";
 		foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
 			$pre_opt = "<option value='".$key."'";
 			( $db_post_type === $post_type )? $pre_opt.=" selected=''" : false;
 			$options .= $pre_opt." >".$post_type."</option>";		
+		}
+		return $options;
+	}*/
+	
+	function getSelectedOption( $cats ){
+		$options="";
+		foreach( $GLOBALS['post_categories'] as $post_cat ){ 
+			$pre_opt = "<option value='".$post_cat."'";
+			( in_array( $post_cat, $cats ) )? $pre_opt.=" selected=''" : false;
+			$options .= $pre_opt." >".$post_cat."</option>";		
 		}
 		return $options;
 	}

@@ -328,7 +328,7 @@
 	window.POSTS_TABLE_PAGENUM = 1;
 	var edit_table_template="<tr data-postid='{{ id }}' >"+
 	"<td>"+
-		"<select name='category' >{{ post_type_options }}</select>"+
+		"<select name='category' multiple='' >{{ post_type_options }}</select>"+
 	"</td>"+
 	"<td><textarea name='description' >{{ description }}</textarea></td>"+
 	"<td>"+

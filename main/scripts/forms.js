@@ -58,6 +58,7 @@ function bindMustacheString( str, obj ){
 		mustaches.forEach( function(prop){
 			var obj_prop=prop.replace( /{{\s*|\s*}}/g,'' );
 			var obj_val=getObjValueFromString( obj, obj_prop );
+			console.log(obj_prop);
 			if( obj_val!==false ){
 				str=str.replace( prop, obj_val );
 			}
@@ -113,6 +114,16 @@ function bindSelectValue( node, obj_val ){
 	}
 }
 
+function bindMultiSelectValue( node, obj_vals_array ){ //takes an array and selects all values in muti select with array
+	var options=node.getElementsByTagName('option');
+	for( var i=0, L=options.length; i<L; i+=1 ){
+		if(  obj_vals_array.indexOf( options[i].value ) !== -1 ){
+			options[i].selected=true;
+		}
+	}
+}
+
+
 function FormClass( form_element ){
 	this.form_element=form_element;
 	
@@ -139,7 +150,13 @@ FormClass.prototype.bindValues=function( obj ){
 			},
 			"select":function( select ){
 				ifObjHasValueCallback( select, function( node, obj_val ){
-					bindSelectValue( node, obj_val );
+					if( !select.hasAttribute("multiple") ){					
+						bindSelectValue( node, obj_val );
+					}else{
+						if( obj_val instanceof Array ){
+							bindMultiSelectValue( node, obj_val );
+						}
+					}
 				})
 			},
 			"input":function( input ){
@@ -168,6 +185,17 @@ FormClass.prototype.bindValues=function( obj ){
 	})
 }
 
+function getMultipleSelectValues( node ){
+	var options=node.getElementsByTagName('option'),
+	vals = [];
+	for( var i=0, L=options.length; i<L; i+=1 ){
+		if( options[i].selected === true ){
+			vals.push( options[i].value );
+		}
+	}
+	return vals
+}
+
 FormClass.prototype.getValues=function(){
 	var obj={};
 	this.getFormElements( function( nodes ){
@@ -176,10 +204,14 @@ FormClass.prototype.getValues=function(){
 				 bindPathToObject( obj, textarea.name, textarea.value );
 			},
 			"select":function( select ){
-				bindPathToObject( obj, select.name, select.options[select.selectedIndex].value );
+				if( !select.hasAttribute("multiple") ){					
+					bindPathToObject( obj, select.name, select.options[select.selectedIndex].value );
+				}else{
+					bindPathToObject( obj, select.name, getMultipleSelectValues( select ) );
+				}
 			},
 			"input":function( input ){
-				if( input.type==='text' || input.type==='password' || input.type==='hidden' ){
+				if( input.type==='text' || input.type==='hidden' || input.type==='password' ){
 					bindPathToObject( obj, input.name, input.value );
 				}
 				if( input.type==='checkbox' ){
@@ -199,6 +231,15 @@ FormClass.prototype.getValues=function(){
 	return obj
 }
 
+function clearSelect( node ){
+	var options=node.getElementsByTagName('option');
+	for( var i=0, L=options.length; i<L; i+=1 ){
+		if( options[i].selected === true ){
+			options[i].selected=false;
+		}
+	}
+}
+
 FormClass.prototype.clearForm=function(){
 	var obj={};
 	this.getFormElements( function( nodes ){
@@ -207,7 +248,7 @@ FormClass.prototype.clearForm=function(){
 				 textarea.value="";
 			},
 			"select":function( select ){
-				select.getElementsByTagName('option')[0].selected=true;
+				clearSelect(select )
 			},
 			"input":function( input ){
 				if( input.type==='text' || input.type==='password' ){

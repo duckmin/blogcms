@@ -8,7 +8,7 @@
 	$message = "";
 	$valid_inputs = true;
 	
-	$category = (int)trim( strip_tags( $json["category"] ) );
+	$category = $json["category"];
 	$title = trim( strip_tags( $json["title"] ) );
 	$desc = trim( strip_tags( $json["description"] ) );
 	//$tags = trim( strip_tags( $json["tags"] ) );
@@ -40,10 +40,21 @@
 		$valid_inputs = false;
 		$message = "Folder empty or longer than ".$GLOBALS['max_folder_path_length']." characters";
 	}*/
-
-	if( $valid_inputs && !in_array( $category, $GLOBALS['post_categories'] ) ){ //category not valid give error message
+	
+	if( $valid_inputs && count( $category ) < 1 ){
 		$valid_inputs = false;
-		$message = "Category Not Regulated";
+		$message = "Must Select Atleast 1 category";
+	}
+	
+	if( $valid_inputs ){ //category not valid give error message
+		foreach( $category as $cat ){
+			if( !in_array( $cat, $GLOBALS['post_categories'] ) ){
+				$valid_inputs = false;
+				$message = "Category Not Regulated";
+				break;
+			}		
+		}
+		;
 	}
 	
 	if( $procedure === 1 ){
@@ -69,7 +80,7 @@
 				$mongo_id = new MongoId();			
 				$document = array( 
 					'_id'=>$mongo_id,					
-					'category'=>$GLOBALS['post_categories'][ $category ],
+					'category'=>$category,
 		   	   	 	'title'=>$title,
 			   	 	'description'=>$desc,
 			   	 	'post_data'=> $post_data
@@ -83,7 +94,7 @@
 			//procedure2 update listings meta data
 			if( $procedure === 2 && isset( $json["id"] ) ){
 				$mongo_id = new MongoId( $json["id"] ); 
-				$update_array = array( '$set'=> array( "category"=>$GLOBALS['post_categories'][ $category ], "title"=>$title, "description"=>$desc ) );	
+				$update_array = array( '$set'=> array( "category"=>$category, "title"=>$title, "description"=>$desc ) );	
 				$collection->update( array( "_id"=>$mongo_id ), $update_array );
 				$success = true;
 				$message = "Post Details Edited";

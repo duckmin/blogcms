@@ -154,9 +154,9 @@
 <div class='dark-shade hide' id='save-preview-popup' >
 	<div class='fixed-box save-preview-popup form' >
 		<label>Category:</label>
-		<select name="category" ><?php
+		<select name="category" multiple="" ><?php
 			foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
-				echo "<option value='".$key."'>".$post_type."</option>";		
+				echo "<option value='".$post_type."'>".$post_type."</option>";		
 			}
 		?></select>
 		

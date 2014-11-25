@@ -24,7 +24,18 @@ $GLOBALS['url_parts'] = preg_split( "/\//", substr( $_SERVER['REQUEST_URI'], 1 )
 $GLOBALS['post_categories'] = array(
 	"blog",
 	"video",
-	"project"
+	"project",
+	"ramblings",
+	"test"
+);
+
+//header categries are the ones which show up in the header of the site
+//you may not want every single category to show up in the header so you can define
+//which ones do here
+$GLOBALS['header_categories'] = array(
+	$GLOBALS['post_categories'][0],
+	$GLOBALS['post_categories'][1],
+	$GLOBALS['post_categories'][2]
 );
 
 $GLOBALS['blog_users'] = array(

@@ -72,8 +72,8 @@
 		
 		public function getCatHeaderList( $cat = "" ){
 			$str = "";			
-			for( $i = 0; $i < count( $GLOBALS['post_categories'] ); $i++ ) {
-				$current_cat = $GLOBALS['post_categories'][ $i ];				
+			for( $i = 0; $i < count( $GLOBALS['header_categories'] ); $i++ ) {
+				$current_cat = $GLOBALS['header_categories'][ $i ];				
 				$added_class = ( $cat === $current_cat )? "class=current-cat" : "";
 				$str.='<li '.$added_class.' ><a href="/'.$current_cat.'">'.$current_cat.'</a></li>';
 			}

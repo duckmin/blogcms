@@ -392,6 +392,7 @@
 					}
 					
 					tbody.innerHTML = inside_tbody;
+					setMultiSelects( tbody );
 					nav.removeChildren();
 					nav.appendChild( nav_body );
 					

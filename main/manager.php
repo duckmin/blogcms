@@ -28,8 +28,9 @@
 	?>
 	<script src="scripts/manager/picture_manager.js" ></script>
 	<script src="scripts/manager/template_manager.js" ></script>
-	<script src="scripts/manager/main_manager.js" ></script>
 	<script src="scripts/extender_tabs.js" ></script>
+	<script src="scripts/multiple_select_replace.js" ></script>
+	<script src="scripts/manager/main_manager.js" ></script>
 </head>
 
 <body>
@@ -95,7 +96,7 @@
 		<table class="manage-table">
 			<thead>
 				<tr>
-					<th>Type</th>
+					<th>Category</th>
 					<th>Description</th>
 					<th>Title</th>
 					<th>Posted</th>

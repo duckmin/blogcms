@@ -159,6 +159,10 @@ section > table.manage-table {
 	width:96%;
 }
 
+.manage-table textarea{
+	min-height:100px;
+}
+
 td.date {
 	font-size:0.75em;
 	text-align:center;
@@ -199,4 +203,49 @@ td.date {
 .list-nav li:hover{
 	cursor:pointer;
 	color:green;
+}
+
+/*for multi select*/
+select[multiple]{
+	display:none;	
+}
+
+td ul.multi-replace{
+	margin:auto;
+}
+
+ul.multi-replace{
+	max-height:100px;
+	width:200px;
+	overflow-y:auto;
+	border:1px solid black;
+	margin-top:15px;
+} 
+   
+ul.multi-replace{
+	list-style-type:none;
+}
+
+ul.multi-replace > li{
+	border-top:1px solid black;
+	text-align:center;
+	padding:2px 0;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+ul.multi-replace > li:first-child{
+	border-top:none;
+}
+   
+ul.multi-replace > li.selected-multi{
+	background-color:green;
+}
+
+ul.multi-replace > li:hover{
+	cursor:pointer;
 }

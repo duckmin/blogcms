@@ -22,7 +22,7 @@
 <body>
 	<div class='wrapper' >
 		<header>
-			<h1>My Olde Blog</h1>
+			<h1>Duckmins BlogCMS</h1>
 			<ul>
 				{{ header }}
 				<li>

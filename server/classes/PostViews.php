@@ -51,7 +51,7 @@
 		
 		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
 		
-		public function makePostHtmlFromData( $row ){		
+		public function makePostHtmlFromData( $row, $cat ){		
 			$structure = array();		
 			$id = new MongoId( $row["_id"] ); 
 			$time_stamp = $id->getTimestamp();
@@ -59,6 +59,7 @@
 			$structure["created"] = $dt->format('F d, Y g:i');		
 			$structure["title"] = $row["title"];    	    
     	    $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
+			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page 			
 			$structure["id"] = $id->__toString();
 			$structure["base"] = $GLOBALS['base_url'];
 			$post_tmplt = new TemplateBinder( "blog_post" );

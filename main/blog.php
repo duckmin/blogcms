@@ -36,7 +36,9 @@
 				
 				$base_page = new TemplateBinder( "base_page" );
 				$full_page = $base_page->bindTemplate( $tmplt_data );
-				$cache->saveUrlContentToCache( $full_page );
+				if( $search === null ){	//do not cache search results			
+					$cache->saveUrlContentToCache( $full_page );
+				}
 				echo $full_page;
 			}else{
 				//if mongo results are false go to 404	logivc in getHomePagePosts Funtion			

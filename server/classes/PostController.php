@@ -47,7 +47,7 @@
 			if( $L > 0 ){			
 				foreach( $posts_from_db as $single ){				
 					if( $i < $GLOBALS['amount_on_main_page'] ){
-						$post_html = $this->post_views->makePostHtmlFromData( $single );
+						$post_html = $this->post_views->makePostHtmlFromData( $single, $cat ); //pass in cat because post can have multiple cats and we want to know which one we are looking at
 						$str.=$post_html;
 						$i++;
 					}

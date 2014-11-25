@@ -32,11 +32,11 @@ $GLOBALS['post_categories'] = array(
 //header categries are the ones which show up in the header of the site
 //you may not want every single category to show up in the header so you can define
 //which ones do here
-$GLOBALS['header_categories'] = array(
+$GLOBALS['header_categories'] = $GLOBALS['post_categories']/*array(
 	$GLOBALS['post_categories'][0],
 	$GLOBALS['post_categories'][1],
 	$GLOBALS['post_categories'][2]
-);
+)*/;
 
 $GLOBALS['blog_users'] = array(
 	"bob"=>"cookedduck",

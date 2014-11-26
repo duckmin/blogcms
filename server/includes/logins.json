@@ -1,0 +1,14 @@
+{
+	"bob":{
+		"pw":"pass",
+		"level":3	
+	},
+	"sue":{
+		"pw":"pass",
+		"level":2	
+	},
+	"mac":{
+		"pw":"pass",
+		"level":1	
+	}
+}

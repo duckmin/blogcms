@@ -38,11 +38,6 @@ $GLOBALS['header_categories'] = $GLOBALS['post_categories']/*array(
 	$GLOBALS['post_categories'][2]
 )*/;
 
-$GLOBALS['blog_users'] = array(
-	"bob"=>"cookedduck",
-	"sue"=>"sauces234"
-);
-
 function returnMessage( $success, $message, $data ){
 	$holder = Array( 'result'=>$success, 'message'=>$message, 'data'=>$data );
 	return json_encode( $holder );

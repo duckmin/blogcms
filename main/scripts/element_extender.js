@@ -169,7 +169,7 @@ function gEBI(id)
 	
 	//in ie might have to remove events many time if more than one attached test more???
 	element_proto.removeEvent=function( event, func ){
-		addEvent( this, event, func );
+		removeEvent( this, event, func );
 		return this
 	}
 	

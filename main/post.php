@@ -19,9 +19,9 @@
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = "";
 				$tmplt_data["base"] = $base;
-				$tmplt_data["header"] = $post_views->getCatHeaderList();
+				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["search_cat"] = $cat;
-				$tmplt_data["body"] = "<section class='main'>".$post_views->makePostHtmlFromData( $single_post_data, $cat )."</section>";
+				$tmplt_data["body"] = $post_views->makePostHtmlFromData( $single_post_data, $cat );
 			
 				$base_page = new TemplateBinder( "base_page" );
 				echo $base_page->bindTemplate( $tmplt_data );

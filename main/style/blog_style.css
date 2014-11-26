@@ -45,6 +45,10 @@ header > ul > li.current-cat {
 	border:none;
 }
 
+header > ul > li > form input.gray-text{
+	color:lightgray;
+}
+
 section.main > ul.paginator > li.current-cat{
 	border:none;
 }

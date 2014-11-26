@@ -1,14 +1,20 @@
 <?php
 	$server = dirname(__FILE__)."/../server";
 	include_once $server."/configs.php";
+
 	if( !isset( $_SERVER['PHP_AUTH_USER'] ) ){
 		header('WWW-Authenticate: Basic realm="Manager"');
 		header('HTTP/1.0 401 Unauthorized');
 	}else{
-		$users = $GLOBALS['blog_users'];
+		$users = json_decode( file_get_contents( $server."/includes/logins.json" ), true );
 		$sent_user = $_SERVER['PHP_AUTH_USER'];
-		if( array_key_exists( $sent_user, $users ) && $users[$sent_user] === $_SERVER['PHP_AUTH_PW'] ){	
+		if( array_key_exists( $sent_user, $users ) && $users[$sent_user]["pw"] === $_SERVER['PHP_AUTH_PW'] ){	
 		//give access to page if user is is a key in array and the value matches the PW
+		$_SESSION['user'] = $sent_user;
+		$_SESSION['level'] = $users[$sent_user]["level"];
+		
+		echo $_SESSION['user'];
+		echo $_SESSION['level'];
 ?>
 <!DOCTYPE html>
 <html>

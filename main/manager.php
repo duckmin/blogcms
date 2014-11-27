@@ -13,8 +13,6 @@
 		$_SESSION['user'] = $sent_user;
 		$_SESSION['level'] = $users[$sent_user]["level"];
 		
-		echo $_SESSION['user'];
-		echo $_SESSION['level'];
 ?>
 <!DOCTYPE html>
 <html>

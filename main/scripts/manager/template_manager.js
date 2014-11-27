@@ -342,6 +342,7 @@
 		"<a href='"+constants.base_url+"/post/{{ id }}' >"+
 			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
 		"</a>"+
+		"<img src='"+constants.base_url+"/style/resources/clock.png' title='Make most recent post (move to top of the)' onclick='postMoveToTop( this )' />"+
 		"<img src='"+base_url+"/style/resources/action_delete.png' title='Delete Post' onclick='deletePostAction( this )' />"+
 	"</td>";
 	
@@ -459,6 +460,33 @@
 				alert( "No Data Error" );
 			}
 		})
+	
+	}
+	
+	window.postMoveToTop = function( element ){
+		var form_values=table_actions.getTrValues( element ),
+		send={ "id":form_values.id };
+		alert( "move "+send.id+" to top" );
+		/*controller.postJson( constants.ajax_url+'?action=6', send, function(d){
+			//var resp = JSON.parse( d);
+			if( d !== "" ){
+				var resp = JSON.parse( d ),
+				frag = documentFragment();
+				resp.forEach(function( post ){
+					var post_type = post["data-posttype"],
+					li = templatetype[ post_type ](),
+					form_class = new FormClass( li );
+					form_class.bindValues( post );
+					frag.appendChild( li );
+					edit_mode.enable( form_values.id );
+				});
+				
+				gEBI("template").removeChildren().appendChild(frag);
+				tab_actions.tabShow( document.querySelector('[data-tab=template]') );
+			}else{
+				alert( "No Data Error" );
+			}
+		})*/
 	
 	}
 	

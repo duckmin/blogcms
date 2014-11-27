@@ -83,7 +83,8 @@
 					'category'=>$category,
 		   	   	 	'title'=>$title,
 			   	 	'description'=>$desc,
-			   	 	'post_data'=> $post_data
+			   	 	'post_data'=> $post_data,
+			   	 	'lastModified'=>new MongoDate()
 				);
 				$collection->insert($document);				
 				

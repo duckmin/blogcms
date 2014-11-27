@@ -23,7 +23,7 @@
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;
 			$collection = $this->db->posts;			
-			$cursor = $collection->find( array( "category"=>$cat ) )->limit($skip)->skip($count)->sort( array( '_id' => -1 ) );		
+			$cursor = $collection->find( array( "category"=>$cat ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );		
 			return $cursor;
 		}
 		

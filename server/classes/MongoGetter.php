@@ -68,7 +68,8 @@
 		public function renewPostDate( $id ){ 
 			$mongo_id = new MongoId( $id );
 			$collection = $this->db->posts;				
-			$fields = array( '$currentDate'=> array( "lastModified"=>true ) ); //updates timestamp to current date
+			//$fields = array( '$currentDate'=> array( "lastModified"=>true ) ); //updates timestamp to current date
+			$fields = array( '$set'=>array( "lastModified"=> new MongoDate() ) );			
 			$cursor = $collection->update( array( "_id"=>$mongo_id ), $fields );
 			return $cursor;
 		}

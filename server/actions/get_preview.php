@@ -5,6 +5,7 @@
 	$post_view = new PostViews( new Parsedown );
 	$single = array();
 	$single["_id"] ="5428784f7f8b9afe1a779e93"; 
+	$single["lastModified"] = new MongoDate();
 	$single["title"] = "Preview";
 	$single["post_data"] = $json;
 	echo $post_view->makePostHtmlFromData( $single, $GLOBALS['post_categories'][0]  );

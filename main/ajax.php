@@ -31,6 +31,9 @@ if( isset( $_GET['action'] ) ){
 		case 7:
 	        $file = '/save_edited_post_template.php';
 			break;
+		case 8:
+	        $file = '/update_post_date.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

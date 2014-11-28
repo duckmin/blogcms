@@ -54,7 +54,7 @@
 		public function makePostHtmlFromData( $row, $cat ){		
 			$structure = array();		
 			$id = new MongoId( $row["_id"] ); 
-			$time_stamp = $id->getTimestamp();
+			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
 			$dt = new DateTime("@$time_stamp");	   	  	    
 			$structure["created"] = $dt->format('F d, Y g:i');		
 			$structure["title"] = $row["title"];    	    

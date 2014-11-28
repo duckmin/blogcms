@@ -464,30 +464,20 @@
 	}
 	
 	window.postMoveToTop = function( element ){
-		var form_values=table_actions.getTrValues( element ),
-		send={ "id":form_values.id };
-		alert( "move "+send.id+" to top" );
-		/*controller.postJson( constants.ajax_url+'?action=6', send, function(d){
-			//var resp = JSON.parse( d);
-			if( d !== "" ){
-				var resp = JSON.parse( d ),
-				frag = documentFragment();
-				resp.forEach(function( post ){
-					var post_type = post["data-posttype"],
-					li = templatetype[ post_type ](),
-					form_class = new FormClass( li );
-					form_class.bindValues( post );
-					frag.appendChild( li );
-					edit_mode.enable( form_values.id );
-				});
-				
-				gEBI("template").removeChildren().appendChild(frag);
-				tab_actions.tabShow( document.querySelector('[data-tab=template]') );
-			}else{
-				alert( "No Data Error" );
-			}
-		})*/
-	
+		var ok = confirm("Are you sure you wish to renew the date on this post,  renewing date will move this post to the top of all categories it is a part of and can not be reversed");	
+		if( ok ){		
+			var form_values=table_actions.getTrValues( element ),
+			send={ "id":form_values.id };
+			controller.postJson( constants.ajax_url+'?action=8', send, function(d){
+				//var resp = JSON.parse( d);
+				if( d !== "" ){
+					var resp = JSON.parse( d );
+					alert( resp.message );
+				}else{
+					alert( "No Data Error" );
+				}
+			})
+		}
 	}
 	
 	window.saveEditedPostAction = function(){

@@ -4,10 +4,19 @@ date_default_timezone_set('UTC');
 $GLOBALS['server_path'] = dirname(__FILE__);
 $GLOBALS['index_path'] = $GLOBALS['server_path']."/../main";
 $GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST'];
-$GLOBALS['max_kb_img_upload']=500;
+$GLOBALS['mongo_db_name'] = "blog";
 
-$GLOBALS['amount_on_main_page'] = 2;
-$GLOBALS['amount_on_manger_tab'] = 2;
+$GLOBALS["upload_vars"] = array(
+	"allowed_image_extensions"=>array("gif", "jpeg", "jpg", "png"),
+	"allowed_audio_extensions"=>array("mp3"),
+	"allowed_mimetypes"=>array("image/jpeg", "image/gif", "image/jpg", "image/png", "audio/mpeg"),
+	"max_kb_img_upload"=>500,
+	"max_mb_audio_upload"=>40
+);
+$GLOBALS["upload_vars"]["allowed_extensions"] = array_merge ( $GLOBALS["upload_vars"]["allowed_image_extensions"], $GLOBALS["upload_vars"]["allowed_audio_extensions"] );
+
+$GLOBALS['amount_on_main_page'] = 8;
+$GLOBALS['amount_on_manger_tab'] = 8;
 
 $GLOBALS['max_category_length'] = 500;
 $GLOBALS['max_title_length'] = 500;

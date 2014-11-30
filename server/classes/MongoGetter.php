@@ -8,7 +8,7 @@
 		public function __construct( $mongo_conn )
 		{
 			$this->mongo_conn = $mongo_conn;
-			$this->db = $this->mongo_conn->blog;
+			$this->db = $this->mongo_conn->$GLOBALS['mongo_db_name'];
 		}
 		
 		/*public function getHomePagePostsFromDb( $page_num ){
@@ -68,7 +68,7 @@
 		public function renewPostDate( $id ){ 
 			$mongo_id = new MongoId( $id );
 			$collection = $this->db->posts;				
-			//$fields = array( '$currentDate'=> array( "lastModified"=>true ) ); //updates timestamp to current date
+			//updates lastModified to current date
 			$fields = array( '$set'=>array( "lastModified"=> new MongoDate() ) );			
 			$cursor = $collection->update( array( "_id"=>$mongo_id ), $fields );
 			return $cursor;

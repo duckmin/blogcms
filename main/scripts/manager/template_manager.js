@@ -97,6 +97,31 @@
 		frame.src=input.value; 
 	}
 	
+	function previewAudio( e ){
+		var element= e.srcElement||e.currentTarget;
+		var container=element.nearestParent('div'),
+		input=container.querySelectorAll('input[name=src]')[0],
+		val = input.value,
+		embed = createElement("embed",{
+			"height":"22",
+			"width":"500",
+			"flashvars":'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'+val+'","loop":false,"autoRewind":true}',
+			"pluginspage":"http://www.adobe.com/go/getflashplayer",
+			"quality":"high",
+			"allowscriptaccess":"always",
+			"allowfullscreen":"true",
+			"bgcolor":"#ffffff",
+			"src":"scripts/FlowPlayerClassic.swf",
+			"type":"application/x-shockwave-flash"
+		});		
+		frame=container.getElementsByTagName('embed')[0];
+		if( typeof frame === "undefined" ){
+			frame = container.appendChild( embed );
+		}else{
+			frame.replaceWith( embed );	
+		}
+	}	
+	
 	function previewVideo( e ){
 		var element= e.srcElement||e.currentTarget;
 		var container=element.nearestParent('div'),
@@ -156,6 +181,30 @@
 								"text":"Preview Img",
 								"events":{
 									"click":previewImage
+								}
+							})
+						})
+					})
+				})
+			)
+		},
+		"audio":function( src ){
+			return post( "audio", multiFragment({
+					"heading":createElement('h5',{
+						"text":"Audio Embed"
+					}),
+					"input":createElement('input',{
+						"name":"src",
+						"type":"text",
+						"value":src||""
+					}),
+					"button":createElement('ul',{
+						"class":"button-list",
+						"child":multiFragment({
+							"preview":createElement('li',{
+								"text":"Preview Audio",
+								"events":{
+									"click":previewAudio
 								}
 							})
 						})
@@ -247,8 +296,11 @@
 			controller.postJson( constants.ajax_url+'?action=3&procedure=1', values, function(d){
 				var resp = JSON.parse( d);
 				if( resp.result){
-					form_class.clearForm();
 					save_form.nearestParentClass("dark-shade").addClass("hide");
+					form_class.clearForm();
+					save_form.querySelectorAll("ul.multi-replace > li.selected-multi" ).each( function(li){
+						li.removeClass("selected-multi");
+					} )
 					gEBI('template').removeChildren();
 					tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 					

@@ -42,6 +42,13 @@ function pictureClick( element ){
 	gEBI("template").appendChild( template_item );
 }
 
+function audioClick( element ){
+	var path = element.getAttribute( 'data-audiopath' );
+	tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	template_item = templatetype[ "audio" ]( path );
+	gEBI("template").appendChild( template_item );
+}
+
 function folderUpload( element ){
 	var path = element.getAttribute( 'data-folderpath' ),
 	input = gEBI( 'upload-path' );

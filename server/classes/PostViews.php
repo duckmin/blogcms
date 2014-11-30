@@ -29,6 +29,12 @@
 					$element = "<img src='".$src."' />";
 					break;
 					
+				case "audio":
+					$src = strip_tags( $post_data_array[ "src" ] );
+					$flash_vars = 'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'.$src.'","loop":false,"autoRewind":true}';					
+					$element = "<embed width='500' height='22' flashvars='".$flash_vars."' wmode='transparent' pluginspage='http://www.adobe.com/go/getflashplayer' quality='high' allowscriptaccess='always' allowfullscreen='true' bgcolor='#ffffff' src='scripts/FlowPlayerClassic.swf' type='application/x-shockwave-flash'>";
+					break;
+					
 				case "video":
 					$src = strip_tags( $post_data_array[ "src" ] );
 					$element = "<div class='iframe-embed' ><iframe src='".$src."' ></iframe></div>";

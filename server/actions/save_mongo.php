@@ -72,7 +72,7 @@
 		try {
 			
 			$m = new MongoClient();
-			$db = $m->blog;
+			$db = $m->$GLOBALS['mongo_db_name'];
 			$collection = $db->posts;
 			
 			//procedure 1 create new listing with post_data
@@ -86,19 +86,20 @@
 			   	 	'post_data'=> $post_data,
 			   	 	'lastModified'=>new MongoDate()
 				);
-				$collection->insert($document);				
-				
-				$success = true;
-				$message = "Post Published";
+				$write_result = $collection->insert($document);				
+				$written = ( $write_result['ok']>=1 )? true : false;			
+				$success = $written; 
+				$message = ( $written )? "Post Published" : "Post Not Saved";
 			}
 			
 			//procedure2 update listings meta data
 			if( $procedure === 2 && isset( $json["id"] ) ){
 				$mongo_id = new MongoId( $json["id"] ); 
 				$update_array = array( '$set'=> array( "category"=>$category, "title"=>$title, "description"=>$desc ) );	
-				$collection->update( array( "_id"=>$mongo_id ), $update_array );
-				$success = true;
-				$message = "Post Details Edited";
+				$write_result = $collection->update( array( "_id"=>$mongo_id ), $update_array );
+				$written = ( $write_result['nModified'] === 1 )? true : false;				
+				$success = $written;
+				$message = ( $written )? "Post Details Edited" : "No Changes Made To Post";
 			}			
 		
 		} catch( MongoCursorException $e ) {

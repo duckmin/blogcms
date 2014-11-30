@@ -71,6 +71,12 @@
 							Video
 						</span>
 					</li>
+					<li data-templateaction="additem" data-action="audio" >
+						<span>
+							<img src="style/resources/audio.png" />
+							Audio
+						</span>
+					</li>
 				</ul>
 			</li>
 		</ul>

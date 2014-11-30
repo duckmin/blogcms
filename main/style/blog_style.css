@@ -105,7 +105,7 @@ div.post:nth-child(1){
 }
 
 .main div.post p, .main div.post img, .iframe-embed, .main div.post h2,
-.main div.post h1, .main div.post ul, .main div.post blockquote {
+.main div.post h1, .main div.post ul, .main div.post blockquote, .main div.post embed {
 	margin-top:0.5rem;
 	display:block;
 }

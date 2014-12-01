@@ -76,8 +76,12 @@ div.post:nth-child(1){
 	margin-top:0;
 }
 
-.main div.post p, .main div.post h1, .main div.post h2{
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+.main div.post p{
+	font-family: Verdana,Geneva,sans-serif;
+}
+
+.main div.post h1, .main div.post h2{
+	font-family: "Lucida Console","Lucida Sans Typewriter",monaco,"Bitstream Vera Sans Mono",monospace;
 }
 
 .main div.post img{
@@ -150,6 +154,7 @@ div.post:nth-child(1){
 	background-repeat: no-repeat;
 	background-position:left center;
 	text-indent:0;
+	font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace
 }
 
 section.main div.post > ul.post-head {

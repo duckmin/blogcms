@@ -27,10 +27,12 @@
 					$result =  "File Up Loaded";
 					$success=true;
 					//$file_icon="<img src='".$GLOBALS['base_url']."/style/resources/images.png'  data-filepath='".$GLOBALS['base_url'].$folder_path."/".$upload["name"]."' class='icon' onclick='selectFolderList(this)' />";
+					$server_path = 	$folder_path."/".$upload["name"];
+					$url_path =  $GLOBALS['base_url'].$server_path;			
 					if( $is_img ){
-						$li = FileGetter::pictureLi( $GLOBALS['base_url'].$folder_path."/".$upload["name"], $upload["name"] );
+						$li = FileGetter::pictureLi( $url_path, $server_path, $upload["name"] );
 					}else{
-						$li = FileGetter::audioLi( $GLOBALS['base_url'].$folder_path."/".$upload["name"], $upload["name"] );
+						$li = FileGetter::audioLi( $url_path, $server_path, $upload["name"] );
 					}					
 					$data = $li;
 					

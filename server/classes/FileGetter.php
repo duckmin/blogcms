@@ -32,16 +32,18 @@
 			</li>";
 		}
 		
-		static public function pictureLi( $picture_path, $pic_name ){
+		static public function pictureLi( $picture_path, $server_path, $pic_name ){
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/image.png' title='Add Picture to Template' data-picturepath='".$picture_path."' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />
+				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				
 				".$pic_name."
 			</li>";
 		}
 		
-		static public function audioLi( $audio_path, $audio_name ){
+		static public function audioLi( $audio_path, $server_path, $audio_name ){
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/audio.png' title='Add Audio to Template' data-audiopath='".$audio_path."' onclick='audioClick(this)' />
+				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				
 				".$audio_name."
 			</li>";
 		}

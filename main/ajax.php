@@ -34,6 +34,9 @@ if( isset( $_GET['action'] ) ){
 		case 8:
 	        $file = '/update_post_date.php';
 			break;
+		case 9:
+	        $file = '/delete_resource.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

@@ -42,7 +42,7 @@
 	<ul class='tab-top' >
 		<li data-tab='template' class='selected-tab' >Template</li>
 		<li data-tab='posts' >Posts</li>
-		<li data-tab='pictures' >Pictures</li>
+		<li data-tab='pictures' >Resources</li>
 		<li data-tab='preview' style="display:none" >Preview</li>
 		<li data-tab='tab5' >Tab 5</li>
 	</ul>

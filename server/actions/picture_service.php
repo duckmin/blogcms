@@ -18,14 +18,15 @@
 		if( isset( $item['file'] ) ){
 			$file_path = $GLOBALS['index_path'].$path."/".$item['file'];
 			$extension = pathinfo( $file_path , PATHINFO_EXTENSION );		
-			$resource_path = $GLOBALS['base_url'].$path."/".$item['file'];
+			$server_path = 	$path."/".$item['file'];
+			$resource_path = $GLOBALS['base_url'].$server_path;
 			
 			if( in_array( $extension, $img_exts ) ){			
-				$list.=FileGetter::pictureLi( $resource_path, $item['file'] );
+				$list.=FileGetter::pictureLi( $resource_path, $server_path, $item['file'] );
 			}
 			
 			if( in_array( $extension, $audio_exts ) ){			
-				$list.=FileGetter::audioLi( $resource_path, $item['file'] );
+				$list.=FileGetter::audioLi( $resource_path, $server_path, $item['file'] );
 			}
 		}
 	}

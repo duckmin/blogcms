@@ -35,6 +35,26 @@ function listFile( element ){
 	}
 }
 
+function deleteResource( element ){
+	if( confirm("Are You Sure You Want to Delete This Resource?") ){	
+		var file_path = element.getAttribute( 'data-filepath' ),//path from file from /main root	
+		send={ "file_path":file_path };
+		controller.postJson( constants.ajax_url+'?action=9', send, function(d){
+			//var resp = JSON.parse( d);
+			if( d !== "" ){
+				var resp = JSON.parse( d );
+				if( resp.result ){
+					var li = element.nearestParent("li").remove();
+				}
+				alert( resp.message )
+				
+			}else{
+				alert( "No Data Error" );
+			}
+		})
+	}
+}
+
 function pictureClick( element ){
 	var path = element.getAttribute( 'data-picturepath' );
 	tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js

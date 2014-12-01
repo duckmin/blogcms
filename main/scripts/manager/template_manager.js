@@ -391,7 +391,7 @@
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
 		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+
-		"<a href='"+constants.base_url+"/post/{{ id }}' >"+
+		"<a href='"+constants.base_url+"/post/{{ first_category }}/{{ id }}' target='_blank' >"+
 			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
 		"</a>"+
 		"<img src='"+constants.base_url+"/style/resources/clock.png' title='Make most recent post (move to top of the)' onclick='postMoveToTop( this )' />"+

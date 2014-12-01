@@ -44,7 +44,8 @@
 			$time_stamp = $id->getTimestamp();	  	  	    
 			$dt = new DateTime("@$time_stamp");	   	  	    
 			$row["created"] = $dt->format('F d, Y g:i');			    	    
-			$row["id"] = $id->__toString();			
+			$row["id"] = $id->__toString();
+			$row["first_category"] = $row['category'][0]; //for link to post on manager tab			
 			array_push( $modified_array, $row );
 			//echo print_r($post);			
 		}

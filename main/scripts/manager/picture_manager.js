@@ -57,14 +57,16 @@ function deleteResource( element ){
 
 function pictureClick( element ){
 	var path = element.getAttribute( 'data-picturepath' );
-	tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	//tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	window.location.hash = "#template";
 	template_item = templatetype[ "image" ]( path );
 	gEBI("template").appendChild( template_item );
 }
 
 function audioClick( element ){
 	var path = element.getAttribute( 'data-audiopath' );
-	tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	//tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	window.location.hash = "#template";
 	template_item = templatetype[ "audio" ]( path );
 	gEBI("template").appendChild( template_item );
 }

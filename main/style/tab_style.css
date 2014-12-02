@@ -24,11 +24,7 @@ ul.tab-top > li:hover{
 	cursor:pointer;
 }
 
-ul.tab-top > li.selected-tab{
-	border-bottom:1px solid lightblue;
-}
-
-[data-tabsection]{
+section[data-tab]{
 	min-height:300px;
 	border:1px solid black;
 	display:none;
@@ -36,6 +32,29 @@ ul.tab-top > li.selected-tab{
 	padding-bottom:10px;
 }
 
-section.selected-section{
+section[data-tab],li[data-tab]{
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	background-color:lightblue;
+}  
+  
+section[data-tab]{
+	display:none;
+}
+  
+li[data-tab]{
+	display:inline-block;
+	margin-bottom:-1px;
+	padding:2px 4px;
+	border-radius:4px 4px 0 0;
+}
+
+li[data-tab].selected{
+	border-bottom-color:lightblue;
+}
+
+section[data-tab].selected{
 	display:block;
 }
+ 

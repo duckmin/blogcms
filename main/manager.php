@@ -32,7 +32,7 @@
 	?>
 	<script src="scripts/manager/picture_manager.js" ></script>
 	<script src="scripts/manager/template_manager.js" ></script>
-	<script src="scripts/extender_tabs.js" ></script>
+	<script src="scripts/extender_new_tabs.js" ></script>
 	<script src="scripts/multiple_select_replace.js" ></script>
 	<script src="scripts/manager/main_manager.js" ></script>
 </head>
@@ -44,10 +44,10 @@
 		<li data-tab='posts' >Posts</li>
 		<li data-tab='pictures' >Resources</li>
 		<li data-tab='preview' style="display:none" >Preview</li>
-		<li data-tab='tab5' >Tab 5</li>
+		<li data-tab='tab5' style="display:none" >Tab 5</li>
 	</ul>
 	
-	<section data-tabsection='template' >
+	<section data-tab='template' >
 	    <ul class="button-list" >
 			<li class="drop" >
 				<img src="style/resources/expand.png" />
@@ -94,7 +94,7 @@
 		</ul>
 	</section>
 	
-	<section data-tabsection='posts' >
+	<section data-tab='posts' >
 		<ul class="inline-list" >
 			<li><input type='radio' name='blog_grid_sort' data-templateaction="select-post-filter" value='' checked="" />all</li>				
 			<?php
@@ -121,7 +121,7 @@
 		</ul>
 	</section>
 		
-	<section data-tabsection='pictures' >
+	<section data-tab='pictures' >
 		<form id="img-upload-form" action="pages/upload_img.php" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="return imageUploadValidator();" >
 			<b><label>Folder:  
 				<input id='upload-path' name="folder_path" readonly  type="text" />
@@ -142,7 +142,7 @@
 		<ul>
 	</section>
 	
-	<section data-tabsection='preview' >
+	<section data-tab='preview' >
 		<ul class="button-list" >
 			<li data-templateaction="save-preview" >
 				Save
@@ -154,7 +154,7 @@
 		
 	</section>
 	
-	<section data-tabsection='tab5' >
+	<section data-tab='tab5' >
 		tab5
 	</section>
 	

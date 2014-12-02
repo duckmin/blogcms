@@ -95,34 +95,34 @@
 	background-image:url('../style/resources/action_delete.png');
 }
 
-[data-tabsection='pictures'] form {
+section[data-tab='pictures'] form {
 	margin:10px;
 }
 
-[data-tabsection='template'] > ul:first-child{
+section[data-tab='template'] > ul:first-child{
 	margin-top:10px;
 }
 
-[data-tabsection='preview']{
+section[data-tab='preview']{
 	background-color:white;
 	padding:0 1em 0 1em;
 }
 
-[data-tabsection='preview'] ul.button-list {
+section[data-tab='preview'] ul.button-list {
 	margin:10px 0;
 }
 
-[data-tabsection='preview']{
+section[data-tab='preview']{
 	border-left:none;
 	border-right:none;
 	border-bottom:none;
 }
 
-[data-tabsection='posts'] > ul {
+section[data-tab='posts'] > ul {
 	margin:10px;
 }
 
-[data-tabsection='posts'] > ul > li {
+section[data-tab='posts'] > ul > li {
 	margin-right:10px;	
 }
 

@@ -41,7 +41,7 @@ header > ul > li, section.main > ul.paginator > li{
 	background-color: white;
 }
 
-header > ul > li.current-cat {
+header > ul > li.current-cat, header > ul > li:hover {
 	/*border:none;*/
 	border-bottom:4px solid blue;
 }

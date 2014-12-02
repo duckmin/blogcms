@@ -62,7 +62,8 @@
 			$id = new MongoId( $row["_id"] ); 
 			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
 			$dt = new DateTime("@$time_stamp");	   	  	    
-			$structure["created"] = $dt->format('F d, Y g:i');		
+			$structure["created"] = $dt->format('F d, Y g:i');
+			$structure["time_stamp"] = $time_stamp*1000; //for js accurrate UTC conversion	
 			$structure["title"] = $row["title"];    	    
     	    $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
 			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page 			

@@ -35,8 +35,13 @@ function listFile( element ){
 	}
 }
 
-function deleteResource( element ){
-	if( confirm("Are You Sure You Want to Delete This Resource?") ){	
+function deleteResource( elm ){
+	//if( confirm("Are You Sure You Want to Delete This Resource?") ){	
+		
+	//}
+	
+	var message = "Are You Sure You Want to Delete This Resource?";
+	showConfirm( message, false, elm, function(element){ //calback function fired if yes is selected
 		var file_path = element.getAttribute( 'data-filepath' ),//path from file from /main root	
 		send={ "file_path":file_path };
 		controller.postJson( constants.ajax_url+'?action=9', send, function(d){
@@ -46,13 +51,13 @@ function deleteResource( element ){
 				if( resp.result ){
 					var li = element.nearestParent("li").remove();
 				}
-				alert( resp.message )
+				showAlertMessage( resp.message, resp.result );
 				
 			}else{
-				alert( "No Data Error" );
+				showAlertMessage( "No Data Error", false );
 			}
 		})
-	}
+	})	
 }
 
 function pictureClick( element ){
@@ -88,7 +93,7 @@ function imageUploadValidator(){
 	if( gEBI( 'upload-path' ).value.length > 0 ){
 		return true;
 	}else{
-		alert( "Folder Form Value is Empty" );
+		showAlertMessage( "Folder Form Value is Empty", false );
 		return false;
 	}
 }
@@ -105,7 +110,7 @@ function uploadResponseAction( obj ){
 			listFile( folder_element );
 		}
 	}else{
-		alert( obj.message );
+		showAlertMessage( obj.message, obj.result );
 	}
 }
 

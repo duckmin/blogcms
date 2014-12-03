@@ -249,3 +249,61 @@ ul.multi-replace > li.selected-multi{
 ul.multi-replace > li:hover{
 	cursor:pointer;
 }
+
+/* code for pop up boxes */
+.backshade{
+	position:fixed;
+	height:100%;
+	width:100%;
+	top:0;
+	left:0;
+	background-color:rgba(0,0,0,0.5);
+}
+
+.backshade > div{
+	background-color:white;
+	position:fixed;
+	top:50%;
+	left:50%;
+	z-index:9000;
+	border:1px solid black;
+	border-radius:5px;
+	padding:0 10px 10px 10px;
+	max-width:400px;
+}
+
+.backshade > div > p{
+ 	font-size:1.5em;
+ 	text-align:center;
+}
+
+.backshade > div > img{
+	display:block;
+	margin:0 auto 0 auto;
+}
+
+.backshade > div > ul{
+	list-style-type:none;
+	text-align:center;
+	margin-top:10px;
+}
+
+.backshade > div > ul > li{
+	display:inline-block;
+	padding:5px 10px;
+	border:1px solid black;
+	border-radius:5px;
+	font-size:1.1em;
+}
+
+.backshade > div > ul > li:hover{
+	cursor:pointer;
+}
+
+.backshade > div > ul > li:nth-child(1){
+	margin-left:0px;
+}
+
+.backshade > div > ul > li:nth-child(2){
+	margin-left:40px;
+}

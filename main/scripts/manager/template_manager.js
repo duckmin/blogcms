@@ -281,7 +281,7 @@
 				}
 			})
 		}else{
-			alert("Template is Empty");
+			showAlertMessage("Template is Empty", false );
 		}
 		//console.log( holder );
 	}
@@ -296,7 +296,7 @@
 			values.post_data = post_data;
 			controller.postJson( constants.ajax_url+'?action=3&procedure=1', values, function(d){
 				var resp = JSON.parse( d);
-				if( resp.result){
+				if( resp.result ){
 					save_form.nearestParentClass("dark-shade").addClass("hide");
 					form_class.clearForm();
 					save_form.querySelectorAll("ul.multi-replace > li.selected-multi" ).each( function(li){
@@ -307,10 +307,10 @@
 					window.location.hash = "#template";
 					
 				}
-				alert( resp.message );
+				showAlertMessage( resp.message, resp.result );
 			})
 		}else{
-			alert("Folder is Empty");
+			showAlertMessage("Template is Empty", false );
 		}
 	}
 	
@@ -333,11 +333,11 @@
 				elm.addEvent( "click", function(e){
 					var edited = edit_mode.active(),
 					message = ( !edited )? "Are you sure you want to clear the template?" : //not in edit
-					"Post is currently being edited and all changes will will lost if canceled are you sure you want to clear the template?";
-					if( confirm( message ) ){
-						( edited )? edit_mode.disable() : false;
-						gEBI("template").removeChildren();	
-					}					
+					"Post is currently being edited and all changes will be lost if canceled are you sure you want to clear the template?";
+					showConfirm( message, false, gEBI("template"), function(elm){ 
+						( edited )? edit_mode.disable() : false;						
+						elm.removeChildren();	
+					} )			
 				})
 			},
 			"save-preview":function(elm){
@@ -452,7 +452,7 @@
 					nav.appendChild( nav_body );
 					
 				}else{
-					alert( resp.message );
+					showAlertMessage( json.message, json.result );
 				}
 			}
 		})
@@ -472,23 +472,23 @@
 		
 		controller.postJson( constants.ajax_url+'?action=3&procedure=2', form_values, function(d){
 			var resp = JSON.parse( d);
-			alert( resp.message );
+			showAlertMessage( resp.message, resp.result );
 		})
 	}
 	
 	window.deletePostAction = function( element ){
-		if( confirm("Are you sure you want to delete this post?") ){
+		var message = "Are you sure you want to delete this post?";
+		showConfirm( message, false, element, function(elm){ //calback function fired if yes is selected
 			var form_values=table_actions.getTrValues( element ),
-			send={ "id":form_values.id, "folder_path":form_values.folder_path };
+			send={ "id":form_values.id };
 			controller.postJson( constants.ajax_url+'?action=5', send, function(d){
 				var resp = JSON.parse( d);
 				if( resp.result ){
 					loadTablePage();
-				}else{
-					alert( resp.message );
 				}
+				showAlertMessage( resp.message, resp.result );
 			})
-		}
+		})	
 	}
 	
 	window.editPostAction = function( element ){
@@ -512,27 +512,27 @@
 				//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 				window.location.hash = "#template";
 			}else{
-				alert( "No Data Error" );
+				showAlertMessage( "No Data For Post", false );
 			}
 		})
 	
 	}
 	
 	window.postMoveToTop = function( element ){
-		var ok = confirm("Are you sure you wish to renew the date on this post,  renewing date will move this post to the top of all categories it is a part of and can not be reversed");	
-		if( ok ){		
+		var message = "Are you sure you wish to renew the date on this post,  renewing date will move this post to the top of all categories it is a part of and can not be reversed";		
+		showConfirm( message, false, element, function(elm){ //calback function fired if yes is selected
 			var form_values=table_actions.getTrValues( element ),
 			send={ "id":form_values.id };
 			controller.postJson( constants.ajax_url+'?action=8', send, function(d){
 				//var resp = JSON.parse( d);
 				if( d !== "" ){
 					var resp = JSON.parse( d );
-					alert( resp.message );
+					showAlertMessage( resp.message, resp.result );
 				}else{
-					alert( "No Data Error" );
+					showAlertMessage( "No Data Error", false );
 				}
-			})
-		}
+			})	
+		})	
 	}
 	
 	window.saveEditedPostAction = function(){
@@ -549,10 +549,10 @@
 					//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 					window.location.hash = "#template";
 				}
-				alert( resp.message );
+				showAlertMessage( resp.message, resp.result );
 			})
 		}else{
-			alert("Empty Post Can Not Be Saved");
+			showAlertMessage( "Empty Post Can Not Be Saved", false );
 		}
 	}
 	

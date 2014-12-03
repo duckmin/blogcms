@@ -46,6 +46,10 @@ header > ul > li.current-cat, header > ul > li:hover {
 	border-bottom:4px solid blue;
 }
 
+header > ul > li:last-child:hover{
+ 	border-bottom:none;
+}
+
 header > ul > li > form input.gray-text{
 	color:lightgray;
 }

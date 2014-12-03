@@ -66,4 +66,14 @@ function removeInlineStyle( element, property ){
 	}
 }
 
+function getAlertMessageIcon( bool ){
+	var icon;	
+	if( bool ){
+		icon = "thumbsup.png"
+	}else{
+		icon = "warning.png"
+	}
+	return 	constants.base_url+"/style/resources/"+icon;
+}
+
 

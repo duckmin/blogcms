@@ -8,6 +8,7 @@ function searchClear( e ){
 function timeFormatter( h, m ){
 	var ext = ( h>=12 )? "PM" : "AM";
 	( h > 12 )? h = h-12 : false;
+	( h === 0 )? h = 12 :false;
 	var mins=( m<=9 )? "0"+m : m;
 	return h+':'+mins+' '+ext;
 }

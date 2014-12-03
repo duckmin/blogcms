@@ -1,24 +1,28 @@
 <?php
 	include_once dirname(__FILE__)."/../configs.php";
 	
-	$json = json_decode( $_POST['json'], true );
-	$procedure = (int)$_GET["procedure"];
-	
 	$success = false; 
 	$message = "";
 	$valid_inputs = true;
+		
+	if( $valid_inputs && false/*logged in*/ ){  //if not logged in all validations will skip and go straight to message
+		$valid_inputs = false;
+		$message = "Not Logged In";
+	}
 	
-	$category = $json["category"];
-	$title = trim( strip_tags( $json["title"] ) );
-	$desc = trim( strip_tags( $json["description"] ) );
-	//$tags = trim( strip_tags( $json["tags"] ) );
-	//$folder = trim( strip_tags( $json["folder_path"] ) );
-	
-	$title_length = strlen( $title );
-	$desc_length = strlen( $desc );
-	//$tags_length = strlen( $tags );
-	//$folder_length = strlen( $folder );
-	
+	if( $valid_inputs && isset( $_GET["procedure"] ) && isset( $_POST["json"] ) ){  //if all required fields are set set up vars
+		$json = json_decode( $_POST['json'], true );
+		$procedure = (int)$_GET["procedure"];
+
+		$category = $json["category"];
+		$title = trim( strip_tags( $json["title"] ) );
+		$desc = trim( strip_tags( $json["description"] ) );
+		
+		$title_length = strlen( $title );
+		$desc_length = strlen( $desc );
+	}else{
+		$valid_inputs = false;
+	}
 	
 	if( $valid_inputs && $title_length > $GLOBALS['max_title_length'] ){
 		$valid_inputs = false;
@@ -30,16 +34,6 @@
 		$valid_inputs = false;
 		$message = "Description longer than ".$GLOBALS['max_desc_length']." characters";
 	}
-	
-	/*if( $valid_inputs && $tags_length > $GLOBALS['max_tags_length'] ){
-		$valid_inputs = false;
-		$message = "Tags longer than ".$GLOBALS['max_tags_length']." characters";
-	}*/
-	
-	/*if( $valid_inputs && ( $folder_length <= 0 || $folder_length > $GLOBALS['max_folder_path_length'] ) ){
-		$valid_inputs = false;
-		$message = "Folder empty or longer than ".$GLOBALS['max_folder_path_length']." characters";
-	}*/
 	
 	if( $valid_inputs && count( $category ) < 1 ){
 		$valid_inputs = false;
@@ -54,7 +48,6 @@
 				break;
 			}		
 		}
-		;
 	}
 	
 	if( $procedure === 1 ){
@@ -104,7 +97,6 @@
 		
 		} catch( MongoCursorException $e ) {
 			
-			//$db_conn->rollback();
 			$message = "error message: ".$e->getMessage()."\n";
 			
 		}

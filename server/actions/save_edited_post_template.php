@@ -4,7 +4,7 @@
 	$success = false; 
 	$message = "";
 	
-	if( isset( $_POST["json"] ) ){
+	if( true && isset( $_POST["json"] ) ){
 		$json = json_decode( $_POST['json'], true );
 		$id = trim( strip_tags( $json["id"] ) );
 		$post_data = $json["post_data"];

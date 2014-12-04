@@ -403,7 +403,7 @@
 	window.loadTablePage = function(){
 		var section = document.querySelector('section[data-tab=posts]'),
 		tbody = section.querySelector('table > tbody'),
-		nav = section.querySelector('ul.list-nav'),
+		nav = section.querySelector('ul.button-list'),
 		category_selection = section.querySelector('ul.inline-list'),
 		nav_body = documentFragment(),
 		cat_form_class = new FormClass( category_selection ),

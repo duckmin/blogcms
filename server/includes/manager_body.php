@@ -101,7 +101,7 @@
 			<tbody>
 			</tbody>
 		</table>
-		<ul class='list-nav' >
+		<ul class='button-list' >
 		
 		</ul>
 	</section>

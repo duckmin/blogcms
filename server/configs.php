@@ -15,7 +15,7 @@ $GLOBALS["upload_vars"] = array(
 );
 $GLOBALS["upload_vars"]["allowed_extensions"] = array_merge ( $GLOBALS["upload_vars"]["allowed_image_extensions"], $GLOBALS["upload_vars"]["allowed_audio_extensions"] );
 
-$GLOBALS['amount_on_main_page'] = 8;
+$GLOBALS['amount_on_main_page'] = 3;
 $GLOBALS['amount_on_manger_tab'] = 8;
 
 $GLOBALS['max_category_length'] = 500;

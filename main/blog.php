@@ -25,10 +25,10 @@
 			
 			if( $mongo_results ){
 				$tmplt_data = array();
-				$tmplt_data["title"] = "Blog - Page ".$page;
+				$tmplt_data["title"] = $cat." ".$_SERVER['HTTP_HOST']." - page ".$page;
 				$tmplt_data["description"] = "";
 				$tmplt_data["styles"] = "";
-				$tmplt_data["scripts"] = "";
+				$tmplt_data["scripts"] = "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>";
 				$tmplt_data["base"] = $base;
 				$tmplt_data["search_cat"] = $cat;		
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );

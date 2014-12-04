@@ -83,7 +83,7 @@
 			for( $i = 0; $i < count( $GLOBALS['header_categories'] ); $i++ ) {
 				$current_cat = $GLOBALS['header_categories'][ $i ];				
 				$added_class = ( $cat === $current_cat )? "class=current-cat" : "";
-				$str.='<li '.$added_class.' ><a href="/'.$current_cat.'">'.ucwords( $current_cat ).'</a></li>';
+				$str.='<li '.$added_class.' ><a href="/'.$current_cat.'/1">'.ucwords( $current_cat ).'</a></li>';
 			}
 			return $str; //just the lis of the list
 		}

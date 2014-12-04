@@ -33,8 +33,8 @@
 			foreach( $posts as $row ){ 			
 				$row["post_type_options"] = getSelectedOption( $row['category'] );
 				$id = new MongoId( $row["_id"] );  
-				$time_stamp = $id->getTimestamp();	  	  	    
-				$dt = new DateTime("@$time_stamp");	   	  	    
+				$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
+				$dt = new DateTime("@$time_stamp");	   	  	    	   	  	    
 				$row["created"] = $dt->format('F d, Y g:i');			    	    
 				$row["id"] = $id->__toString();
 				$row["first_category"] = $row['category'][0]; //for link to post on manager tab			

@@ -35,10 +35,13 @@ input[type="submit"]:hover{
 
 header > ul > li, section.main > ul.paginator > li{
 	padding:0 0.5rem;
-	/*border:1px dotted black;*/
 	margin-right:4px;
-	
 	background-color: white;
+}
+
+section.main > ul.paginator > li{
+	border:1px dotted black;
+	padding:0 0.8rem;
 }
 
 header > ul > li.current-cat, header > ul > li:hover {
@@ -178,7 +181,7 @@ section.main div.post > ul.post-head > li {
 }
 
 section.main > ul.paginator{
-	margin-top:1rem
+	margin:1rem 0 2rem 0;
 }
 
 section.main > ul.paginator, section.main div.post > ul.post-head, header > ul {
@@ -191,7 +194,7 @@ section.main > ul.paginator > li, section.main div.post > ul.post-head > li, hea
 }
 
 section.main > ul.paginator > li {
-	font-size:1.3em;
+	font-size:1.9em;
 }
 
 section.main > ul.paginator > li:nth-child(1){

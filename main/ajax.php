@@ -13,8 +13,6 @@ if( isset( $_GET['action'] ) ){
 	        $file = '/get_preview.php';
 			break;
 		case 2:
-	        $file = '/post_folder_service.php';
-			break;
 		case 3:
 	       // $file = '/save_post.php';
 	       $file = '/save_mongo.php';
@@ -36,6 +34,9 @@ if( isset( $_GET['action'] ) ){
 			break;
 		case 9:
 	        $file = '/delete_resource.php';
+			break;
+		case 10:
+	        $file = '/count_page_view.php';
 			break;
 	}
 

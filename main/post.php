@@ -14,7 +14,7 @@
 			
 			if( $single_post_data ){
 				$tmplt_data = array();
-				$tmplt_data["title"] = $single_post_data["title"];
+				$tmplt_data["title"] = $single_post_data["title"]." ".$_SERVER['HTTP_HOST'];
 				$tmplt_data["description"] = $single_post_data["description"];
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = "";

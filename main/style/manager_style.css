@@ -118,8 +118,12 @@ section[data-tab='preview']{
 	border-bottom:none;
 }
 
-section[data-tab='posts'] > ul {
+section[data-tab='posts'] > ul.inline-list {
 	margin:10px;
+}
+
+section[data-tab='posts'] > ul.button-list {
+	margin-left:10px;
 }
 
 section[data-tab='posts'] > ul > li {

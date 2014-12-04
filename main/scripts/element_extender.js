@@ -380,7 +380,7 @@ function gEBI(id)
 (function(window){
 
 	var html_collection_proto=HTMLCollection.prototype;
-	var node_list_proto=( typeof NodeList !== "object" )? NodeList.prototype : StaticNodeList.prototype;
+	var node_list_proto=( typeof StaticNodeList === "undefined" )? NodeList.prototype : StaticNodeList.prototype;
 	
 	function each( list, callback ){
 		for( var i=0, L=list.length; i<L; i+=1 ){
@@ -606,38 +606,41 @@ function gEBI(id)
 		return xmlHttp;
 	}
 	
-	/*	EXAMPLE AJAX INIT OBJ
-		{
-			url:"http://myajaxurl.com",
-			method:"POST",
-			send:JSON.stringify( { test:"test", test2:"test2" } ),
-			content_type:"text/html",
-			success:function( data ){  //data function },
-			error:function( e_code, e_message ){ //handle error }
-		}
-	*/
-	window.Ajaxer=function( obj ){
-		var xmlHttp = getXMLHttp(),
-		send_info=( obj.hasOwnProperty('send') && obj.method === 'POST')? obj.send : null,
-		headers=( obj.hasOwnProperty('content_type') )? obj.content_type : "application/x-www-form-urlencoded";
-		xmlHttp.open( obj.method, obj.url, true );
-		xmlHttp.setRequestHeader( "Content-type", headers );
-		xmlHttp.send( send_info );
-
-		xmlHttp.onreadystatechange=function(){
-			//console.log( "rdy stat="+xmlHttp.readyState+" status="+xmlHttp.status )
-			if(xmlHttp.readyState===4 && xmlHttp.status===200){
-				obj.success( xmlHttp.responseText );
-			}
-			else if( xmlHttp.status>200 ){
-				if(obj.hasOwnProperty('error') ){
-					if( typeof obj.error==='function' ){
-						obj.error( xmlHttp.status,  xmlHttp.statusText  )
-					}
-				}
-			}  
-		}
-	}
+	/*    EXAMPLE AJAX INIT OBJ
+        {
+            url:"http://myajaxurl.com",
+            method:"POST",
+            send:JSON.stringify( { test:"test", test2:"test2" } ),
+            content_type:"text/html",
+            async:true,
+            success:function( data ){  //data function },
+            error:function( e_code, e_message ){ //handle error }
+        }
+    */
+    window.Ajaxer=function( obj ){
+        var xmlHttp = getXMLHttp(),
+        send_info=( obj.hasOwnProperty('send') && obj.method === 'POST')? obj.send : null,
+        headers=( obj.hasOwnProperty('content_type') )? obj.content_type : "application/x-www-form-urlencoded",
+        async = ( obj.hasOwnProperty('async') )? obj.async : true;
+        console.log( async );
+        xmlHttp.open( obj.method, obj.url, async );
+        xmlHttp.setRequestHeader( "Content-type", headers );
+        xmlHttp.send( send_info );
+ 
+        xmlHttp.onreadystatechange=function(){
+            //console.log( "rdy stat="+xmlHttp.readyState+" status="+xmlHttp.status )
+            if(xmlHttp.readyState===4 && xmlHttp.status===200){
+                obj.success( xmlHttp.responseText );
+            }
+            else if( xmlHttp.status>200 ){
+                if(obj.hasOwnProperty('error') ){
+                    if( typeof obj.error==='function' ){
+                        obj.error( xmlHttp.status, statusText  )
+                    }
+                }
+            }  
+        }
+    }
 
 })( window );
 

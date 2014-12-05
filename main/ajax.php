@@ -38,6 +38,12 @@ if( isset( $_GET['action'] ) ){
 		case 10:
 	        $file = '/count_page_view.php';
 			break;
+		case 11:
+	        $file = '/analytics/unique_url_paginator.php';
+			break;
+		case 12:
+	        $file = '/analytics/graph_data_by_daterange.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

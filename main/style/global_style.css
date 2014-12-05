@@ -162,6 +162,20 @@ ul,div,section,a,aside,h1,h2,h3,h4,h5,h6,p,pre,span,li,label,input,button,header
 	display:none;
 }
 
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hac
+
 /*at or above 800px screen width*/		  
 @media only screen and (min-width: 1000px) {
        

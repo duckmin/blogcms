@@ -87,6 +87,21 @@
 			$cursor = $collection->remove( array( "_id"=>$mongo_id ) );
 			return $cursor;
 		}
+		
+		public function getUniqueAnalyticUrlPage(){
+			$collection = $this->db->analytics;			
+			$cursor = $collection->distinct('url');		
+			return $cursor;
+		}
+		
+		public function getPageCountsByUrlAndDateRange( $url, $start, $end ){
+			$start_date = new MongoDate( $start );
+			$end_date = new MongoDate( $end );
+			$date_array = array( '$gte'=>$start_date, '$lte'=>$end_date );
+			$collection = $this->db->analytics;			
+			$cursor = $collection->find( array( 'url'=>$url, 'date'=>$date_array ) )->sort( array( 'date'=>1 ) );	
+			return $cursor;
+		}
 			
 	};
 	

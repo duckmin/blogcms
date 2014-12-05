@@ -118,7 +118,7 @@ section[data-tab='preview']{
 	border-bottom:none;
 }
 
-section[data-tab='posts'] > ul.inline-list {
+section[data-tab='posts'] > ul.inline-list, section[data-tab='analytics'] > ul.inline-list {
 	margin:10px;
 }
 
@@ -126,8 +126,53 @@ section[data-tab='posts'] > ul.button-list {
 	margin-left:10px;
 }
 
-section[data-tab='posts'] > ul > li {
+section[data-tab='analytics'] div.left{
+	width:25%;
+}
+
+section[data-tab='analytics'] div.left > ul.multi-replace {
+	width:100%;
+	min-height:100%;
+	max-height:500px;
+	margin:0;
+	border-left:none;
+}
+
+#views-graph{
+	height:400px;
+	max-width:95%;
+	margin:auto;
+}
+
+section[data-tab='analytics'] div.right{
+	width:75%;
+}
+
+section[data-tab='analytics'] > div{
+	float:left;
+	min-height:300px;
+	
+}
+
+ul.form-list > li {
 	margin-right:10px;	
+}
+
+ul.form-list > li > span {
+    font-size: 1.1em;
+   
+}
+
+ul.form-list > li > input[type='radio'] {
+    left: 3px;
+    position: relative;
+    top: 2px;
+}
+
+ul.form-list > li > input[type='text'] {
+    left: 3px;
+    position: relative;
+    top: -1px;
 }
 
 .save-preview-popup{

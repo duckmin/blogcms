@@ -48,8 +48,14 @@ TabSet.prototype.init = function(){ //call on window load event
 addEvent( window, "load", function(){
 	var actions = {
 		"posts":function( tab, panel ){
-			loadTablePage();
+			loadTablePage(); //tab_manager.js
 			delete this.posts;	
+		},
+		"analytics":function( panel, tab ){
+			var unique_url_ul = panel.querySelector("div.left > ul");			
+			getUniqueUrlPage( unique_url_ul ); //manager/analytics_graphs.js
+			getGraphPage();
+			delete this.analytics;	
 		}	
 	}		
 	window.tabset = new TabSet( document.body, actions );

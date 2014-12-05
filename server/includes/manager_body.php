@@ -11,15 +11,19 @@
 	<link rel='stylesheet' type='text/css' href='style/tab_style.css'>
 	<link rel='stylesheet' type='text/css' href='style/manager_style.css'>
 	<link rel='stylesheet' type='text/css' href='style/blog_style.css'>
+	<link rel='stylesheet' type='text/css' href='style/date_picker.css'>
+	<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 	<?php
 		include $server."/includes/global_style_scripts.php";
 	?>
+	<script src="scripts/manager/date_math.js" ></script>
 	<script src="scripts/manager/alert_boxes.js" ></script>
 	<script src="scripts/manager/picture_manager.js" ></script>
 	<script src="scripts/manager/template_manager.js" ></script>
 	<script src="scripts/extender_new_tabs.js" ></script>
 	<script src="scripts/multiple_select_replace.js" ></script>
 	<script src="scripts/manager/main_manager.js" ></script>
+	<script src="scripts/manager/analytics_graphs.js" ></script>
 </head>
 
 <body>
@@ -29,7 +33,7 @@
 		<li data-tab='posts' >Posts</li>
 		<li data-tab='pictures' >Resources</li>
 		<li data-tab='preview' style="display:none" >Preview</li>
-		<li data-tab='tab5' style="display:none" >Tab 5</li>
+		<li data-tab='analytics'  >Analytics</li>
 	</ul>
 	
 	<section data-tab='template' >
@@ -80,11 +84,11 @@
 	</section>
 	
 	<section data-tab='posts' >
-		<ul class="inline-list" >
-			<li><input type='radio' name='blog_grid_sort' data-templateaction="select-post-filter" value='' checked="" />all</li>				
+		<ul class="inline-list form-list" >
+			<li><span>all</span><input type='radio' name='blog_grid_sort' data-templateaction="select-post-filter" value='' checked="" /></li>				
 			<?php
 				foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
-					echo "<li><input type='radio' name='blog_grid_sort' data-templateaction='select-post-filter' value='".$post_type."' />".$post_type."</li>";		
+					echo "<li><span>".$post_type."</span><input type='radio' name='blog_grid_sort' data-templateaction='select-post-filter' value='".$post_type."' /></li>";		
 				}
 			?>	
 		</ul>
@@ -139,8 +143,34 @@
 		
 	</section>
 	
-	<section data-tab='tab5' >
-		tab5
+	<section class="clearfix" data-tab='analytics' >
+		<ul class="inline-list form-list" data-templateaction="date-picker">
+			<li><span>line</span><input type="radio" value="combo" name="chart_type" checked=""></li>				
+			<li><span>bar</span><input type="radio" value="column" name="chart_type"></li>
+			<li>
+				<span>start</span>
+				<input data-datepick="" type="text" value='<?php  echo date( "m/d/Y", strtotime("-1 week") ); ?>' name="start_date">
+			</li>	
+			<li>
+				<span>end</span>
+				<input data-datepick="" type="text" value='<?php  echo date( "m/d/Y" ); ?>' name="end_date">
+			</li>
+			<li>
+				<!---input type="hidden" value="column" name="url" value='' -->
+				<script>
+					document.write( "<input type='hidden' name='url' value='"+constants.base_url+"/' >" );
+				</script>	
+			</li>
+		</ul>
+		<div class="left" >
+			<ul class="multi-replace" >
+		
+			</ul>
+		</div>
+		<div class="right">
+			<div id='views-graph'>
+			</div>
+		</div>
 	</section>
 	
 	
@@ -161,18 +191,6 @@
 		
 		<label>Description:</label>
 		<textarea name="description" ></textarea>
-		
-		<!--label>Tags:</label>
-		<input type="text" name="tags" />
-		
-		<ul class='folders'>
-			<?php
-				echo FileGetter::folderLi( '/posts', "2", "savePopupFolderClickAction" );
-			?>
-		<ul>
-		
-		<label>Folder:</label>
-		<input type="text" readonly name="folder_path" /-->
 		
 		<ul class="button-list" >
 			<li data-templateaction="save-new-post" >

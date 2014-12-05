@@ -370,14 +370,15 @@
 					POSTS_TABLE_PAGENUM = 1;
 					loadTablePage();
 				})
+			},
+			"date-picker":function(elm){
+				//initialize date picks in date_math.js
+				setDatePickers(elm)
 			}
 		})
 	})
 
-})(window);
-
-//posts edit section
-(function(window){
+//POSTS TAB EDIT FUNCS -----------------------------------------------------------------------------------------------------
 
 	window.POSTS_TABLE_PAGENUM = 1;
 	var edit_table_template="<tr data-postid='{{ id }}' >"+

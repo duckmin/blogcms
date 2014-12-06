@@ -62,7 +62,8 @@
 
 		window.loadChart = function( data, type ){
 			var chart = gEBI('views-graph');
-			( typeof mychart === "object" )? mychart.destroy() : false;
+			//if( typeof mychart === "object" ){ delete mychart; console.log(mychart); }
+			
 			chart.removeChildren();				
 			window.mychart = new Y.Chart({
 			    dataProvider: data,

@@ -112,10 +112,14 @@ section[data-tab='preview'] ul.button-list {
 	margin:10px 0;
 }
 
-section[data-tab='preview']{
+section[data-tab='preview'], section[data-tab='analytics']{
 	border-left:none;
 	border-right:none;
 	border-bottom:none;
+}
+
+section[data-tab='analytics']{
+	background-color:white;
 }
 
 section[data-tab='posts'] > ul.inline-list, section[data-tab='analytics'] > ul.inline-list {
@@ -135,7 +139,6 @@ section[data-tab='analytics'] div.left > ul.multi-replace {
 	min-height:100%;
 	max-height:500px;
 	margin:0;
-	border-left:none;
 }
 
 #views-graph{
@@ -146,6 +149,7 @@ section[data-tab='analytics'] div.left > ul.multi-replace {
 
 section[data-tab='analytics'] div.right{
 	width:75%;
+
 }
 
 section[data-tab='analytics'] > div{

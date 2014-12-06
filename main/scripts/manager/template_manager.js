@@ -372,7 +372,7 @@
 				})
 			},
 			"date-picker":function(elm){
-				//initialize date picks in date_math.js
+				//initialize date picks in calendar.js
 				setDatePickers(elm)
 			}
 		})

@@ -1,7 +1,7 @@
 (function(window){
 
 addEvent(window, "beforeunload", function(e){
-	var send = encodeURIComponent("url")+"="+encodeURIComponent(window.location.href);	
+	var send = encodeURIComponent("url")+"="+encodeURIComponent(window.location.pathname);	
 	Ajaxer({
 		url:constants.ajax_url+'?action=10',
 		method:"POST",

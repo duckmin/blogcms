@@ -1,5 +1,5 @@
 (function(window){
-	var insertedValues = [];
+
 	var myAxes = {
         Views:{
             keys:["views"],
@@ -62,8 +62,8 @@
 
 		window.loadChart = function( data, type ){
 			var chart = gEBI('views-graph');
-			chart.removeChildren();
-			insertedValues = [];				
+			( typeof mychart === "object" )? mychart.destroy() : false;
+			chart.removeChildren();				
 			window.mychart = new Y.Chart({
 			    dataProvider: data,
 			    type:type,
@@ -87,6 +87,7 @@
 			method:"GET",
 			success:function( data ){ 
 				element.innerHTML = data
+				element.firstChild.addClass('selected-multi');
 			},
 			error:function( e_code, e_message ){  }
 		})
@@ -113,12 +114,17 @@
 	}
 	
 	window.urlClickAction = function( element ){
-		var url = url = element.getAttribute("data-url"),
+		var url = element.getAttribute("data-url"),
+		parent_ul = element.nearestParent('ul'),
 		section = element.nearestParent("section"),
 		hidden = section.querySelector("ul.form-list input[type='hidden']");
 		hidden.value = url;
 		//console.log(hidden.value);	
 		getGraphPage();
+		parent_ul.querySelectorAll("li.selected-multi").each( function(li){
+			li.removeClass("selected-multi");
+		});
+		element.addClass("selected-multi");
 	}
 
 

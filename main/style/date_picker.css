@@ -3,6 +3,7 @@ div.date-box {
 	padding:5px;
 	border:1px solid black;
 	border-radius:5px;
+	margin-top:8px;
 }
 
 div.date-box > select {

@@ -16,7 +16,7 @@
 	<?php
 		include $server."/includes/global_style_scripts.php";
 	?>
-	<script src="scripts/manager/date_math.js" ></script>
+	<script src="scripts/manager/calendar.js" ></script>
 	<script src="scripts/manager/alert_boxes.js" ></script>
 	<script src="scripts/manager/picture_manager.js" ></script>
 	<script src="scripts/manager/template_manager.js" ></script>
@@ -158,7 +158,7 @@
 			<li>
 				<!---input type="hidden" value="column" name="url" value='' -->
 				<script>
-					document.write( "<input type='hidden' name='url' value='"+constants.base_url+"/' >" );
+					document.write( "<input type='hidden' name='url' value='/' >" );
 				</script>	
 			</li>
 		</ul>

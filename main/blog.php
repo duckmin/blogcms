@@ -28,7 +28,7 @@
 				$tmplt_data["title"] = $cat." ".$_SERVER['HTTP_HOST']." - page ".$page;
 				$tmplt_data["description"] = "";
 				$tmplt_data["styles"] = "";
-				$tmplt_data["scripts"] = "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>";
+				$tmplt_data["scripts"] = ( $search === null )? "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>" : ""; //no analytics on search pages
 				$tmplt_data["base"] = $base;
 				$tmplt_data["search_cat"] = $cat;		
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );

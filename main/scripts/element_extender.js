@@ -1,7 +1,4 @@
-/*
-TEST PHASE, COOL FUNCS TO TEST NOT READY FOR PRIME TIME YET
-*/
-//WHEN ELEMENT WITH SCROLLBAR
+
 function atBottomScroll( element, callback ){   
     var fire=element.clientHeight+60;
     element.onscroll=function(){
@@ -25,7 +22,7 @@ function attributeActions( element, attr, config ){
 		}
 	})
 }
-//END TEST PHASE
+
 
 if(!Array.prototype.forEach){
     Array.prototype.forEach = function (fn, scope) {
@@ -147,20 +144,20 @@ function gEBI(id)
 	//avoid using "this" keyword when referring to target element due to IE error and use below variable instead
 	//var element= e.srcElement||e.currentTarget;
 	window.addEvent=function( element, event, func ){
-		if( typeof element.attachEvent !== 'undefined' ){
-			element.attachEvent('on' + event, func );
-		}else{ 
-			element.addEventListener( event, func, false );
-		}
-	}
-	
-	window.removeEvent=function( element, event, func ){
-		if( typeof element.detachEvent !== 'undefined' ){
-			element.detachEvent( 'on' + event, func );
-		}else{ 
-			element.removeEventListener( event, func, false );
-		}
-	}
+        if( typeof element.addEventListener !== 'undefined' ){
+            element.addEventListener( event, func, false );
+        }else{ 
+            element.attachEvent('on' + event, func );
+        }
+    }
+     
+    window.removeEvent=function( element, event, func ){
+        if( typeof element.removeEventListener !== 'undefined' ){
+            element.removeEventListener( event, func, false );             
+        }else{ 
+            element.detachEvent( 'on' + event, func );
+        }
+    }
 	
 	element_proto.addEvent=function( event, func ){
 		addEvent( this, event, func );

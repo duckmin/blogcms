@@ -52,35 +52,58 @@
 	            line: {
 	                color: "orange"
 	            }
-	        }  
+	        },
+	        {
+	            marker: {
+	                fill: {
+	                    color: "yellow"
+	                },
+	                border: {
+	                    color: "green",
+	                    weight: 3
+	                },
+	                over: {
+	                    width: 15,
+	                    height: 15
+	                },
+	                width:12,
+	                height:12
+	            },
+	            line: {
+	                color: "blue"
+	            }
+	        }   
 	    ]
 	};
 		 
 	// Create a new YUI instance and populate it with the required modules.
-	YUI().use('charts', function (Y) {
-		// Instantiate and render the chart
-
-		window.loadChart = function( data, type ){
-			var chart = gEBI('views-graph');
-			//if( typeof mychart === "object" ){ delete mychart; console.log(mychart); }
+		
+		YUI().use('charts', function (Y) {
+			// Instantiate and render the chart
+	
+			window.loadChart = function( data ){
+				if( typeof mychart === "undefined" ){				
+					var chart = gEBI('views-graph');
+					window.mychart = new Y.Chart({
+					    dataProvider: data,
+					    type:type,
+					    render: chart,
+					    styles:styleDef,
+					    // interactionType:"planar",
+					    axes:myAxes,
+					    categoryAxisName:"Date",
+					    valueAxisName:"Views",
+					    horizontalGridlines:true,
+		                verticalGridlines:true
+					});
+				}else{
+					mychart.set( "dataProvider", data );
+					console.log( type );
+				}
+			}
 			
-			chart.removeChildren();				
-			window.mychart = new Y.Chart({
-			    dataProvider: data,
-			    type:type,
-			    render: chart,
-			    styles:styleDef,
-			    // interactionType:"planar",
-			    axes:myAxes,
-			    categoryAxisName:"Date",
-			    valueAxisName:"Views",
-			    horizontalGridlines:true,
-                verticalGridlines:true
-			});
-		}
-		
-		
-	});	
+			
+		});	
 	
 	window.getUniqueUrlPage = function ( element ){
 		Ajaxer({
@@ -105,6 +128,7 @@
 			var resp = JSON.parse( d);
 			if( resp.length > 0 ){
 				console.log( resp );
+				//mychart.set( "dataProvider", resp );
 				loadChart( resp, values.chart_type );
 			}else{
 				showAlertMessage( "No Data For Date Range Selected", false );

@@ -146,7 +146,7 @@
 	<section class="clearfix" data-tab='analytics' >
 		<ul class="inline-list form-list" data-templateaction="date-picker">
 			<li><span>line</span><input type="radio" value="combo" name="chart_type" checked=""></li>				
-			<!--li><span>bar</span><input type="radio" value="column" name="chart_type"></li-->
+			<li><span>bar</span><input type="radio" value="column" name="chart_type"></li>
 			<li>
 				<span>start</span>
 				<input data-datepick="" type="text" value='<?php  echo date( "m/d/Y", strtotime("-1 week") ); ?>' name="start_date">

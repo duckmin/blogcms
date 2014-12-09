@@ -22,6 +22,7 @@
 			$dt = new DateTime("@$sec");	
 			$tmp['date'] = $dt->format('m/d/Y');
 			$tmp['views'] = $row['views'];
+			$tmp['unique'] = count( $row["ips"] );
 			array_push( $holder, $tmp ); 		
 		}		
 	}

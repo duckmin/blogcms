@@ -7,14 +7,17 @@
 	if( isset( $_POST["url"] ) ){		
 		$visited_url = $_POST["url"];
 		
-		$db = new MongoClient();
-		$dt = date('Y-m-d'); //todays date with no time
+		$ip = $_SERVER['REMOTE_ADDR'];
 		
-		$ts = new MongoDate( strtotime( $dt." 00:00:00" ) ); //time of 00:00:00 because we only want 1 record per page per day
-		$url = "http://localhost:8080/video";	
+		if( filter_var( $ip, FILTER_VALIDATE_IP) ){
+			$db = new MongoClient();
+			$dt = date('Y-m-d'); //todays date with no time
 			
-		$write_result = $db->blog->analytics->update( array("url"=>$visited_url,'date'=>$ts), array('$inc'=>array('views'=>1)), array('upsert'=>true) );
-		$success = ( $write_result['n'] === 1 )? true : false;		
+			$ts = new MongoDate( strtotime( $dt." 00:00:00" ) ); //time of 00:00:00 because we only want 1 record per page per day	
+				
+			$write_result = $db->$GLOBALS['mongo_db_name']->analytics->update( array("url"=>$visited_url,'date'=>$ts ), array( '$inc'=>array('views'=>1), '$addToSet'=>array( 'ips'=>$ip ) ), array('upsert'=>true) );
+			$success = ( $write_result['n'] === 1 )? true : false;	
+		}	
 	}
 	echo returnMessage( $success, $message, null );
 ?>

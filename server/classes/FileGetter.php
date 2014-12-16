@@ -28,6 +28,7 @@
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/folder.png' title='Show Folder Contents' data-actionnum='".$action_num."' data-filepath='".$filepath."' onclick='listFile(this)' />
 				<img src='".$GLOBALS['base_url']."/style/resources/arrow-curve.png' title='Upload to Folder' data-folderpath='".$filepath."' onclick='".$folder_upload_function."(this)' />
+				<img class='hide' src='".$GLOBALS['base_url']."/style/resources/folder-add.png' title='New Folder' data-folderpath='".$filepath."' onclick='newFolder(this)' />
 				".$filepath."
 			</li>";
 		}

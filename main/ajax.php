@@ -44,6 +44,9 @@ if( isset( $_GET['action'] ) ){
 		case 12:
 	        $file = '/analytics/graph_data_by_daterange.php';
 			break;
+		case 13:
+	        $file = '/add_new_resource_folder.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

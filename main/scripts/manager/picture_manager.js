@@ -1,6 +1,7 @@
 
 function listFile( element ){
 	var parent_li = element.nearestParent( "li" ),
+	add_folder_img = parent_li.lastChildOfType( 'img' ),
 	src = constants.base_url+"/style/resources/";
 	
 	if( element.hasAttribute( 'data-filepath' ) && !element.hasAttribute( 'data-loaded' ) ){
@@ -16,6 +17,7 @@ function listFile( element ){
 				parent_li.appendChild( list );
 				element.setAttribute( 'data-loaded', "" );
 				element.src = src+= "folder-open.png"; 
+				add_folder_img.removeClass("hide");
 			}
 		})
 		
@@ -26,9 +28,11 @@ function listFile( element ){
 		if( current_display === "" || current_display === "block" ){
 			display = "none";
 			src += "folder.png";
+			add_folder_img.addClass("hide");
 		}else{
 			display = "block";
-			src += "folder-open.png";
+			src += "folder-open.png"
+			add_folder_img.removeClass("hide");;
 		}
 		ul.style.display = display;
 		element.src = src;
@@ -36,10 +40,6 @@ function listFile( element ){
 }
 
 function deleteResource( elm ){
-	//if( confirm("Are You Sure You Want to Delete This Resource?") ){	
-		
-	//}
-	
 	var message = "Are You Sure You Want to Delete This Resource?";
 	showConfirm( message, false, elm, function(element){ //calback function fired if yes is selected
 		var file_path = element.getAttribute( 'data-filepath' ),//path from file from /main root	
@@ -74,6 +74,52 @@ function audioClick( element ){
 	window.location.hash = "#template";
 	template_item = templatetype[ "audio" ]( path );
 	gEBI("template").appendChild( template_item );
+}
+
+function newFolder( element ){
+	var path = element.getAttribute( 'data-folderpath' ),
+	parent_li = element.nearestParent('li'),
+	folder_list = parent_li.querySelector( "ul.folders" );
+	
+	if( folder_list !== null && folder_list.querySelector( "li.add-folder-li" ) === null ){
+		var add_folder_li = createElement( "li", {
+			"class":"add-folder-li",
+			"child":multiFragment({
+				"input":createElement( "input",{
+					"type":"text",
+					"name":"folder_name"
+				}),
+				"hidden_path_input":createElement( "input",{
+					"type":"hidden",
+					"name":"folder_path",
+					"value":path
+				}),
+				"save":createElement( "img",{
+					"src":constants.base_url+"/style/resources/confirm_check.png",
+					"title":"Save New Folder",
+					"events":{
+						"click":addFolderAction
+					}
+				}),
+				"remove":createElement( "img",{
+					"src":constants.base_url+"/style/resources/action_delete.png",
+					"title":"Cancel Add New Folder",
+					"events":{
+						"click":function(){
+							this.nearestParent("li").remove();			
+						}
+					}
+				})				
+			})
+		});
+		
+		folder_list.prepend( add_folder_li );	
+	}
+	
+	//tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
+	//window.location.hash = "#template";
+	//template_item = templatetype[ "audio" ]( path );
+	//gEBI("template").appendChild( template_item );
 }
 
 function folderUpload( element ){
@@ -112,6 +158,32 @@ function uploadResponseAction( obj ){
 	}else{
 		showAlertMessage( obj.message, obj.result );
 	}
+}
+
+function addFolderAction( e ){
+	var elm = e.currentTarget,
+	parent_li = elm.nearestParent("li"),
+	form_class = new FormClass( parent_li ),
+	vals = form_class.getValues(),
+	message = "Are You Sure You Want to add folder "+vals.folder_path+'/'+vals.folder_name;
+	showConfirm( message, false, elm, function(element){ //calback function fired if yes is selected
+		//var file_path = element.getAttribute( 'data-filepath' ),//path from file from /main root	
+		send=vals;
+		controller.postJson( constants.ajax_url+'?action=13', send, function(d){
+			console.log( d );
+			//var resp = JSON.parse( d);
+			/*if( d !== "" ){
+				var resp = JSON.parse( d );
+				if( resp.result ){
+					var li = element.nearestParent("li").remove();
+				}
+				showAlertMessage( resp.message, resp.result );
+				
+			}else{
+				showAlertMessage( "No Data Error", false );
+			}*/
+		})
+	})	
 }
 
 function imageOver( element ){

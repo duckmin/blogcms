@@ -303,6 +303,19 @@ ul.multi-replace > li:hover{
 	cursor:pointer;
 }
 
+/*resources manager*/
+li.add-folder-li {
+	padding:3px 0 4px 0;
+}
+
+li.add-folder-li *{
+	vertical-align: middle;
+}
+
+li.add-folder-li img{
+	margin-right:4px;
+}
+
 /* code for pop up boxes */
 .backshade{
 	position:fixed;

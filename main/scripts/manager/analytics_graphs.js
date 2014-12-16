@@ -86,7 +86,7 @@
 					var chart = gEBI('views-graph');
 					window.mychart = new Y.Chart({
 					    dataProvider: data,
-					    type:type,
+					    type:"combo",
 					    render: chart,
 					    styles:styleDef,
 					    // interactionType:"planar",
@@ -98,7 +98,6 @@
 					});
 				}else{
 					mychart.set( "dataProvider", data );
-					console.log( type );
 				}
 			}
 			
@@ -129,7 +128,7 @@
 			if( resp.length > 0 ){
 				console.log( resp );
 				//mychart.set( "dataProvider", resp );
-				loadChart( resp, values.chart_type );
+				loadChart( resp );
 			}else{
 				showAlertMessage( "No Data For Date Range Selected", false );
 			}

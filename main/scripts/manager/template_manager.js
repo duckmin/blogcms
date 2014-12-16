@@ -8,7 +8,7 @@
 		var element= e.srcElement||e.currentTarget;
 		var container=element.nearestParent('li');
 		container.remove();
-	}
+	} 
 
 	function moveUp( e ){
 		var element= e.srcElement||e.currentTarget;

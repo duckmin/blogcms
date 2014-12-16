@@ -1,4 +1,7 @@
-
+/*
+TEST PHASE, COOL FUNCS TO TEST NOT READY FOR PRIME TIME YET
+*/
+//WHEN ELEMENT WITH SCROLLBAR
 function atBottomScroll( element, callback ){   
     var fire=element.clientHeight+60;
     element.onscroll=function(){
@@ -22,7 +25,7 @@ function attributeActions( element, attr, config ){
 		}
 	})
 }
-
+//END TEST PHASE
 
 if(!Array.prototype.forEach){
     Array.prototype.forEach = function (fn, scope) {
@@ -144,20 +147,20 @@ function gEBI(id)
 	//avoid using "this" keyword when referring to target element due to IE error and use below variable instead
 	//var element= e.srcElement||e.currentTarget;
 	window.addEvent=function( element, event, func ){
-        if( typeof element.addEventListener !== 'undefined' ){
-            element.addEventListener( event, func, false );
-        }else{ 
-            element.attachEvent('on' + event, func );
-        }
-    }
-     
-    window.removeEvent=function( element, event, func ){
-        if( typeof element.removeEventListener !== 'undefined' ){
-            element.removeEventListener( event, func, false );             
-        }else{ 
-            element.detachEvent( 'on' + event, func );
-        }
-    }
+		if( typeof element.addEventListener !== 'undefined' ){
+			element.addEventListener( event, func, false );
+		}else{ 
+			element.attachEvent('on' + event, func );
+		}
+	}
+	
+	window.removeEvent=function( element, event, func ){
+		if( typeof element.removeEventListener !== 'undefined' ){
+			element.removeEventListener( event, func, false );			
+		}else{ 
+			element.detachEvent( 'on' + event, func );
+		}
+	}
 	
 	element_proto.addEvent=function( event, func ){
 		addEvent( this, event, func );
@@ -196,6 +199,45 @@ function gEBI(id)
 	    }
 	    return this
 	}
+	
+	/*element_proto.firstChildOfType=function( type ){
+	    var children = this.childNodes, child = null;
+	    for( var i = 0, L = children.length; i < L; i+=1 ){
+	    	if( children[i].nodeName.toLowerCase() === type.toLowerCase() ){
+	    		child = children[i];
+	    		break;
+	    	}
+	    }
+	    return child
+	}*/
+	
+	element_proto.firstChildOfType=function( type, index_num, children_node_list ){
+	    var index = index_num || 0,
+	    children = children_node_list || this.childNodes;
+	   // console.log( children[ index ] );
+	    if( typeof children[ index ] === "undefined" ){
+	    	return null
+	    }
+	    
+	    if( children[ index ].nodeName.toLowerCase() === type.toLowerCase() ){
+	    	return children[ index ]
+	    }
+	    
+	    if( children[ index ].nodeName.toLowerCase() !== type.toLowerCase() ){
+	    	return this.firstChildOfType( type, index+1, children );
+	    }
+	}
+	
+	element_proto.lastChildOfType=function( type ){
+	    var children = this.childNodes, child = null;
+	    for( var i = children.length-1; i >= 0; i-=1 ){
+	    	if( children[i].nodeName.toLowerCase() === type.toLowerCase() ){
+	    		child = children[i];
+	    		break;
+	    	}
+	    }
+	    return child
+	}
 
 	element_proto.remove=function(){
 		this.parentElement.removeChild( this );
@@ -233,38 +275,48 @@ function gEBI(id)
 	
 	element_proto.prepend=function( new_element ){
 		if( isAppendable( new_element ) ){
-			if( this.childNodes.length>0 )
-			{
-				this.insertBefore( new_element, this.firstChild )
+			if( this.childNodes.length>0 ){
+				this.insertBefore( new_element, this.firstChild );
+				return new_element;
+			}else{
+				return this.appendChild( new_element );
 			}
-		}
-		return this
+		}else{
+	    	throw new Error( "given node can be be appended before" );
+	    }
 	}
 	
 	element_proto.appendBefore=function( node ){
 	    if( isAppendable( node ) ){
-			this.parentElement.insertBefore( node, this )
+			this.parentElement.insertBefore( node, this );
+			return node
+	    }else{
+	    	throw new Error( "given node can be be appended before" );
 	    }
-	    return this
+	    //return this
 	}
 
 	element_proto.appendAfter=function( node ){
-	    if( isAppendable( node ) ){
-			try{
-				this.nextElement().appendBefore( node );
-			}catch(e){
-				this.parentElement.appendChild( node );
+		if( isAppendable( node ) ){
+			var sibling = this.nextElementSibling;
+			if( sibling !== null ){
+				sibling.appendBefore( node );
+			}else{
+			    this.parentElement.appendChild( node );
 			}
-	    }
-	    return this
+			
+			return node
+	    }else{
+	    	throw new Error( "given node can be be appended after" );
+	    }	
 	}
 	
-	element_proto.nextElement=function(){
+	//use element.nextElementSibling instead ( IE9 + )
+	/*element_proto.nextElement=function(){
 		var next_elem=false;
 		current=this
 		while( next_elem===false ){
 			current=current.nextSibling;
-			console.log( current ) ; 
 			if( isHTMLElement( current ) ){
 				return current;
 			}else{
@@ -273,14 +325,14 @@ function gEBI(id)
 				}
 			}
 		}
-	}
+	}*/
 	
-	element_proto.prevElement=function(){
+	//use element.previousElementSibling instead ( IE9 + )		
+	/*element_proto.prevElement=function(){
 		var prev_elem=false;
 		current=this
 		while( prev_elem===false ){
 			current=current.previousSibling;
-			console.log( current ); 
 			if( isHTMLElement( current ) ){
 				return current;
 			}else{
@@ -289,9 +341,10 @@ function gEBI(id)
 				}
 			}
 		}
-	}
+	}*/
 	
-	element_proto.firstChildElement=function(){
+	//use element.firstElementCild instead ( IE9 + )	
+	/*element_proto.firstChildElement=function(){
         var children=this.childNodes,
         L=children.length;
         if( L>0 ){
@@ -309,9 +362,10 @@ function gEBI(id)
         }else{
             throw new Error( "node has no children can not find first child element" );
         }
-    }
+    }*/
    
-    element_proto.lastChildElement=function(){
+   	//use element.lastElementCild instead ( IE9 + )
+    /*element_proto.lastChildElement=function(){
         var children=this.childNodes,
         L=children.length;
         if( L>0 ){
@@ -329,9 +383,9 @@ function gEBI(id)
         }else{
             throw new Error( "node has no children can not find last child element" );
         }
-    }
+    }*/
 	
-	element_proto.nearestParent=function( type ){
+	/*element_proto.nearestParent=function( type ){
 		var match=false,
 	    current_parent=this;
 	    while( match===false ){
@@ -348,9 +402,23 @@ function gEBI(id)
 			}
 	    }
 	    return match
+	}*/
+	
+	element_proto.nearestParent=function( type ){
+		var current_parent = this.parentElement;//,
+		//current_node_name = current_parent.nodeName.toLowerCase();
+		console.log( current_parent );
+		if( current_parent === null || current_parent.nodeName.toLowerCase() === type.toLowerCase() ){
+			return current_parent;
+		}
+		
+		if( current_parent.nodeName.toLowerCase() !== type.toLowerCase() ){
+			return current_parent.nearestParent( type );
+		}
+		
 	}
 	
-	element_proto.nearestParentClass=function( class_name ){
+	/*element_proto.nearestParentClass=function( class_name ){
         var match=false,
         current_parent=this;
         while( match===false ){
@@ -368,6 +436,17 @@ function gEBI(id)
             }
         }
         return match
+    }*/
+    
+    element_proto.nearestParentClass=function( class_name ){
+		var current_parent = this.parentElement;
+		//console.log( current_parent );
+		if( current_parent === null || current_parent.hasClass( class_name ) ){
+			return current_parent;
+		}	
+		if( !current_parent.hasClass( class_name ) ){
+			return current_parent.nearestParentClass( class_name );
+		}       
     }
 	
 	
@@ -544,6 +623,10 @@ function gEBI(id)
 		}
 		head.appendChild(frag);
 	}
+	
+	window.minMaxRandomNumber = function( min, max ){
+   		return Math.floor( Math.random() * ( max - min + 1 ) + min );
+	}
 
 	//put in obj and a string path to get value or false if undefined
 	window.getObjValueFromString=function(obj,name_path){
@@ -603,46 +686,40 @@ function gEBI(id)
 		return xmlHttp;
 	}
 	
-	/*    EXAMPLE AJAX INIT OBJ
-        {
-            url:"http://myajaxurl.com",
-            method:"POST",
-            send:JSON.stringify( { test:"test", test2:"test2" } ),
-            content_type:"text/html",
-            async:true,
-            success:function( data ){  //data function },
-            error:function( e_code, e_message ){ //handle error }
-        }
-    */
-    window.Ajaxer=function( obj ){
-        var xmlHttp = getXMLHttp(),
-        send_info=( obj.hasOwnProperty('send') && obj.method === 'POST')? obj.send : null,
-        headers=( obj.hasOwnProperty('content_type') )? obj.content_type : "application/x-www-form-urlencoded",
-        async = ( obj.hasOwnProperty('async') )? obj.async : true;
-        console.log( async );
-        xmlHttp.open( obj.method, obj.url, async );
-        xmlHttp.setRequestHeader( "Content-type", headers );
-        xmlHttp.send( send_info );
- 
-        xmlHttp.onreadystatechange=function(){
-            //console.log( "rdy stat="+xmlHttp.readyState+" status="+xmlHttp.status )
-            if(xmlHttp.readyState===4 && xmlHttp.status===200){
-                obj.success( xmlHttp.responseText );
-            }
-            else if( xmlHttp.status>200 ){
-                if(obj.hasOwnProperty('error') ){
-                    if( typeof obj.error==='function' ){
-                        obj.error( xmlHttp.status, statusText  )
-                    }
-                }
-            }  
-        }
-    }
+	/*	EXAMPLE AJAX INIT OBJ
+		{
+			url:"http://myajaxurl.com",
+			method:"POST",
+			send:JSON.stringify( { test:"test", test2:"test2" } ),
+			content_type:"text/html",
+			async:true,
+			success:function( data ){  //data function },
+			error:function( e_code, e_message ){ //handle error }
+		}
+	*/
+	window.Ajaxer=function( obj ){
+		var xmlHttp = getXMLHttp(),
+		send_info=( obj.hasOwnProperty('send') && obj.method === 'POST')? obj.send : null,
+		headers=( obj.hasOwnProperty('content_type') )? obj.content_type : "application/x-www-form-urlencoded",
+		async = ( obj.hasOwnProperty('async') )? obj.async : true;
+		console.log( async );
+		xmlHttp.open( obj.method, obj.url, async );
+		xmlHttp.setRequestHeader( "Content-type", headers );
+		xmlHttp.send( send_info );
+
+		xmlHttp.onreadystatechange=function(){
+			//console.log( "rdy stat="+xmlHttp.readyState+" status="+xmlHttp.status )
+			if(xmlHttp.readyState===4 && xmlHttp.status===200){
+				obj.success( xmlHttp.responseText );
+			}
+			else if( xmlHttp.status>200 ){
+				if(obj.hasOwnProperty('error') ){
+					if( typeof obj.error==='function' ){
+						obj.error( xmlHttp.status, statusText  )
+					}
+				}
+			}  
+		}
+	}
 
 })( window );
-
-//yo
-
-
-
-

@@ -58,7 +58,6 @@ function bindMustacheString( str, obj ){
 		mustaches.forEach( function(prop){
 			var obj_prop=prop.replace( /{{\s*|\s*}}/g,'' );
 			var obj_val=getObjValueFromString( obj, obj_prop );
-			console.log(obj_prop);
 			if( obj_val!==false ){
 				str=str.replace( prop, obj_val );
 			}

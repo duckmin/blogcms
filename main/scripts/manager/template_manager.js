@@ -12,22 +12,22 @@
 
 	function moveUp( e ){
 		var element= e.srcElement||e.currentTarget;
-		var container=element.nearestParent('li');
-		try{
-			var prevli=container.prevElement();
-			prevli.appendBefore( container );
-		}catch(e){
+		var container=element.nearestParent('li'),
+		prev_li = container.previousElementSibling;
+		if( prev_li !== null ){
+			prev_li.appendBefore( container );
+		}else{
 			container.nearestParent('ul').appendChild( container );
 		}
 	}
 
 	function moveDown( e ){
 		var element= e.srcElement||e.currentTarget;
-		var container=element.nearestParent('li');
-		try{
-			var prevli=container.nextElement();
-			prevli.appendAfter( container );
-		}catch(e){
+		var container=element.nearestParent('li'),
+		next_li = container.nextElementSibling;
+		if( next_li !== null ){
+			next_li.appendAfter( container );
+		}else{
 			container.nearestParent('ul').prepend( container );
 		}
 	}

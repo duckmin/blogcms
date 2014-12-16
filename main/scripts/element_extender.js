@@ -405,9 +405,7 @@ function gEBI(id)
 	}*/
 	
 	element_proto.nearestParent=function( type ){
-		var current_parent = this.parentElement;//,
-		//current_node_name = current_parent.nodeName.toLowerCase();
-		console.log( current_parent );
+		var current_parent = this.parentElement;
 		if( current_parent === null || current_parent.nodeName.toLowerCase() === type.toLowerCase() ){
 			return current_parent;
 		}
@@ -440,7 +438,6 @@ function gEBI(id)
     
     element_proto.nearestParentClass=function( class_name ){
 		var current_parent = this.parentElement;
-		//console.log( current_parent );
 		if( current_parent === null || current_parent.hasClass( class_name ) ){
 			return current_parent;
 		}	
@@ -702,7 +699,6 @@ function gEBI(id)
 		send_info=( obj.hasOwnProperty('send') && obj.method === 'POST')? obj.send : null,
 		headers=( obj.hasOwnProperty('content_type') )? obj.content_type : "application/x-www-form-urlencoded",
 		async = ( obj.hasOwnProperty('async') )? obj.async : true;
-		console.log( async );
 		xmlHttp.open( obj.method, obj.url, async );
 		xmlHttp.setRequestHeader( "Content-type", headers );
 		xmlHttp.send( send_info );

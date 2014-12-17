@@ -200,7 +200,7 @@ function gEBI(id)
 	    return this
 	}
 	
-	/*element_proto.firstChildOfType=function( type ){
+	element_proto.firstChildOfType=function( type ){
 	    var children = this.childNodes, child = null;
 	    for( var i = 0, L = children.length; i < L; i+=1 ){
 	    	if( children[i].nodeName.toLowerCase() === type.toLowerCase() ){
@@ -209,23 +209,6 @@ function gEBI(id)
 	    	}
 	    }
 	    return child
-	}*/
-	
-	element_proto.firstChildOfType=function( type, index_num, children_node_list ){
-	    var index = index_num || 0,
-	    children = children_node_list || this.childNodes;
-	   // console.log( children[ index ] );
-	    if( typeof children[ index ] === "undefined" ){
-	    	return null
-	    }
-	    
-	    if( children[ index ].nodeName.toLowerCase() === type.toLowerCase() ){
-	    	return children[ index ]
-	    }
-	    
-	    if( children[ index ].nodeName.toLowerCase() !== type.toLowerCase() ){
-	    	return this.firstChildOfType( type, index+1, children );
-	    }
 	}
 	
 	element_proto.lastChildOfType=function( type ){

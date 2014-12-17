@@ -2,6 +2,16 @@
 	margin-left:10px;
 }
 
+.folders > li {
+	vertical-align: middle;
+	margin-top:4px;	
+}
+
+.folders > li > span {
+	margin-left:5px;
+	color:#190087;	
+}
+
 .folders, #template {
 	list-style-type:none;
 }
@@ -305,7 +315,7 @@ ul.multi-replace > li:hover{
 
 /*resources manager*/
 li.add-folder-li {
-	padding:3px 0 4px 0;
+	padding-bottom:4px;
 }
 
 li.add-folder-li *{

@@ -79,9 +79,10 @@ function audioClick( element ){
 function newFolder( element ){
 	var path = element.getAttribute( 'data-folderpath' ),
 	parent_li = element.nearestParent('li'),
-	folder_list = parent_li.querySelector( "ul.folders" );
-	
-	if( folder_list !== null && folder_list.querySelector( "li.add-folder-li" ) === null ){
+	folder_list = parent_li.querySelector( "ul.folders" ),
+	folder_first_child = folder_list.firstElementChild;
+	console.log(folder_first_child);
+	if( folder_list !== null && ( folder_first_child === null || !folder_first_child.hasClass("add-folder-li") ) ){ //first child of parent li will eiter be null 'empty' or it will not be an add folder element
 		var add_folder_li = createElement( "li", {
 			"class":"add-folder-li",
 			"child":multiFragment({
@@ -170,18 +171,14 @@ function addFolderAction( e ){
 		//var file_path = element.getAttribute( 'data-filepath' ),//path from file from /main root	
 		send=vals;
 		controller.postJson( constants.ajax_url+'?action=13', send, function(d){
-			console.log( d );
-			//var resp = JSON.parse( d);
-			/*if( d !== "" ){
-				var resp = JSON.parse( d );
-				if( resp.result ){
-					var li = element.nearestParent("li").remove();
-				}
-				showAlertMessage( resp.message, resp.result );
-				
+			var resp = JSON.parse( d);
+			if( resp.result ){
+				var holder_ul = createElement("ul");
+				holder_ul.innerHTML = resp.data;
+				elm.nearestParent("li").replaceWith( holder_ul.firstElementChild ); //resp returns new folder li ready to go just replace box with DOM friendly li
 			}else{
-				showAlertMessage( "No Data Error", false );
-			}*/
+				showAlertMessage( resp.message, false );
+			}
 		})
 	})	
 }

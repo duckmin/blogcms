@@ -250,7 +250,7 @@ FormClass.prototype.clearForm=function(){
 				clearSelect(select )
 			},
 			"input":function( input ){
-				if( input.type==='text' || input.type==='password' ){
+				if( input.type==='text' || input.type==='hidden' || input.type==='password' ){
 					input.value="";
 				}
 				if( input.type==='checkbox' || input.type==='radio' ){

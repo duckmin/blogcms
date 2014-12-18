@@ -180,6 +180,10 @@ section.main div.post > ul.post-head > li {
 	margin-right:10px;
 }
 
+section.main div.post > ul.post-head > li[data-ts]{
+	font-size:0.8em	
+}
+
 section.main > ul.paginator{
 	margin:1rem 0 2rem 0;
 }

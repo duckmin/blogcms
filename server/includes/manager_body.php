@@ -68,7 +68,15 @@
 					</li>
 				</ul>
 			</li>
+			<li class="hide" id="edit-mode-form" >
+				<input class="hide" type="checkbox" name="edit_mode" />
+				<input type="hidden" name="id_in_edit" /> 
+				<img src="style/resources/pencil.png" />
+				Edit Mode
+				<img src="style/resources/arrow-31-16.png" />		
+			</li>
 		</ul>
+		
 		
 		<ul class="template" id="template" >
 		</ul>

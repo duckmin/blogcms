@@ -169,7 +169,7 @@ section[data-tab='analytics'] > div{
 }
 
 ul.form-list > li {
-	margin-right:10px;	
+	margin-right:20px;	
 }
 
 ul.form-list > li > span {
@@ -382,4 +382,15 @@ li.add-folder-li img{
 
 .backshade > div > ul > li:nth-child(2){
 	margin-left:40px;
+}
+
+li#edit-mode-form{
+	background-image: none;
+	background-color: orangered;
+	color:white;
+	font-weight:bold;
+}
+
+li#edit-mode-form.hide{
+	display:none;
 }

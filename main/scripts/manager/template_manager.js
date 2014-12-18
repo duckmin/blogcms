@@ -1,9 +1,5 @@
 (function(window){
 	
-	window.EDIT_MODE = false;
-	window.ID_IN_EDIT = null; 
-	window.FOLDER_PATH_IN_EDIT = null; 
-	
 	function removeBox( e ){
 		var element= e.srcElement||e.currentTarget;
 		var container=element.nearestParent('li');
@@ -239,16 +235,33 @@
 	
 	//controls save button after previewing template
 	window.edit_mode = {
-		"enable":function( id, folder ){
-			EDIT_MODE = true;
-			ID_IN_EDIT = id; 
+		"edit_mode":false,
+		"id_in_edit":"",
+		"getEditForm":function(){
+			var form = gEBI("edit-mode-form");		
+			return {
+				"form":form,
+				"form_class":new FormClass( form )	
+			};
+		},		
+		"enable":function( id ){
+			var edit_form = this.getEditForm(),
+			edit_mode = true,
+			id_in_edit = id
+			this.edit_mode = edit_mode,
+			this.id_in_edit = id_in_edit;			
+			edit_form.form_class.bindValues( { "edit_mode":edit_mode, "id_in_edit":id_in_edit} );	
+			edit_form.form.removeClass("hide");		
 		},
 		"disable":function(){
-			EDIT_MODE = false;
-			ID_IN_EDIT = null; 
+			var edit_form = this.getEditForm();
+			edit_form.form_class.clearForm();
+			edit_form.form.addClass("hide");	
+			this.edit_mode = false;
+			this.id_in_edit = ""; 
 		},
-		"active":function(){
-			return ( EDIT_MODE === false && ID_IN_EDIT === null )?
+		"active":function(){		
+			return ( this.edit_mode === false && this.id_in_edit === "" )?
 			false : true;
 		}
 	}
@@ -539,7 +552,7 @@
 	window.saveEditedPostAction = function(){
 		var post_data = getPostDataFromTemplate();
 		if( post_data.length > 0 ){
-			var values = { "id":ID_IN_EDIT, "post_data":post_data }
+			var values = { "id":edit_mode.id_in_edit, "post_data":post_data }
 			console.log( values );
 			controller.postJson( constants.ajax_url+'?action=7', values, function(d){
 				

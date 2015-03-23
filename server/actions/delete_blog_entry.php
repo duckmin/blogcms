@@ -9,7 +9,7 @@
 		$id = $json["id"];
 		
 		try{	
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$deleted = $db_getter->removeSingleRowById( $id );
 			$result = true;

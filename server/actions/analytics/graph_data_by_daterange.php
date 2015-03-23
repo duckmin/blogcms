@@ -4,7 +4,7 @@
 	$holder = array();
 
 	if( isset( $_POST['json'] ) ){	
-		$db = new MongoClient();
+		$db = MongoConnection();
 		$db_getter = new MongoGetter( $db );
 		$json = json_decode( $_POST['json'], true );
 		$url = $json['url'];

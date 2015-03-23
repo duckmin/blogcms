@@ -5,7 +5,7 @@
 	$message = "";
 
 	if( true ){	
-		$db = new MongoClient();
+		$db = MongoConnection();
 		$db_getter = new MongoGetter( $db );	
 		$data = $db_getter->getUniqueAnalyticUrlPage( );
 		$list = "";

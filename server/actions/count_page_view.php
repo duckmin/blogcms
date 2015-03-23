@@ -10,7 +10,7 @@
 		$ip = $_SERVER['REMOTE_ADDR'];
 		
 		if( filter_var( $ip, FILTER_VALIDATE_IP) ){
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$dt = date('Y-m-d'); //todays date with no time
 			
 			$ts = new MongoDate( strtotime( $dt." 00:00:00" ) ); //time of 00:00:00 because we only want 1 record per page per day	

@@ -64,7 +64,7 @@
 		
 		try {
 			
-			$m = new MongoClient();
+			$m = MongoConnection();
 			$db = $m->$GLOBALS['mongo_db_name'];
 			$collection = $db->posts;
 			

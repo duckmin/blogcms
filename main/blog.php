@@ -18,7 +18,7 @@
 			$search = $_GET['search'];
 			$parsedown = new Parsedown();				
 			$post_views = new PostViews( $parsedown );		
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$post_controller = new PostController( $db_getter, $post_views );
 			$mongo_results = $post_controller->getHomePagePosts( $page, $cat, $search ); //false if no result set

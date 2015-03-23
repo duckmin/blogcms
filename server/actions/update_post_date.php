@@ -9,7 +9,7 @@
 		$id = trim( strip_tags( $json["id"] ) );
 		
 		try{			
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$result = $db_getter->renewPostDate( $id );
 			$success = ( $result['nModified'] === 1 )? true : false;

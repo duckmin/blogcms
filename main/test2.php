@@ -3,7 +3,7 @@ $server = dirname(__FILE__)."/../server";
 	
 include_once $server."/configs.php";
 	//try{
-	//$db = new MongoClient();
+	//$db = MongoConnection();
 	//}catch( MongoCursorException $e ) {	
 		//	echo $e->getMessage()."\n";
 	//}

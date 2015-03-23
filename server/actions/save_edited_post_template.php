@@ -11,7 +11,7 @@
 		
 		if( count( $post_data > 0 ) ){
 			try{			
-				$db = new MongoClient();
+				$db = MongoConnection();
 				$db_getter = new MongoGetter( $db );
 				$db_getter->updateSinglePostDataById( $id, $post_data );
 				$success = true;

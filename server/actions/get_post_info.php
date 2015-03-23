@@ -18,7 +18,7 @@
 		}		
 		
 		try{		
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$posts = iterator_to_array ( $db_getter->getBlogManagePosts( $page_num, $cat ) );
 			

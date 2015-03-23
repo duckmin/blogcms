@@ -7,7 +7,7 @@
 		$id = $GLOBALS['url_parts'][2];
 		
 		try{	
-			$db = new MongoClient();
+			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$post_views = new PostViews( new Parsedown );
 			$single_post_data = $db_getter->getSingleRowById( $id );

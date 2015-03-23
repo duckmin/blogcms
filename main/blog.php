@@ -22,6 +22,7 @@
 			$db_getter = new MongoGetter( $db );
 			$post_controller = new PostController( $db_getter, $post_views );
 			$mongo_results = $post_controller->getHomePagePosts( $page, $cat, $search ); //false if no result set
+			$template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
 			
 			if( $mongo_results ){
 				$tmplt_data = array();
@@ -34,8 +35,9 @@
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["body"] = $mongo_results;
 				
-				$base_page = new TemplateBinder( "base_page" );
-				$full_page = $base_page->bindTemplate( $tmplt_data );
+				//$base_page = TemplateBinder::( "base_page" );
+				//$full_page = $base_page->bindTemplate( $tmplt_data );
+				$full_page = TemplateBinder::bindTemplate( $template, $tmplt_data );
 				if( $search === null ){	//do not cache search results			
 					$cache->saveUrlContentToCache( $full_page );
 				}

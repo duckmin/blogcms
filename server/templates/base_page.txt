@@ -29,7 +29,7 @@
 				<li>
 					<form method="GET" action="{{ base }}/pages/search.php" >
 						<input type="hidden" name="cat" value="{{ search_cat }}" />						
-						<input type="text" class="gray-text" data-blogaction="search-clear" name="search" value="search {{ search_cat }}" />
+						<input type="text" name="search" placeholder="search {{ search_cat }}" />
 						<input type="submit" value="" />
 					</form>
 				</li>

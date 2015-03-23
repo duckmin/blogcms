@@ -1,9 +1,3 @@
-function searchClear( e ){
-	var target = e.currentTarget;
-	target.removeClass("gray-text");	
-	target.value = "";
-	var d= target.removeEvent( "focus", searchClear );
-}
 
 function timeFormatter( h, m ){
 	var ext = ( h>=12 )? "PM" : "AM";
@@ -31,11 +25,11 @@ function convertTimeStamps( element ){
 }
 
 addEvent( window, "load", function(){
-	attributeActions( document.body, "data-blogaction", {
+	/*attributeActions( document.body, "data-blogaction", {
 		"search-clear":function(elm){
 			elm.addEvent( "focus", searchClear );
 		}
-	})
+	})*/
 	
 	convertTimeStamps( document );
 })

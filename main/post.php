@@ -11,6 +11,8 @@
 			$db_getter = new MongoGetter( $db );
 			$post_views = new PostViews( new Parsedown );
 			$single_post_data = $db_getter->getSingleRowById( $id );
+			$page_template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
+			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			
 			if( $single_post_data ){
 				$tmplt_data = array();
@@ -21,10 +23,10 @@
 				$tmplt_data["base"] = $base;
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["search_cat"] = $cat;
-				$tmplt_data["body"] = $post_views->makePostHtmlFromData( $single_post_data, $cat );
+				$tmplt_data["body"] = $post_views->makePostHtmlFromData( $single_post_data, $cat, $post_template );
 			
-				$base_page = new TemplateBinder( "base_page" );
-				echo $base_page->bindTemplate( $tmplt_data );
+				$full_page = TemplateBinder::bindTemplate( $page_template, $tmplt_data );
+				echo $full_page;
 			}else{
 				goTo404();
 			}

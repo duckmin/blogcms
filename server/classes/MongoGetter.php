@@ -19,6 +19,14 @@
 			return $cursor;
 		}*/
 		
+		public function getShortendHomePagePostsFromDbByCategory( $page_num, $cat ){
+			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
+			$skip = $GLOBALS['amount_on_main_page']+1;
+			$collection = $this->db->posts;			
+			$cursor = $collection->find( array( "category"=>$cat ), array( "post_data"=>array('$slice'=>array(0,1)) ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );		
+			return $cursor;
+		}
+		
 		public function getHomePagePostsFromDbByCategory( $page_num, $cat ){
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;

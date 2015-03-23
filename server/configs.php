@@ -68,6 +68,10 @@ function goTo404(){
 	include($redirect_url );	
 }
 
+function MongoConnection(){
+	return new MongoClient("mongodb:///tmp/mongodb-27017.sock");
+}
+
 /*
 function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
 	$paginator="<ul class='paginator' >";

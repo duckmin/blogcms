@@ -10,7 +10,7 @@ addEvent(window, "load", function(e){
 		send:null,
 		async:true,
 		success:function( data ){ 
-		document.querySelector("section.main").innerHTML+=data; 
+			document.querySelector("section.main").innerHTML+=data; 
 		},
 		error:function( e_code, e_message ){  }
 	})

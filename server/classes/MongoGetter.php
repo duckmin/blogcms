@@ -92,7 +92,7 @@
 		public function getPreviousPostsFromTimestamp( $cat, $time_stamp ){
 			$mongo_date = new MongoDate( $time_stamp );
 			$collection = $this->db->posts;	
-			$cursor = $collection->findOne( array( "category"=>$cat, "lastModified"=>array( '$lt'=>$mongo_date ) ) );
+			$cursor = $collection->find( array( "category"=>$cat, "lastModified"=>array( '$lt'=>$mongo_date ) ) )->limit(1)->sort( array( 'lastModified' => -1 ) );
 			return $cursor;
 		}
 		

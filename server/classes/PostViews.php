@@ -26,7 +26,7 @@
 					
 				case "image":
 					$src = strip_tags( $post_data_array[ "src" ] );
-					$element = "<img src='".$src."' />";
+					$element = "<img src='".$src."' alt=\"No Image\" />";
 					break;
 					
 				case "audio":

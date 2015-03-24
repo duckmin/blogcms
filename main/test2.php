@@ -26,6 +26,7 @@ include_once $server."/configs.php";
 	////echo  var_dump( filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) );
 	
 	
+	//FOR USE WITH THE GD PHP LIB
 	$src = $GLOBALS['index_path']."/pics/amazon/dove.jpg";
 	$img_info = getimagesize($src);
 	echo var_dump($img_info);

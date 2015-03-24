@@ -57,7 +57,7 @@
 				return $str;
 			}else{
 				if( $search !== null ){
-					if( $page_num ===1 ){					
+					if( $page_num === 1 ){					
 						//if search is set and count is 0 and page = one then search return no n results show them a non result page
 						return "<div class='post'><h1>Search ".$search." not found</h1></p>";
 					}else{

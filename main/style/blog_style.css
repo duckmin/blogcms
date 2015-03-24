@@ -33,15 +33,43 @@ input[type="submit"]:hover{
 	cursor:pointer;
 }
 
-header > ul > li, section.main > ul.paginator > li{
-	padding:0 0.5rem;
+header > ul > li{
 	margin-right:4px;
+	padding:0 0.5rem;
+}
+
+header > ul > li, section.main > ul.paginator > li{
+	
+	
 	background-color: white;
 }
 
 section.main > ul.paginator > li{
-	border:1px dotted black;
+	border-width:1px ;
+	border-style:solid;
+	border-color:black;
+	border-right:none;
+	
+	position:relative;
+}
+
+section.main > ul.paginator > li > a, section.main > ul.paginator > li.current-cat{
 	padding:0 0.8rem;
+}
+
+section.main > ul.paginator > li.current-cat, section.main > ul.paginator > li:hover{
+	background-color:lightblue;
+}
+
+section.main > ul.paginator > li:first-child{
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+}
+
+section.main > ul.paginator > li:last-child{
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	border-right:1px solid black;
 }
 
 header > ul > li.current-cat, header > ul > li:hover {
@@ -55,10 +83,6 @@ header > ul > li:last-child:hover{
 
 header > ul > li > form input.gray-text{
 	color:lightgray;
-}
-
-section.main > ul.paginator > li.current-cat{
-	border:none;
 }
 
 header a, section.main div.post > ul.post-head a{

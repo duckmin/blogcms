@@ -47,6 +47,9 @@ if( isset( $_GET['action'] ) ){
 		case 13:
 	        $file = '/add_new_resource_folder.php';
 			break;
+		case 14:
+	        $file = '/get_previous_post_html_from_timestamp.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

@@ -19,7 +19,7 @@
 				$tmplt_data["title"] = $single_post_data["title"]." ".$_SERVER['HTTP_HOST'];
 				$tmplt_data["description"] = $single_post_data["description"];
 				$tmplt_data["styles"] = "";
-				$tmplt_data["scripts"] = "";
+				$tmplt_data["scripts"] = "<script src='/scripts/page_actions/post_actions.js' ></script>";
 				$tmplt_data["base"] = $base;
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["search_cat"] = $cat;

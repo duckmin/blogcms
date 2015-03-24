@@ -89,6 +89,13 @@
 			return $cursor;
 		}
 		
+		public function getPreviousPostsFromTimestamp( $cat, $time_stamp ){
+			$mongo_date = new MongoDate( $time_stamp );
+			$collection = $this->db->posts;	
+			$cursor = $collection->findOne( array( "category"=>$cat, "lastModified"=>array( '$lt'=>$mongo_date ) ) );
+			return $cursor;
+		}
+		
 		public function removeSingleRowById( $id ){
 			$mongo_id = new MongoId( $id );
 			$collection = $this->db->posts;	

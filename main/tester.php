@@ -3,8 +3,8 @@
 	
 	include_once $server."/configs.php";
 	$db = MongoConnection();file:///home/duckmin/projects/js_libs/libs_in_dev/extender_test.html
-	$id2 = new MongoId();
-	echo $id2;
+	//$id2 = new MongoId();
+	//echo $id2;
 	/*$count = ( 4-1 )*$GLOBALS['amount_on_main_page'];
 	$skip = $GLOBALS['amount_on_main_page']+1;
 	$collection = $db->blog->posts;			
@@ -22,7 +22,7 @@
 	//$cursor = $collection->find( array( 'created'=>array( '$lt'=>$d ) ) );
 	//echo var_dump( $cursor );
 
-	$parser = new Parsedown();
+	//$parser = new Parsedown();
 	
 $t = 'Hello _Parsedown_! whus good my ninja
 I am a<b>baws</b> of this number
@@ -93,4 +93,10 @@ munchin ass niga shit mein!
 		echo $cache->pullUrlContentFromCache();
 		
 	}*/
+	
+	//TEST TO GET TIMESTAMP OF ONE POST AND GET THE NEXT POST BACK IN TIME
+	//$time = 1427140819000/1000;	
+	$d = new MongoDate(time());
+	//echo time();
+	var_dump($d);
 ?>

@@ -85,7 +85,7 @@ header > ul > li > form input.gray-text{
 	color:lightgray;
 }
 
-header a, section.main div.post > ul.post-head a{
+header a, section.main article.post > ul.post-head a{
 	text-decoration:none;
 }
 
@@ -94,7 +94,7 @@ section.main {
 	
 }
 
-div.post{
+article.post{
 	/*background-color:orange;*/
 	margin-top:2rem;
 	padding:0em 1rem 1rem 1rem;
@@ -104,24 +104,24 @@ div.post{
 }
 
 
-div.post:nth-child(1){
+article.post:nth-child(1){
 	margin-top:0;
 }
 
-.main div.post p{
+.main article.post p{
 	font-family: Verdana,Geneva,sans-serif;
 }
 
-.main div.post h1, .main div.post h2{
+.main article.post h1, .main article.post h2{
 	font-family: "Lucida Console","Lucida Sans Typewriter",monaco,"Bitstream Vera Sans Mono",monospace;
 }
 
-div.post > embed {
+article.post > embed {
 	width:500px;
 	height:22px;	
 }
 
-.main div.post img{
+.main article.post img{
 	display:block;
 	vertical-align: middle;
 	/*max-width:80%;*/
@@ -129,34 +129,34 @@ div.post > embed {
 	/*margin:0 auto 0 5%;*/
 }
 
-.main div.post p{
+.main article.post p{
 	/*max-width:90%;
 	margin:0 auto 10px auto;*/
 	font-size:1.5em;
 	font-weight:100;
 }
 
-.main div.post ul{
+.main article.post ul{
 	list-style-type: square;
 	font-size:1.5em;
 	margin-left:0.9em;
 }
 
-.main div.post ul.post-head{
+.main article.post ul.post-head{
 	font-size:1em;	
 }
 
-.main div.post p, .main div.post img, .iframe-embed, .main div.post h2,
-.main div.post h1, .main div.post ul, .main div.post blockquote, .main div.post embed {
+.main article.post p, .main article.post img, .iframe-embed, .main article.post h2,
+.main article.post h1, .main article.post ul, .main article.post blockquote, .main article.post embed {
 	margin-top:0.5rem;
 	display:block;
 }
 
-.main div.post strong{
+.main article.post strong{
 	font-weight:700;	
 }
 
-.main div.post h1{
+.main article.post h1{
 	line-height:1em;
 	padding-bottom:3px;
 	max-width:90%;
@@ -182,7 +182,7 @@ div.post > embed {
 	border:none;
 }
 
-.main div.post img + blockquote > p{
+.main article.post img + blockquote > p{
 	font-size:1.3em;
 	background-image: url('resources/arrow-31-16.png');
 	padding-left:18px;
@@ -193,18 +193,18 @@ div.post > embed {
 	font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace
 }
 
-section.main div.post > ul.post-head {
+section.main article.post > ul.post-head {
 	border-top:1px dotted black;
 	border-bottom:1px dotted black;
 	margin:0 -1rem;
 	padding:3px 1rem;
 }
 
-section.main div.post > ul.post-head > li {
+section.main article.post > ul.post-head > li {
 	margin-right:10px;
 }
 
-section.main div.post > ul.post-head > li[data-ts]{
+section.main article.post > ul.post-head > li[data-ts]{
 	font-size:0.8em	
 }
 
@@ -212,11 +212,11 @@ section.main > ul.paginator{
 	margin:1rem 0 2rem 0;
 }
 
-section.main > ul.paginator, section.main div.post > ul.post-head, header > ul {
+section.main > ul.paginator, section.main article.post > ul.post-head, header > ul {
 	list-style-type:none;
 }
 
-section.main > ul.paginator > li, section.main div.post > ul.post-head > li, header > ul > li{
+section.main > ul.paginator > li, section.main article.post > ul.post-head > li, header > ul > li{
 	display:inline-block;
 	
 }
@@ -248,7 +248,7 @@ section.main > ul.paginator > li a{
 /*at or above 800px screen width*/		  
 @media only screen and (min-width: 1000px) {
        
-	.main div.post img{
+	.main article.post img{
 		max-width:80%;
 	}
 	
@@ -262,7 +262,7 @@ section.main > ul.paginator > li a{
 /*1000px width and below*/		  
 @media only screen and (max-width: 1000px) {
 	
-	.main div.post img{
+	.main article.post img{
 		max-width:100%;
 	}
 	
@@ -273,7 +273,7 @@ section.main > ul.paginator > li a{
 }  
 
 @media only screen and (max-width: 600px) {
-	div.post > embed {
+	article.post > embed {
 		width:250px;	
 	}
 }  

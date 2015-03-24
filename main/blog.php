@@ -26,7 +26,7 @@
 			
 			if( $mongo_results ){
 				$tmplt_data = array();
-				$tmplt_data["title"] = $cat." ".$_SERVER['HTTP_HOST']." - page ".$page;
+				$tmplt_data["title"] = $cat." - page ".$page." ".$_SERVER['HTTP_HOST'];
 				$tmplt_data["description"] = "";
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = ( $search === null )? "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>" : ""; //no analytics on search pages

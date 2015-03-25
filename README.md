@@ -5,7 +5,7 @@
 4. change your apache conf ( or vhost ) documentroot to be the "main" ( same directory of index.php ) folder of the project 
 5. this application routes all urls through "index.php" file with using apaches mod rewrite rules for the /main directory should look like
 
-	<VirtualHost *:80>
+    <VirtualHost *:80>
 	
 		ServerName www.blog.local
 		DocumentRoot /opt/blogcms/main
@@ -23,7 +23,7 @@
 			Allow from all
 		</Directory>
 	
-	</VirtualHost>
+    </VirtualHost>
 
 
 6. in /server/configs.php you will find many configuration settings most are obvious as to what they are and can be changed easily 

@@ -64,7 +64,7 @@ function myAutoloader( $className )
 }
 
 function goTo404(){
-	$redirect_url = $GLOBALS['index_path']."/pages/404.php";
+	$redirect_url = $GLOBALS['server_path']."/pages/404.php";
 	header( $_SERVER["SERVER_PROTOCOL"]." 404 Not Found" );	
 	include($redirect_url );	
 }

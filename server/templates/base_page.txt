@@ -35,7 +35,7 @@
 				</li>
 			</ul>
 		</header>
-		<section class='main'>
+		<section class='main'>		
 			{{ body }}
 		</section>
 	</div>

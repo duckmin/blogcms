@@ -25,9 +25,10 @@
          public function loginSuccess( $user, $pw ){
 			$users = json_decode( file_get_contents( $GLOBALS['server_path']."/includes/logins.json" ), true );  
 			          
-            if( array_key_exists( $user, $users ) && $users[$user]["pw"] === $pw ){	
-            	$_SESSION['user'] = $user;
+         if( array_key_exists( $user, $users ) && $users[$user]["pw"] === $pw ){	
+            $_SESSION['user'] = $user;
 				$_SESSION['level'] = $users[$user]["level"];
+				$_SESSION['created'] = time();
 				return true;
 			}else{
 				return false;	

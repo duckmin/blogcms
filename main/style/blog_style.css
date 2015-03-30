@@ -182,15 +182,24 @@ article.post > embed {
 	border:none;
 }
 
-.main article.post img + blockquote > p{
+.main article.post blockquote > p{
 	font-size:1.3em;
-	background-image: url('resources/arrow-31-16.png');
-	padding-left:18px;
-	margin-left:10px;
 	background-repeat: no-repeat;
 	background-position:left center;
 	text-indent:0;
-	font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace
+	font-family: "Courier New",Courier,"Lucida Sans Typewriter","Lucida Typewriter",monospace;
+}
+
+.main article.post img + blockquote > p{
+	background-image: url('resources/arrow-31-16.png');
+	padding-left:18px;
+	margin-left:10px;
+}
+
+blockquote > p{
+	background-image: url('resources/quotes.png');
+	padding-left:48px;
+	margin-left:10px;
 }
 
 section.main article.post > ul.post-head {

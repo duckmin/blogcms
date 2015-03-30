@@ -4,13 +4,10 @@
 	$success = false; 
 	$message = "";
 	$valid_inputs = true;
-		
-	if( $valid_inputs && false/*logged in*/ ){  //if not logged in all validations will skip and go straight to message
-		$valid_inputs = false;
-		$message = "Not Logged In";
-	}
+	$logged_in = ManagerActions::isLoggedIn();	
+	//if not logged in all validations will skip and go straight to message
 	
-	if( $valid_inputs && isset( $_GET["procedure"] ) && isset( $_POST["json"] ) ){  //if all required fields are set set up vars
+	if( $valid_inputs && $logged_in && isset( $_GET["procedure"] ) && isset( $_POST["json"] ) ){  //if all required fields are set set up vars
 		$json = json_decode( $_POST['json'], true );
 		$procedure = (int)$_GET["procedure"];
 
@@ -22,13 +19,13 @@
 		$desc_length = strlen( $desc );
 	}else{
 		$valid_inputs = false;
+		$message = "Not Logged In";
 	}
 	
 	if( $valid_inputs && $title_length > $GLOBALS['max_title_length'] ){
 		$valid_inputs = false;
 		$message = "Title longer than ".$GLOBALS['max_title_length']." characters";
 	}
-	
 	
 	if( $valid_inputs && $desc_length > $GLOBALS['max_desc_length'] ){
 		$valid_inputs = false;
@@ -50,7 +47,7 @@
 		}
 	}
 	
-	if( $procedure === 1 ){
+	if( isset( $procedure ) && $procedure === 1 ){
 		$post_data = $json["post_data"];
 		$post_data_length = count( $post_data );
 		

@@ -2,8 +2,9 @@
 	include_once dirname(__FILE__)."/../configs.php";
 	$result = false;
 	$message = "Not Logged In";
+	$logged_in = ManagerActions::isLoggedIn();
 	
-	if( true ){
+	if( $logged_in ){
 	
 		$json = json_decode( $_POST['json'], true );
 		$id = $json["id"];

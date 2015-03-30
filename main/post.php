@@ -21,7 +21,6 @@
 			$db_getter = new MongoGetter( $db );
 			$post_views = new PostViews( new Parsedown );
 			$single_post_data = $db_getter->getSingleRowFromDtae( $title, $start, $end ); //NULL if not found
-			//$single_post_data = $db_getter->getSingleRowById( $id );
 			$page_template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
 			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			

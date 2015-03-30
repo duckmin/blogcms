@@ -2,8 +2,9 @@
 	include_once dirname(__FILE__)."/../configs.php";
 	$result = false;
 	$message = "File Not Found";
+	$logged_in = ManagerActions::isLoggedIn();
 	
-	if( true ){ //logged in
+	if( $logged_in ){ //logged in
 	
 		$json = json_decode( $_POST['json'], true );
 		$file_path = $json["file_path"];

@@ -3,8 +3,9 @@
 	
 	$success = false; 
 	$message = "";
+	$logged_in = ManagerActions::isLoggedIn();
 	
-	if( true && isset( $_POST["json"] ) ){
+	if( $logged_in && isset( $_POST["json"] ) ){
 		$json = json_decode( $_POST['json'], true );
 		$id = trim( strip_tags( $json["id"] ) );
 		

@@ -3,8 +3,9 @@
 	$result = false;
 	$message = "";
 	$data = null;
+	$logged_in = ManagerActions::isLoggedIn();
 	
-	if( true && isset( $_POST['json'] ) ){ //logged in
+	if( $logged_in && isset( $_POST['json'] ) ){ //logged in
 	
 		$json = json_decode( $_POST['json'], true );
 		$folder_name = $json["folder_name"];

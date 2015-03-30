@@ -7,21 +7,21 @@
 
     <VirtualHost *:80>
 	
-		ServerName www.blog.local
-		DocumentRoot /opt/blogcms/main
+        ServerName www.blog.local
+		  DocumentRoot /opt/blogcms/main
 		
-		<Directory "/opt/blogcms/main">
-			RewriteEngine On
-			RewriteBase /
-			RewriteCond %{REQUEST_FILENAME} !-f
-			RewriteCond %{REQUEST_FILENAME} !-d
-			RewriteRule ^(.*)$ index.php
-			
-			Options -Indexes +FollowSymLinks
-			AllowOverride None
-			Order allow,deny
-			Allow from all
-		</Directory>
+        <Directory "/opt/blogcms/main">
+            RewriteEngine On
+			   RewriteBase /
+			   RewriteCond %{REQUEST_FILENAME} !-f
+			   RewriteCond %{REQUEST_FILENAME} !-d
+			   RewriteRule ^(.*)$ index.php
+			   
+			   Options -Indexes +FollowSymLinks
+			   AllowOverride None
+			   Order allow,deny
+			   Allow from all
+        </Directory>
 	
     </VirtualHost>
 

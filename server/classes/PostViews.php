@@ -15,6 +15,7 @@
 			switch( $post_data_array[ "data-posttype" ] ){
 				
 				case "heading":
+					//not used as markdown can be used for headings
 					$text = strip_tags( $post_data_array[ "text" ] );
 					$element = "<h1>".$text."</h1>";
 					break;
@@ -61,14 +62,22 @@
 			$structure = array();		
 			$id = new MongoId( $row["_id"] ); 
 			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
-			$dt = new DateTime("@$time_stamp");	   	  	    
+			$dt = new DateTime("@$time_stamp");	 
+			 	  	    
 			$structure["created"] = $dt->format('F d, Y g:i');
 			$structure["time_stamp"] = $time_stamp*1000; //for js accurrate UTC conversion	
 			$structure["title"] = $row["title"];    	    
-    	    $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
+    	   $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
 			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page 			
 			$structure["id"] = $id->__toString();
 			$structure["base"] = $GLOBALS['base_url'];
+			
+			//parse date modified to use in direct URL to post
+			$date_of_post = date_parse( $structure["created"] );
+			$structure["month"] = $date_of_post["month"];
+			$structure["day"] = $date_of_post["day"];
+			$structure["year"] = $date_of_post["year"];
+			$structure["safe_title"] = urlencode($row["title"]);
 			return TemplateBinder::bindTemplate( $template, $structure );	
 		}
 		

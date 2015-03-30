@@ -89,6 +89,15 @@
 			return $cursor;
 		}
 		
+		public function getSingleRowFromDtae( $title, $start, $end ){
+			$title_uncode = urldecode( $title );			
+			$start_d = new MongoDate( $start );
+			$end_d = new MongoDate( $end );
+			$collection = $this->db->posts;	
+			$cursor = $collection->findOne( array( "title"=>$title_uncode, "lastModified"=>array( '$gte'=>$start_d, '$lte'=>$end_d ) ) );
+			return $cursor;
+		}
+		
 		public function getPreviousPostsFromTimestamp( $cat, $time_stamp ){
 			$mongo_date = new MongoDate( $time_stamp );
 			$collection = $this->db->posts;	

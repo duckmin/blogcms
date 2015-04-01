@@ -35,8 +35,6 @@
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["body"] = $mongo_results;
 				
-				//$base_page = TemplateBinder::( "base_page" );
-				//$full_page = $base_page->bindTemplate( $tmplt_data );
 				$full_page = TemplateBinder::bindTemplate( $template, $tmplt_data );
 				if( $search === null ){	//do not cache search results			
 					$cache->saveUrlContentToCache( $full_page );

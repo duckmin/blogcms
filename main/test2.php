@@ -27,7 +27,7 @@ include_once $server."/configs.php";
 	
 	
 	//FOR USE WITH THE GD PHP LIB
-	$src = $GLOBALS['index_path']."/pics/amazon/dove.jpg";
+	/*$src = $GLOBALS['index_path']."/pics/amazon/dove.jpg";
 	$img_info = getimagesize($src);
 	echo var_dump($img_info);
 	$width = $img_info[0];
@@ -39,5 +39,9 @@ include_once $server."/configs.php";
 	$img = imagecreatefromjpeg( $src );
 	imagecopyresampled($img_p, $img, 0, 0, 0, 0, $aspect_width, $aspect_height, $width, $height);
 	imagejpeg($img_p, $GLOBALS['index_path']."/pics/amazon/dove-thumb.jpg", 100); //save resized img canvas to new src
-
+	*/
+	
+	$json = "['yo','me','ello']";
+	
+	echo var_dump( json_decode($json) );
 ?>

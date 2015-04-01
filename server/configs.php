@@ -5,8 +5,11 @@ $GLOBALS['server_path'] = dirname(__FILE__);
 $GLOBALS['index_path'] = $GLOBALS['server_path']."/../main";
 $GLOBALS['base_url'] = "http://".$_SERVER['HTTP_HOST'];
 $GLOBALS['template_dir'] = $GLOBALS['server_path']."/templates";
-$GLOBALS['mongo_db_name'] = "blog";
+$GLOBALS['cache_dir'] = dirname(__FILE__)."/page_cache";
+$GLOBALS['url_parts'] = preg_split( "/\//", preg_replace( "/\/$/", "", substr( $_SERVER['REQUEST_URI'], 1 ) ) );
 
+//audio and video files allowed to be uploaded through the manager
+//if adding new type add a new permitted extension & mime type
 $GLOBALS["upload_vars"] = array(
 	"allowed_image_extensions"=>array("gif", "jpeg", "jpg", "png"),
 	"allowed_audio_extensions"=>array("mp3"),
@@ -16,8 +19,17 @@ $GLOBALS["upload_vars"] = array(
 );
 $GLOBALS["upload_vars"]["allowed_extensions"] = array_merge ( $GLOBALS["upload_vars"]["allowed_image_extensions"], $GLOBALS["upload_vars"]["allowed_audio_extensions"] );
 
+//mongo DB name project uses
+$GLOBALS['mongo_db_name'] = "blog";
+
+//# of posts that show up per page
 $GLOBALS['amount_on_main_page'] = 3;
+
+//# of posts that show up on the "posts" tab in the manager
 $GLOBALS['amount_on_manger_tab'] = 8;
+
+//minutes until cache file expires
+$GLOBALS['max_page_cache_mins'] = -5;  
 
 $GLOBALS['max_category_length'] = 500;
 $GLOBALS['max_title_length'] = 500;
@@ -25,12 +37,9 @@ $GLOBALS['max_desc_length'] = 500;
 $GLOBALS['max_tags_length'] = 1000;
 $GLOBALS['max_folder_path_length'] = 1000;
 
-$GLOBALS['cache_dir'] = dirname(__FILE__)."/page_cache";
-$GLOBALS['max_page_cache_mins'] = -5;  //minutes until cache file expires
-
-$GLOBALS['url_parts'] = preg_split( "/\//", preg_replace( "/\/$/", "", substr( $_SERVER['REQUEST_URI'], 1 ) ) );
-
 //categories are how posts will be sorted edit with care !!
+//new category names must not contain any spaces or special chars 
+//only A-z 0-9 -_
 $GLOBALS['post_categories'] = array(
 	"blog",
 	"video",
@@ -69,23 +78,9 @@ function goTo404(){
 	include($redirect_url );	
 }
 
+
+//mongo connection string cqan be changed here
 function MongoConnection(){
 	return new MongoClient("mongodb:///tmp/mongodb-27017.sock");
 }
-
-/*
-function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
-	$paginator="<ul class='paginator' >";
-	if( $page_num>1 ){
-		$back=$page_num-1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$back."' >".$back."</a></li>";
-	}
-	$paginator.="<li class='current-cat' >".$page_num."</li>";
-	if( $amount_retrieved > $amount_per_page ){
-		$forward=$page_num+1;
-		$paginator.="<li><a href='".$GLOBALS['base_url']."/blog.php".$add_to_base."p=".$forward."' >".$forward."</a></li>";
-	}
-	return $paginator."</ul>";
-}
-*/
 ?>

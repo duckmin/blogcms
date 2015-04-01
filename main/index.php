@@ -11,20 +11,25 @@
 		switch ( $GLOBALS['url_parts'][0] ) {
 			
 			case "post":
-		        $file = '/server/pages/post.php';
+				$file = '/server/pages/post.php';
 				break;
+				
 			case "ajax":
-		        $file = '/server/pages/ajax.php';
+				$file = '/server/pages/ajax.php';
 				break;
+				
 			case "search":
-		        $file = '/server/pages/search.php';
+				$file = '/server/pages/search.php';
 				break;
+				
 			case "manager":
-		        $file = '/server/pages/manager.php';
-				break;		
+				$file = '/server/pages/manager.php';
+				break;
+						
 			default:
 				$file = "";
 				break;
+
 		}
 		
 	}

@@ -62,7 +62,7 @@
 						return "<article class='post'>
 							<ul class='post-head' style='border-bottom:none' ></ul>	
 							<img style='margin:auto' src=\"/style/resources/question-mark.png\" alt=\"\" >						
-							<h1>no posts in ".$cat." found for search &ldquo;".urldecode($search)."&rdquo;</h1>
+							<h1>no posts in ".$cat." found for search &ldquo;".$search."&rdquo;</h1>
 						</article>";
 					}else{
 						//if page > 1 and search is set something is wrong send to 404						

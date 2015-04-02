@@ -10,7 +10,7 @@
 		
 		$_GET['cat'] = ( $url_parts[0] !== "" )? $url_parts[0] : $GLOBALS['post_categories'][0]; //cat is first url part or the default cat	
 		$_GET['page'] = ( $part_count > 1 )? (int)$url_parts[ $part_count-1 ] : 1; //page is always last part of url or 1		
-		$_GET['search'] = ( $part_count >= 3 )? $url_parts[1] : null; //if url part is 3 entries long search is the second entry		
+		$_GET['search'] = ( $part_count >= 3 )? strip_tags( urldecode( $url_parts[1] ) ) : null; //if url part is 3 entries long search is the second entry		
 		
 		try{		
 			$cat = $_GET['cat'];		

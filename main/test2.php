@@ -41,7 +41,12 @@ include_once $server."/configs.php";
 	imagejpeg($img_p, $GLOBALS['index_path']."/pics/amazon/dove-thumb.jpg", 100); //save resized img canvas to new src
 	*/
 	
-	$json = "['yo','me','ello']";
-	
-	echo var_dump( json_decode($json) );
+	$initial_date = "2015-4-02";
+	$s1 = strtotime($initial_date);
+	$md = new MongoDate( $s1 );
+	echo var_dump($md);
+	echo "<br>";
+	$it2 = 1425346156;
+	$md2 = new MongoDate( $it2 );
+	echo var_dump($md2);		
 ?>

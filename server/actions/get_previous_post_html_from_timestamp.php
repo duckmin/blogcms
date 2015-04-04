@@ -2,9 +2,9 @@
 	include_once dirname(__FILE__)."/../configs.php";
 	
 	if( isset( $_GET["cat"] ) && isset( $_GET["ts"] ) ){
-		$time_stamp = (int)$_GET["ts"]/1000; //js use milliseconds mongo uses seconds convert milliseconds to seconds
+		$time = floatval( $_GET["ts"] );
+		$time_stamp = $time/1000; //js use milliseconds mongo uses seconds convert milliseconds to seconds
 		$cat = $_GET['cat'];		
-		//echo $time_stamp;
 		
 		try{			
 			$db = MongoConnection();

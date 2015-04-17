@@ -1,6 +1,5 @@
 <article class="post">
 	<ul class="post-head" >
-		<!--li><b><a href="{{ base }}/post/{{ page_category }}/{{ id }}/">{{ title }}</a></b></li-->
 		<li><b><a href="{{ base }}/post/{{ page_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}/">{{ title }}</a></b></li>
 		<li data-ts="{{ time_stamp }}" >{{ created }}</li>
 	</ul>

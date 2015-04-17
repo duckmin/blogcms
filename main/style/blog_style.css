@@ -4,14 +4,13 @@ header{
 }
 
 header h1 {
-	font-family: 'Raleway Dots', cursive;
+	font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 	font-size:4em;
 	font-weight:100;
-	
+	color:blue;
 }
 
 header > ul {
-	display:inline-block;
 	margin-top:5px;
 	font-size:1.2em;
 }
@@ -34,14 +33,18 @@ input[type="submit"]:hover{
 }
 
 header > ul > li{
-	margin-right:4px;
+	color:blue;
 	padding:0 0.5rem;
+	position:relative;
+	border-bottom: 4px solid blue;
 }
 
 header > ul > li, section.main > ul.paginator > li{
-	
-	
 	background-color: white;
+}
+
+header > ul > li > a {
+	color:inherit;
 }
 
 section.main > ul.paginator > li{
@@ -73,8 +76,8 @@ section.main > ul.paginator > li:last-child{
 }
 
 header > ul > li.current-cat, header > ul > li:hover {
-	/*border:none;*/
-	border-bottom:4px solid blue;
+	border-bottom-color:orange;
+	color:orange;
 }
 
 header > ul > li:last-child:hover{

@@ -27,7 +27,9 @@
 					
 				case "image":
 					$src = strip_tags( $post_data_array[ "src" ] );
-					$element = "<img src='".$src."' alt=\"No Image\" />";
+					$alt_val = strip_tags( $post_data_array[ "alt" ] );
+					$alt = ( $alt_val !== "" )? $alt_val : "Image Failed to Load";
+					$element = "<img src='".$src."' alt=\"$alt\" />";
 					break;
 					
 				case "audio":

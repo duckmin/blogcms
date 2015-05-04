@@ -170,6 +170,14 @@
 						"type":"text",
 						"value":src||""
 					}),
+					"subheading":createElement('h6',{
+						"text":"Alt ( text that appears if image does not load )"
+					}),
+					"alt_input":createElement('input',{
+						"name":"alt",
+						"type":"text",
+						"value":""
+					}),
 					"button":createElement('ul',{
 						"class":"button-list",
 						"child":multiFragment({

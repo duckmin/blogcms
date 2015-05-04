@@ -56,7 +56,7 @@
 	padding-bottom:10px;
 }
 
-.tmplt-forum-container h5 {
+.tmplt-forum-container h5, .tmplt-forum-container h6 {
 	padding:4px 0 5px 10px;
 }
 

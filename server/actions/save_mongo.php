@@ -27,6 +27,12 @@
 		$message = "Title longer than ".$GLOBALS['max_title_length']." characters";
 	}
 	
+	//only allow letters nums and spaces in title
+	if( $valid_inputs && preg_match( "/[^A-z0-9\s]/", $title ) ){
+		$valid_inputs = false;
+		$message = "Title can only contain letters, numbers, or spaces";
+	}
+	
 	if( $valid_inputs && $desc_length > $GLOBALS['max_desc_length'] ){
 		$valid_inputs = false;
 		$message = "Description longer than ".$GLOBALS['max_desc_length']." characters";

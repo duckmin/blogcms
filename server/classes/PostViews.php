@@ -56,7 +56,21 @@
 				$inner_post .= $single_item;
 			}
 			return $inner_post;
-		}		
+		}
+		
+		public function convertPostTitleSpacesToHyphens( $title ){
+			if( preg_match( "/\s/", $title ) ){
+				$title = preg_replace ( "/\s/", "-", $title );
+			}
+			return $title;
+		}	
+		
+		public function convertPostTitleHyphensToSpaces( $title ){
+			if( preg_match( "/-/", $title ) ){
+				$title = preg_replace ( "/-/", " ", $title );
+			}
+			return $title;
+		}					
 		
 		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
 		
@@ -69,7 +83,7 @@
 			$structure["created"] = $dt->format('F d, Y g:i');
 			$structure["time_stamp"] = $time_stamp*1000; //for js accurrate UTC conversion	
 			$structure["title"] = $row["title"];    	    
-    	   $structure["inner"] = $this::formatSinglePost( $row["post_data"] );
+    	   $structure["inner"] = $this->formatSinglePost( $row["post_data"] );
 			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page 			
 			$structure["id"] = $id->__toString();
 			$structure["base"] = $GLOBALS['base_url'];
@@ -79,7 +93,7 @@
 			$structure["month"] = $date_of_post["month"];
 			$structure["day"] = $date_of_post["day"];
 			$structure["year"] = $date_of_post["year"];
-			$structure["safe_title"] = urlencode($row["title"]);
+			$structure["safe_title"] = $this->convertPostTitleSpacesToHyphens( $row["title"] );
 			return TemplateBinder::bindTemplate( $template, $structure );	
 		}
 		

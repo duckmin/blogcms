@@ -89,7 +89,7 @@
 			return $cursor;
 		}
 		
-		public function getSingleRowFromDtae( $title, $start, $end ){
+		public function getSingleRowFromDate( $title, $start, $end ){
 			$title_uncode = urldecode( $title );			
 			$start_d = new MongoDate( $start );
 			$end_d = new MongoDate( $end );

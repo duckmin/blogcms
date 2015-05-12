@@ -202,12 +202,6 @@ ul,div,section,a,aside,article,h1,h2,h3,h4,h5,h6,p,pre,span,li,label,input,butto
 		font-size:60%;
 	}
 	
-	header > ul > li:last-child {
-		display:block !important;
-		margin-top:5px;
-		padding:0;
-	}
-	
 	header > ul{
 		
 	}

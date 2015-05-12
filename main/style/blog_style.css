@@ -7,19 +7,15 @@ header h1 {
 	font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 	font-size:4em;
 	font-weight:100;
-	color:blue;
+	color:navy;
 }
 
 header > ul {
-	margin-top:5px;
+	margin-top:0px;
 	font-size:1.2em;
 }
 
-header > ul > li:last-child {
-	border:none;
-}
-
-header > ul > li > form > input[type="submit"] {
+header > form > input[type="submit"] {
 	background-image: url("resources/search.png");
 	background-repeat: no-repeat;
 	width:16px;
@@ -32,11 +28,21 @@ input[type="submit"]:hover{
 	cursor:pointer;
 }
 
+header > form > input[name="search"] {
+	border:none;
+	border-bottom:2px solid tomato;
+	font-size:1.2em;
+}
+
 header > ul > li{
-	color:blue;
+	color:tomato;
 	padding:0 0.5rem;
 	position:relative;
-	border-bottom: 4px solid blue;
+	border-bottom: 2px solid tomato;
+}
+
+header > ul > li:first-child{
+	border-left:2px solid tomato;
 }
 
 header > ul > li, section.main > ul.paginator > li{
@@ -76,8 +82,12 @@ section.main > ul.paginator > li:last-child{
 }
 
 header > ul > li.current-cat, header > ul > li:hover {
-	border-bottom-color:orange;
-	color:orange;
+	border-bottom-color:navy;
+	color:navy;
+}
+
+header > ul > li:first-child.current-cat{
+	border-left-color:navy;
 }
 
 header > ul > li:last-child:hover{

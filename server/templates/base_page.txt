@@ -23,15 +23,14 @@
 	<div class='wrapper' >
 		<header>
 			<h1>Duckmins BlogCMS</h1>
+			<form method="GET" action="{{ base }}/search/" >
+				<input type="hidden" name="cat" value="{{ search_cat }}" />						
+				<input type="text" name="search" placeholder="search {{ search_cat }}" />
+				<input type="submit" value="" />
+			</form>
 			<ul>
 				{{ header }}
-				<li>
-					<form method="GET" action="{{ base }}/search/" >
-						<input type="hidden" name="cat" value="{{ search_cat }}" />						
-						<input type="text" name="search" placeholder="search {{ search_cat }}" />
-						<input type="submit" value="" />
-					</form>
-				</li>
+				<!-- add hard coded <li> here -->
 			</ul>
 		</header>
 		<section class='main'>		

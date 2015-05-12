@@ -32,6 +32,7 @@ header > form > input[name="search"] {
 	border:none;
 	border-bottom:2px solid tomato;
 	font-size:1.2em;
+	color:tomato;
 }
 
 header > ul > li{

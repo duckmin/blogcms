@@ -91,10 +91,6 @@ header > ul > li:first-child.current-cat{
 	border-left-color:navy;
 }
 
-header > ul > li:last-child:hover{
- 	border-bottom:none;
-}
-
 header > ul > li > form input.gray-text{
 	color:lightgray;
 }

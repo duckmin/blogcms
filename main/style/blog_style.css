@@ -33,6 +33,7 @@ header > form > input[name="search"] {
 	border-bottom:2px solid tomato;
 	font-size:1.2em;
 	color:tomato;
+	text-align:center;
 }
 
 header > ul > li{
@@ -289,7 +290,26 @@ section.main > ul.paginator > li a{
 		max-width:100%;
 	}
 	
-}  
+} 
+
+@media only screen and (max-width: 800px) {
+	body {
+		margin:0;
+		padding:0;
+	}
+	
+	.main article.post{
+		border-left:none;
+		border-right:none;
+		box-shadow: 0 5px 2.5px -2.5px rgba(0, 0, 0, 0.5);
+		padding-left:0;
+		padding-right:0;
+	}
+	
+	 section.main article.post > ul.post-head{
+	 	margin:0 0 0 0;
+	 }
+}   
 
 @media only screen and (max-width: 600px) {
 	article.post > embed {

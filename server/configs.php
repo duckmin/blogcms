@@ -40,13 +40,7 @@ $GLOBALS['max_folder_path_length'] = 1000;
 //categories are how posts will be sorted edit with care !!
 //new category names must not contain any spaces or special chars 
 //only A-z 0-9 -_
-$GLOBALS['post_categories'] = array(
-	"blog",
-	"video",
-	"project",
-	"ramblings",
-	"test"
-);
+$GLOBALS['post_categories'] = json_decode( file_get_contents( $GLOBALS['server_path']."/includes/categories.json" ), true );
 
 //header categries are the ones which show up in the header of the site
 //you may not want every single category to show up in the header so you can define

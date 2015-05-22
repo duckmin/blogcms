@@ -6,6 +6,7 @@
 	$server = dirname(__FILE__)."/../";
 	include_once $server."/configs.php";
 	if( count( $GLOBALS['url_parts'] ) === 6 ){	
+		
 		$base = $GLOBALS['base_url'];
 		$cat = $GLOBALS['url_parts'][1];
 		$year = $GLOBALS['url_parts'][2];
@@ -27,7 +28,7 @@
 			
 			if( $single_post_data !== NULL ){
 				$tmplt_data = array();
-				$tmplt_data["title"] = $single_post_data["title"]." ".$_SERVER['HTTP_HOST'];
+				$tmplt_data["title"] = $single_post_data["title"]." - ".$_SERVER['HTTP_HOST'];
 				$tmplt_data["description"] = $single_post_data["description"];
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = "<script src='/scripts/page_actions/post_actions.js' ></script>";

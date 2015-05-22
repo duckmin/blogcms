@@ -23,11 +23,13 @@
 			$post_controller = new PostController( $db_getter, $post_views );
 			$mongo_results = $post_controller->getHomePagePosts( $page, $cat, $search ); //false if no result set
 			$template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
+			$title = $cat." page ".$page." - ".$_SERVER['HTTP_HOST'];		
+			$desc	= 	$_SERVER['HTTP_HOST']." - browse ".$cat." page ".$page;
 			
 			if( $mongo_results ){
 				$tmplt_data = array();
-				$tmplt_data["title"] = $cat." - page ".$page." ".$_SERVER['HTTP_HOST'];
-				$tmplt_data["description"] = "";
+				$tmplt_data["title"] = $title;
+				$tmplt_data["description"] = $desc;
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = ( $search === null )? "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>" : ""; //no analytics on search pages
 				$tmplt_data["base"] = $base;

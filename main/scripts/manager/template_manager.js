@@ -79,7 +79,7 @@
 		var container = element.nearestParent('div'),
 		textarea = container.querySelectorAll('textarea[name=text]')[0],
 		value = textarea.value;
-		textarea.value = value + " []()";
+		textarea.value = value + " [](http://)";
 	}
 	
 	function previewImage( e ){

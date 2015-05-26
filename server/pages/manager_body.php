@@ -4,6 +4,7 @@
 	<title>Manager</title>
 	<meta charset="utf-8"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="pragma" content="no-cache" />
 	<meta content="General" name="rating"/>
 	<meta content="English" name="language"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
@@ -29,6 +30,12 @@
 
 <body>
 <div class=wrapper>
+	<ul class='login-bar' >
+		<li><?php
+			echo $_SESSION["user"];
+		?></li>
+		<li data-loadaction="logout" >logout<form id="logout" method="GET" action="/logout"></form></li>
+	</ul>
 	<ul class='tab-top' >
 		<li data-tab='template' >Template</li>
 		<li data-tab='pictures' >Resources</li>

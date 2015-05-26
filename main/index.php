@@ -25,6 +25,10 @@
 			case "manager":
 				$file = '/server/pages/manager.php';
 				break;
+				
+			case "logout":
+				$file = '/server/pages/logout.php';
+				break;
 						
 			default:
 				$file = "";

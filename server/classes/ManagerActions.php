@@ -12,8 +12,7 @@
 		}
 		  
 		public static function authenticate(){
-			header('WWW-Authenticate: Basic realm="Manager"');
-			header('HTTP/1.0 401 Unauthorized');
+			include $GLOBALS['server_path']."/pages/manager_login.php";
 		}
 		  
 		public static function loginSuccess( $user, $pw ){

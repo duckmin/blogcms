@@ -102,6 +102,35 @@
 			return $this->makePostHtmlFromData( $row, $post_data );
 		}*/
 		
+		private function getSelectedOption( $cats ){
+			$options="";
+			foreach( $GLOBALS['post_categories'] as $post_cat ){ 
+				$pre_opt = "<option value='".$post_cat."'";
+				( in_array( $post_cat, $cats ) )? $pre_opt.=" selected=''" : false;
+				$options .= $pre_opt." >".$post_cat."</option>";		
+			}
+			return $options;
+		}				
+		
+		//for actions/get_post_info.php we must modify the posting to put in the form
+		public function generateModifedListingForPostInfo( $row ){
+			$row["post_type_options"] = $this->getSelectedOption( $row['category'] );
+			$id = new MongoId( $row["_id"] );  
+			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
+			$dt = new DateTime("@$time_stamp");	   	  	    	   	  	    
+			$row["created"] = $dt->format('F d, Y g:i');			    	    
+			$row["id"] = $id->__toString();
+			$row["first_category"] = $row['category'][0]; //for link to post on manager tab
+			//parse date modified to use in direct URL to post
+			$date_of_post = date_parse( $row["created"] );
+			$row["month"] = $date_of_post["month"];
+			$row["day"] = $date_of_post["day"];
+			$row["year"] = $date_of_post["year"];	
+			$row["safe_title"] = $this->convertPostTitleSpacesToHyphens( $row["title"] );
+
+			return $row;
+		}
+		
 		public function getCatHeaderList( $cat = "" ){
 			$str = "";			
 			for( $i = 0; $i < count( $GLOBALS['header_categories'] ); $i++ ) {

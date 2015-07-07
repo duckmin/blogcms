@@ -137,17 +137,28 @@ function savePopupFolderClickAction( element ){
 }
 
 function imageUploadValidator(){
-	if( gEBI( 'upload-path' ).value.length > 0 ){
+	var upload_path_not_empty = (gEBI( 'upload-path' ).value.length > 0 )? true : false,
+	file_input_not_empty = ( document.querySelector("input[type='file']").value.length > 0 )? true : false;
+	if( upload_path_not_empty && file_input_not_empty ){
 		return true;
 	}else{
-		showAlertMessage( "Folder Form Value is Empty", false );
+		//if upload_path is not empty then it must be gfile that is
+		var message;
+		if( !upload_path_not_empty ){
+			message = "Folder Form Value is Empty";
+		}else{
+			message = "Please Select a File To Upload";
+		}
+		
+		showAlertMessage( message, false );
 		return false;
 	}
 }
 
 function uploadResponseAction( obj ){
 	if( obj.result === true ){
-		var folder_path = gEBI( 'upload-path' ).value,
+		var folder_input = gEBI( 'upload-path' ),
+		folder_path = folder_input.value,
 		folder_element = document.querySelector('[data-filepath="'+folder_path+'"]'),
 		ul = folder_element.nearestParent("li").getElementsByTagName("ul");
 		
@@ -156,6 +167,9 @@ function uploadResponseAction( obj ){
 		}else{
 			listFile( folder_element );
 		}
+		//clear form 
+		folder_input.value = "";
+		document.querySelector("input[type='file']").value = "";
 	}else{
 		showAlertMessage( obj.message, obj.result );
 	}

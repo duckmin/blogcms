@@ -22,6 +22,9 @@ $GLOBALS["upload_vars"]["allowed_extensions"] = array_merge ( $GLOBALS["upload_v
 //mongo DB name project uses
 $GLOBALS['mongo_db_name'] = "blog";
 
+//keyword used to access manager page (no spaces!)
+$GLOBALS['manager_keyword'] = "manager";
+
 //# of posts that show up per page
 $GLOBALS['amount_on_main_page'] = 3;
 
@@ -29,7 +32,7 @@ $GLOBALS['amount_on_main_page'] = 3;
 $GLOBALS['amount_on_manger_tab'] = 8;
 
 //minutes until cache file expires
-$GLOBALS['max_page_cache_mins'] = -5;  
+$GLOBALS['max_page_cache_mins'] = -5; //turned off for dev turn on for prod to resonable amount of mins
 
 $GLOBALS['max_category_length'] = 500;
 $GLOBALS['max_title_length'] = 500;

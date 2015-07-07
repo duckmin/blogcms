@@ -22,7 +22,7 @@
 				$file = '/server/pages/search.php';
 				break;
 				
-			case "manager":
+			case $GLOBALS['manager_keyword']:
 				$file = '/server/pages/manager.php';
 				break;
 				

@@ -4,7 +4,7 @@
 	class FileGetter
 	{
 		
-		static public function listFolderContents( $path ){
+		public static function listFolderContents( $path ){
 			$holder = array();
 			$folder_path = $GLOBALS['index_path'].$path;
 			if( is_dir( $folder_path ) ){
@@ -24,7 +24,7 @@
 			}
 		}
 		
-		static public function folderLi( $filepath, $action_num, $folder_upload_function ){
+		public static function folderLi( $filepath, $action_num, $folder_upload_function ){
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/folder.png' title='Show Folder Contents' data-actionnum='".$action_num."' data-filepath='".$filepath."' onclick='listFile(this)' />
 				<img src='".$GLOBALS['base_url']."/style/resources/arrow-curve.png' title='Upload to Folder' data-folderpath='".$filepath."' onclick='".$folder_upload_function."(this)' />
@@ -33,7 +33,7 @@
 			</li>";
 		}
 		
-		static public function pictureLi( $picture_path, $server_path, $pic_name ){
+		public static function pictureLi( $picture_path, $server_path, $pic_name ){
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/image.png' title='Add Picture to Template' data-picturepath='".$picture_path."' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />
 				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				
@@ -41,7 +41,7 @@
 			</li>";
 		}
 		
-		static public function audioLi( $audio_path, $server_path, $audio_name ){
+		public static function audioLi( $audio_path, $server_path, $audio_name ){
 			return "<li>
 				<img src='".$GLOBALS['base_url']."/style/resources/audio.png' title='Add Audio to Template' data-audiopath='".$audio_path."' onclick='audioClick(this)' />
 				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				

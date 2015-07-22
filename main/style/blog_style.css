@@ -117,7 +117,7 @@ article.post{
 }
 
 
-article.post:nth-child(1){
+section.main > article:nth-child(2){
 	margin-top:0;
 }
 
@@ -230,8 +230,13 @@ section.main article.post > ul.post-head > li[data-ts]{
 	font-size:0.8em	
 }
 
-section.main > ul.paginator{
-	margin:1rem 0 2rem 0;
+section.main > ul.paginator:first-child{
+	margin:0rem 0 1rem 0;
+}
+
+section.main > ul.paginator:last-child{
+	margin-top:1rem;
+	margin-bottom:2rem;
 }
 
 section.main > ul.paginator, section.main article.post > ul.post-head, header > ul {

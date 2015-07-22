@@ -53,8 +53,8 @@
 						$i++;
 					}
 				}
-				$str.=$this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
-				return $str;
+				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
+				return $paginator.$str.$paginator;
 			}else{
 				if( $search !== null ){
 					if( $page_num === 1 ){					

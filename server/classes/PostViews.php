@@ -72,35 +72,31 @@
 			return $title;
 		}					
 		
-		//$single["folder_path"], $single["id"], $single["tags"], $single["created"], $single["title"]
+		//takes a blog post row from mongo and returns a modifed row with converted values used for URLs
+		private function convertRowValues( $row ){
+			$id = new MongoId( $row["_id"] );  
+			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
+			$dt = new DateTime("@$time_stamp");	   	  	    	   	  	    
+			$row["created"] = $dt->format('F d, Y g:i');			    	    
+			$row["id"] = $id->__toString();
+			//parse date modified to use in direct URL to post
+			$date_of_post = date_parse( $row["created"] );
+			$row["month"] = $date_of_post["month"];
+			$row["day"] = $date_of_post["day"];
+			$row["year"] = $date_of_post["year"];	
+			$row["safe_title"] = $this->convertPostTitleSpacesToHyphens( $row["title"] );
+			return $row;
+		}		
+		
 		
 		public function makePostHtmlFromData( $row, $cat, $template ){		
-			$structure = array();		
-			$id = new MongoId( $row["_id"] ); 
-			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
-			$dt = new DateTime("@$time_stamp");	 
-			 	  	    
-			$structure["created"] = $dt->format('F d, Y g:i');
-			$structure["time_stamp"] = $time_stamp*1000; //for js accurrate UTC conversion	
-			$structure["title"] = $row["title"];    	    
-    	   $structure["inner"] = $this->formatSinglePost( $row["post_data"] );
-			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page 			
-			$structure["id"] = $id->__toString();
+			$structure = $this->convertRowValues( $row );
+			$structure["time_stamp"] = $structure["lastModified"]->sec * 1000; //for js accurrate UTC conversion
+			$structure["inner"] = $this->formatSinglePost( $row["post_data"] );
+			$structure["page_category"] = $cat; //dont get from DB data get from page so we know which cat is currently in view on the page
 			$structure["base"] = $GLOBALS['base_url'];
-			
-			//parse date modified to use in direct URL to post
-			$date_of_post = date_parse( $structure["created"] );
-			$structure["month"] = $date_of_post["month"];
-			$structure["day"] = $date_of_post["day"];
-			$structure["year"] = $date_of_post["year"];
-			$structure["safe_title"] = $this->convertPostTitleSpacesToHyphens( $row["title"] );
 			return TemplateBinder::bindTemplate( $template, $structure );	
 		}
-		
-		/*public function getPostHTMLFromDBData( $row ){
-			$post_data = $this->getPostFileArrayData( $row );
-			return $this->makePostHtmlFromData( $row, $post_data );
-		}*/
 		
 		private function getSelectedOption( $cats ){
 			$options="";
@@ -114,20 +110,9 @@
 		
 		//for actions/get_post_info.php we must modify the posting to put in the form
 		public function generateModifedListingForPostInfo( $row ){
+			$row = $this->convertRowValues( $row );
 			$row["post_type_options"] = $this->getSelectedOption( $row['category'] );
-			$id = new MongoId( $row["_id"] );  
-			$time_stamp = $row["lastModified"]->sec;//$id->getTimestamp();
-			$dt = new DateTime("@$time_stamp");	   	  	    	   	  	    
-			$row["created"] = $dt->format('F d, Y g:i');			    	    
-			$row["id"] = $id->__toString();
 			$row["first_category"] = $row['category'][0]; //for link to post on manager tab
-			//parse date modified to use in direct URL to post
-			$date_of_post = date_parse( $row["created"] );
-			$row["month"] = $date_of_post["month"];
-			$row["day"] = $date_of_post["day"];
-			$row["year"] = $date_of_post["year"];	
-			$row["safe_title"] = $this->convertPostTitleSpacesToHyphens( $row["title"] );
-
 			return $row;
 		}
 		

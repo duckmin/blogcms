@@ -226,8 +226,17 @@ section.main article.post > ul.post-head > li {
 	margin-right:10px;
 }
 
-section.main article.post > ul.post-head > li[data-ts]{
+section.main article.post > ul.post-head > li[data-ts], section.main article.post > ul.post-head > li:last-child{
 	font-size:0.8em	
+}
+ /*Last child is li that holds author*/
+section.main article.post > ul.post-head > li:last-child{
+	
+}
+
+section.main article.post > ul.post-head > li:last-child > span{
+	color:blue;
+	font-weight:bold;
 }
 
 section.main > ul.paginator:first-child{

@@ -52,7 +52,7 @@
 				$filter["category"] = $cat;	
 			}
 			$collection = $this->db->posts;	
-			$fields = array( "_id_"=>true, "category"=>true, "title"=>true, "description"=>true, "lastModified"=>true );				
+			$fields = array( "_id_"=>true, "category"=>true, "title"=>true, "description"=>true, "lastModified"=>true, "author"=>true );				
 			$cursor = $collection->find( $filter, $fields )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );
 			return $cursor;
 		}

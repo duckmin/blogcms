@@ -411,7 +411,7 @@
 		"<input type='hidden' name='id' value='{{ id }}' />"+
 		"<input type='text' name='title' value='{{ title }}' />"+
 	"</td>"+	
-	"<td class='date' >{{ created }}</td>"+
+	"<td class='date' >{{ created }}<br> By: <b>{{ author }}</b></td>"+
 	"<td>"+
 		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
 		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+

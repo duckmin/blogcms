@@ -70,6 +70,7 @@
 			$m = MongoConnection();
 			$db = $m->$GLOBALS['mongo_db_name'];
 			$collection = $db->posts;
+			$author = $_SESSION['user'];
 			
 			//procedure 1 create new listing with post_data
 			if( $procedure === 1 ){
@@ -77,13 +78,14 @@
 				$document = array( 
 					'_id'=>$mongo_id,					
 					'category'=>$category,
-		   	   	 	'title'=>$title,
-			   	 	'description'=>$desc,
-			   	 	'post_data'=> $post_data,
-			   	 	'lastModified'=>new MongoDate()
+		   	   'title'=>$title,
+			   	'description'=>$desc,
+			   	'post_data'=> $post_data,
+			   	'lastModified'=>new MongoDate(),
+			   	'author'=>$author
 				);
 				$write_result = $collection->insert($document);				
-				$written = ( $write_result['ok']>=1 )? true : false;			
+				$written = ( $write_result['ok'] >= 1 )? true : false;			
 				$success = $written; 
 				$message = ( $written )? "Post Published" : "Post Not Saved";
 			}

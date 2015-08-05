@@ -1,7 +1,7 @@
 (function(window){
 
 addEvent(window, "load", function(e){
-	var ts = document.querySelector("section.main > article.post > ul.post-head	> li[data-ts]").getAttribute("data-ts");
+	var ts = document.querySelector("section.main > article:last-of-type > ul.post-head	> li[data-ts]").getAttribute("data-ts");
 	var category = document.querySelector("input[name='cat']").value;
 	console.log( category );
 	Ajaxer({

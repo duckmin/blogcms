@@ -106,6 +106,14 @@
 			return TemplateBinder::bindTemplate( $template, $structure );	
 		}
 		
+		// called in actons/get_previous_post_html_from_timestamp
+		public function getNextPostButton(  $row, $cat, $template ){
+			$structure = $this->convertRowValues( $row );
+			$structure["page_category"] = $cat;
+			$structure["base"] = $GLOBALS['base_url'];
+			return TemplateBinder::bindTemplate( $template, $structure );
+		}
+		
 		private function getSelectedOption( $cats ){
 			$options="";
 			foreach( $GLOBALS['post_categories'] as $post_cat ){ 

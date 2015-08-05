@@ -10,11 +10,13 @@
 			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
 			$post_data = $db_getter->getPreviousPostsFromTimestamp( $cat, $time_stamp );
-
+			$post_template = file_get_contents( $GLOBALS['template_dir']."/next_post_button.txt" );
+			
 			foreach( $post_data as $posting ){
 				$post_view = new PostViews( new Parsedown );
-				$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
-				echo $post_view->makePostHtmlFromData( $posting, $cat, $post_template );
+				echo $post_view->getNextPostButton( $posting, $cat, $post_template );
+				//$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
+				//echo $post_view->makePostHtmlFromData( $posting, $cat, $post_template );
 			}
 			
 		} catch( MongoCursorException $e ) {;

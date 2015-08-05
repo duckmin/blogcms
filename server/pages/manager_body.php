@@ -13,11 +13,10 @@
 	<link rel='stylesheet' type='text/css' href='style/manager_style.css'>
 	<link rel='stylesheet' type='text/css' href='style/blog_style.css'>
 	<link rel='stylesheet' type='text/css' href='style/date_picker.css'>
-	<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
-	<?php
-		$server = dirname(__FILE__)."/../";
-		include $server."/includes/global_style_scripts.php";
-	?>
+	<script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>	
+	<script src="scripts/element_extender.js" ></script>
+	<script src="scripts/forms.js" ></script>
+	<script src="scripts/globals.js" ></script>	
 	<script src="scripts/manager/calendar.js" ></script>
 	<script src="scripts/manager/alert_boxes.js" ></script>
 	<script src="scripts/manager/picture_manager.js" ></script>

@@ -34,7 +34,9 @@
 				$tmplt_data["scripts"] = "<script src='/scripts/page_actions/post_actions.js' ></script>";
 				$tmplt_data["base"] = $base;
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
-				$tmplt_data["search_cat"] = $cat;
+				$tmplt_data["category"] = $cat;
+				$tmplt_data["search_placeholder"] = "search $cat";	
+				$tmplt_data["search_value"] = "";
 				$tmplt_data["body"] = $post_views->makePostHtmlFromData( $single_post_data, $cat, $post_template );
 			
 				$full_page = TemplateBinder::bindTemplate( $page_template, $tmplt_data );

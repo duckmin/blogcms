@@ -50,7 +50,7 @@
 	}else{ 
 	   // echo var_dump( $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) );
 		echo $cache->pullUrlContentFromCache();
-		echo "pulled from cache";
+		//echo "pulled from cache";
 		
 	}
 ?>

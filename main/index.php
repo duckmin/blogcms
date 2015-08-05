@@ -14,11 +14,15 @@
 				$file = '/server/pages/post.php';
 				break;
 				
+			case "search":
+				$file = '/server/pages/search_page.php';
+				break;
+				
 			case "ajax":
 				$file = '/server/pages/ajax.php';
 				break;
 				
-			case "search":
+			case "submit-search":
 				$file = '/server/pages/search.php';
 				break;
 				

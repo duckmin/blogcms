@@ -24,25 +24,36 @@
 			return $paginator."</ul>";
 		}		
 		
-		public function getHomePagePosts( $page_num, $cat, $search ){
+		public function getHomePagePosts( $page_num, $cat ){
 			$str="";
 			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			$i = 0;
-			/*if( $cat === null && $search === null ){
-				//this is not used becaue we only show from posts for specific category now				
-				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDb( $page_num );
-				$url_add = "";
-			}*/
-			if( $search === null ){
-				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
-				$url_add = $cat;
-			}
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
+			$url_add = $cat;
+			$L = $posts_from_db->count(true);
 			
-			if( $search !== null ){				
-				$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
-				$url_add = $cat."/".$search;
+			if( $L > 0 ){			
+				foreach( $posts_from_db as $single ){				
+					if( $i < $GLOBALS['amount_on_main_page'] ){
+						$post_html = $this->post_views->makePostHtmlFromData( $single, $cat, $post_template ); //pass in cat because post can have multiple cats and we want to know which one we are looking at
+						$str.=$post_html;
+						$i++;
+					}
+				}
+				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
+				return $paginator.$str.$paginator;
+			}else{			
+				//no results return false and we will send them to 404 (paginator logic should not allow this to happen)
+				return false;
 			}
-			//echo print_r( $posts_from_db->count() );
+		}
+		
+		public function getSearchPagePosts( $page_num, $cat, $search ){
+			$str="";
+			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
+			$i = 0;			
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
+			$url_add = "search/".$cat."/".$search;
 			$L = $posts_from_db->count(true);
 			
 			if( $L > 0 ){			
@@ -56,20 +67,15 @@
 				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
 				return $paginator.$str.$paginator;
 			}else{
-				if( $search !== null ){
-					if( $page_num === 1 ){					
-						//if search is set and count is 0 and page = one then search return no n results show them a non result page
-						return "<article class='post'>
-							<ul class='post-head' style='border-bottom:none' ></ul>	
-							<img style='margin:auto' src=\"/style/resources/question-mark.png\" alt=\"\" >						
-							<h1>no posts in ".$cat." found for search &ldquo;".$search."&rdquo;</h1>
-						</article>";
-					}else{
-						//if page > 1 and search is set something is wrong send to 404						
-						return false;
-					}
+				if( $page_num === 1 ){					
+					//if search is set and count is 0 and page = one then search return no n results show them a non result page
+					return "<article class='post'>
+						<ul class='post-head' style='border-bottom:none' ></ul>	
+						<img style='margin:auto' src=\"/style/resources/question-mark.png\" alt=\"\" >						
+						<h1>no posts in ".$cat." found for search &ldquo;".$search."&rdquo;</h1>
+					</article>";
 				}else{
-					//if result set is 0 and seach is not set return false and take action on page					
+					//if page > 1 and search count is zero something is wrong send to 404						
 					return false;
 				}
 			}

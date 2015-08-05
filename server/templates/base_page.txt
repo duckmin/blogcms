@@ -23,7 +23,7 @@
 	<div class='wrapper' >
 		<header>
 			<h1>Duckmins BlogCMS</h1>
-			<form method="GET" action="{{ base }}/search/" >
+			<form method="GET" action="{{ base }}/submit-search/" >
 				<input type="hidden" name="cat" value="{{ search_cat }}" />						
 				<input type="text" name="search" placeholder="search {{ search_cat }}" />
 				<input type="submit" value="" />

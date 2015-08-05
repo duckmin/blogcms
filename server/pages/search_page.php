@@ -20,8 +20,8 @@
 			$post_controller = new PostController( $db_getter, $post_views );
 			$mongo_results = $post_controller->getSearchPagePosts( $page, $cat, $search ); //false if no result set
 			$template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
-			$title = $cat." page ".$page." - ".$_SERVER['HTTP_HOST'];		
-			$desc	= 	$_SERVER['HTTP_HOST']." - browse ".$cat." page ".$page;
+			$title = $cat." search '".$search."' page ".$page." - ".$_SERVER['HTTP_HOST'];		
+			$desc	= 	$_SERVER['HTTP_HOST']." - browse ".$cat." search '".$search."' page ".$page;
 			
 			if( $mongo_results ){
 				$tmplt_data = array();
@@ -30,7 +30,9 @@
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = "";
 				$tmplt_data["base"] = $base;
-				$tmplt_data["search_cat"] = $cat;		
+				$tmplt_data["category"] = $cat;
+				$tmplt_data["search_placeholder"] = "search $cat";	
+				$tmplt_data["search_value"] = $search;		
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["body"] = $mongo_results;
 				

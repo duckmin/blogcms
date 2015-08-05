@@ -29,7 +29,9 @@
 				$tmplt_data["styles"] = "";
 				$tmplt_data["scripts"] = "<script src='".$base."/scripts/page_actions/main_analytics.js'></script>";
 				$tmplt_data["base"] = $base;
-				$tmplt_data["search_cat"] = $cat;		
+				$tmplt_data["category"] = $cat;
+				$tmplt_data["search_placeholder"] = "search $cat";	
+				$tmplt_data["search_value"] = "";		
 				$tmplt_data["header"] = $post_views->getCatHeaderList( $cat );
 				$tmplt_data["body"] = $mongo_results;
 				

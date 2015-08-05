@@ -16,5 +16,5 @@
 	
 	// Finally, destroy the session.
 	session_destroy();
-	header("Location: ".$GLOBALS['base_url']."/manager");
+	header("Location: ".$GLOBALS['base_url']."/".$GLOBALS['manager_keyword']);
 ?>

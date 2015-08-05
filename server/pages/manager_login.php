@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<form method="POST" action="/manager" >
+	<form method="POST" action="/<?php echo $GLOBALS['manager_keyword']; ?>" >
 		<fieldset>
 			<legend>Manager</legend>		
 			<div>

@@ -1,0 +1,4 @@
+<article class='post'>
+	<ul class='post-head' style='border-bottom:none' ></ul>							
+	<p>no posts in {{ category }} found for search &ldquo;{{ search_term }}&rdquo;</p>
+</article>

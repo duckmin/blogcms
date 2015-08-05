@@ -98,6 +98,14 @@
 			return TemplateBinder::bindTemplate( $template, $structure );	
 		}
 		
+		//when search returns no results show this HTML
+		public function emptySearchHtml( $cat, $search, $template ){		
+			$structure = array();
+			$structure["category"] = $cat;
+			$structure["search_term"] = htmlspecialchars($search, ENT_QUOTES);
+			return TemplateBinder::bindTemplate( $template, $structure );	
+		}
+		
 		private function getSelectedOption( $cats ){
 			$options="";
 			foreach( $GLOBALS['post_categories'] as $post_cat ){ 

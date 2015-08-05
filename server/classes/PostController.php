@@ -26,13 +26,13 @@
 		
 		public function getHomePagePosts( $page_num, $cat ){
 			$str="";
-			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			$i = 0;
 			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
 			$url_add = $cat;
 			$L = $posts_from_db->count(true);
 			
-			if( $L > 0 ){			
+			if( $L > 0 ){	 
+				$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );		
 				foreach( $posts_from_db as $single ){				
 					if( $i < $GLOBALS['amount_on_main_page'] ){
 						$post_html = $this->post_views->makePostHtmlFromData( $single, $cat, $post_template ); //pass in cat because post can have multiple cats and we want to know which one we are looking at
@@ -50,13 +50,13 @@
 		
 		public function getSearchPagePosts( $page_num, $cat, $search ){
 			$str="";
-			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			$i = 0;			
 			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
 			$url_add = "search/".$cat."/".$search;
 			$L = $posts_from_db->count(true);
 			
-			if( $L > 0 ){			
+			if( $L > 0 ){	
+				$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );		
 				foreach( $posts_from_db as $single ){				
 					if( $i < $GLOBALS['amount_on_main_page'] ){
 						$post_html = $this->post_views->makePostHtmlFromData( $single, $cat, $post_template ); //pass in cat because post can have multiple cats and we want to know which one we are looking at
@@ -67,13 +67,10 @@
 				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
 				return $paginator.$str.$paginator;
 			}else{
-				if( $page_num === 1 ){					
+				if( $page_num === 1 ){	
+					$empty_search_template = file_get_contents( $GLOBALS['template_dir']."/empty_search.txt" );				
 					//if search is set and count is 0 and page = one then search return no n results show them a non result page
-					return "<article class='post'>
-						<ul class='post-head' style='border-bottom:none' ></ul>	
-						<img style='margin:auto' src=\"/style/resources/question-mark.png\" alt=\"\" >						
-						<h1>no posts in ".$cat." found for search &ldquo;".$search."&rdquo;</h1>
-					</article>";
+					return $this->post_views->emptySearchHtml( $cat, $search, $empty_search_template );
 				}else{
 					//if page > 1 and search count is zero something is wrong send to 404						
 					return false;

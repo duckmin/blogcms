@@ -12,7 +12,7 @@
 		
 		if( isset( $item['folder'] ) ){
 			$filepath = $path."/".$item['folder'];
-			$list.=FileGetter::folderLi( $filepath, "0", "folderUpload" );
+			$list.=FileGetter::folderLi( $filepath );
 		}
 		
 		if( isset( $item['file'] ) ){

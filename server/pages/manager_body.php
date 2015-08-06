@@ -141,7 +141,7 @@
 		
 		<ul class='folders'>
 			<?php
-				echo FileGetter::folderLi( '/pics', "0", "folderUpload" );
+				echo FileGetter::folderLi( '/pics' );
 			?>
 		<ul>
 	</section>

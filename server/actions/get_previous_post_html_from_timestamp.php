@@ -15,8 +15,6 @@
 			foreach( $post_data as $posting ){
 				$post_view = new PostViews( new Parsedown );
 				echo $post_view->getNextPostButton( $posting, $cat, $post_template );
-				//$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
-				//echo $post_view->makePostHtmlFromData( $posting, $cat, $post_template );
 			}
 			
 		} catch( MongoCursorException $e ) {;

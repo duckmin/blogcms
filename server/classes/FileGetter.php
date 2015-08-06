@@ -3,6 +3,24 @@
 	
 	class FileGetter
 	{
+		const FOLDER_LI = "<li>
+			<img src=\"{{ base }}/style/resources/folder.png\" title='Show Folder Contents' data-actionnum=\"0\" data-filepath=\"{{ file_path }}\" onclick='listFile(this)' />
+			<img src=\"{{ base }}/style/resources/arrow-curve.png\" title='Upload to Folder' data-folderpath=\"{{ file_path }}\" onclick=\"folderUpload(this)\" />
+			<img class='hide' src=\"{{ base }}/style/resources/folder-add.png\" title='New Folder' data-folderpath=\"{{ file_path }}\" onclick='newFolder(this)' />
+			<span>{{ file_path }}</span>
+		</li>";
+		
+		const FILE_LI = "<li>
+			<img src=\"{{ base }}/style/resources/image.png\" title='Add Picture to Template' data-picturepath=\"{{ picture_path }}\" onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />
+			<img src=\"{{ base }}/style/resources/action_delete.png\" title='Delete Resource' data-filepath=\"{{ server_path }}\" onclick='deleteResource(this)' />				
+			{{ pic_name }}
+		</li>";
+		
+		const AUDIO_LI = "<li>
+			<img src=\"{{ base }}/style/resources/audio.png\" title='Add Audio to Template' data-audiopath=\"{{ audio_path }}\" onclick='audioClick(this)' />
+			<img src=\"{{ base }}/style/resources/action_delete.png\" title='Delete Resource' data-filepath=\"{{ server_path }}\" onclick='deleteResource(this)' />				
+			{{ audio_name }}
+		</li>";
 		
 		public static function listFolderContents( $path ){
 			$holder = array();
@@ -24,29 +42,32 @@
 			}
 		}
 		
-		public static function folderLi( $filepath, $action_num, $folder_upload_function ){
-			return "<li>
-				<img src='".$GLOBALS['base_url']."/style/resources/folder.png' title='Show Folder Contents' data-actionnum='".$action_num."' data-filepath='".$filepath."' onclick='listFile(this)' />
-				<img src='".$GLOBALS['base_url']."/style/resources/arrow-curve.png' title='Upload to Folder' data-folderpath='".$filepath."' onclick='".$folder_upload_function."(this)' />
-				<img class='hide' src='".$GLOBALS['base_url']."/style/resources/folder-add.png' title='New Folder' data-folderpath='".$filepath."' onclick='newFolder(this)' />
-				<span>".$filepath."</span>
-			</li>";
+		public static function folderLi( $filepath ){
+			$info = array(
+				"base"=>$GLOBALS['base_url'],
+				"file_path"=>$filepath
+			);
+			return TemplateBinder::bindTemplate( self::FOLDER_LI, $info );
 		}
 		
 		public static function pictureLi( $picture_path, $server_path, $pic_name ){
-			return "<li>
-				<img src='".$GLOBALS['base_url']."/style/resources/image.png' title='Add Picture to Template' data-picturepath='".$picture_path."' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />
-				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				
-				".$pic_name."
-			</li>";
+			$info = array(
+				"base"=>$GLOBALS['base_url'],
+				"picture_path"=>$picture_path,
+				"server_path"=>$server_path,
+				"pic_name"=>$pic_name
+			);
+			return TemplateBinder::bindTemplate( self::FILE_LI, $info );
 		}
 		
 		public static function audioLi( $audio_path, $server_path, $audio_name ){
-			return "<li>
-				<img src='".$GLOBALS['base_url']."/style/resources/audio.png' title='Add Audio to Template' data-audiopath='".$audio_path."' onclick='audioClick(this)' />
-				<img src='".$GLOBALS['base_url']."/style/resources/action_delete.png' title='Delete Resource' data-filepath='".$server_path."' onclick='deleteResource(this)' />				
-				".$audio_name."
-			</li>";
+			$info = array(
+				"base"=>$GLOBALS['base_url'],
+				"audio_path"=>$audio_path,
+				"server_path"=>$server_path,
+				"audio_name"=>$audio_name
+			);
+			return TemplateBinder::bindTemplate( self::AUDIO_LI, $info );
 		}
 		
 	};

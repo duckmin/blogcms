@@ -4,7 +4,7 @@
 	class FileGetter
 	{
 		const FOLDER_LI = "<li>
-			<img src=\"{{ base }}/style/resources/folder.png\" title='Show Folder Contents' data-actionnum=\"0\" data-filepath=\"{{ file_path }}\" onclick='listFile(this)' />
+			<img src=\"{{ base }}/style/resources/folder.png\" title='Show Folder Contents' data-filepath=\"{{ file_path }}\" onclick='listFile(this)' />
 			<img src=\"{{ base }}/style/resources/arrow-curve.png\" title='Upload to Folder' data-folderpath=\"{{ file_path }}\" onclick=\"folderUpload(this)\" />
 			<img class='hide' src=\"{{ base }}/style/resources/folder-add.png\" title='New Folder' data-folderpath=\"{{ file_path }}\" onclick='newFolder(this)' />
 			<span>{{ file_path }}</span>

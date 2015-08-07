@@ -5,10 +5,9 @@ function listFile( element ){
 	src = constants.base_url+"/style/resources/";
 	
 	if( element.hasAttribute( 'data-filepath' ) && !element.hasAttribute( 'data-loaded' ) ){
-		var path = element.getAttribute( 'data-filepath' ),
-		action_num = element.getAttribute( 'data-actionnum' );
+		var path = element.getAttribute( 'data-filepath' );
 		
-		controller.getText( constants.ajax_url+'?action='+action_num+'&dir_path='+path, function(d){
+		controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
 			if( d.length > 0 ){
 				var list = createElement("ul", {
 					"class":"folders",

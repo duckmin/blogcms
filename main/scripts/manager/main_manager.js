@@ -7,6 +7,24 @@ window.managerExtraActions = {
 	}
 }
 
+//init tabs, code in extender_new_tabs.js
+addEvent( window, "load", function(){
+	var actions = {
+		"posts":function( tab, panel ){
+			loadTablePage(); //tab_manager.js
+			delete this.posts;	
+		},
+		"analytics":function( panel, tab ){
+			var unique_url_ul = panel.querySelector("div.left > ul");			
+			getUniqueUrlPage( unique_url_ul ); //manager/analytics_graphs.js
+			getGraphPage();
+			delete this.analytics;	
+		}	
+	}		
+	window.tabset = new TabSet( document.body, actions );
+	tabset.init();
+})
+
 addEvent( window, "load", function(){
 	//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 	setMultiSelects( document.querySelector('#save-preview-popup') );
@@ -17,4 +35,5 @@ addEvent( window, "load", function(){
 				elm.addEvent( "click", managerExtraActions.logout )
 			}
 	});
-})
+});
+

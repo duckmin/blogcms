@@ -122,11 +122,12 @@ section.main > article:first-of-type{
 }
 
 .main article.post p{
-	font-family: Verdana,Geneva,sans-serif;
+	font-family: Arial Rounded MT Bold,Helvetica Rounded,Arial,sans-serif;
 }
 
 .main article.post h1, .main article.post h2{
-	font-family: "Lucida Console","Lucida Sans Typewriter",monaco,"Bitstream Vera Sans Mono",monospace;
+	font-family: Geneva,Tahoma,Verdana,sans-serif;
+	font-family: "Century Gothic",CenturyGothic,AppleGothic,sans-serif;
 }
 
 article.post > embed {
@@ -147,6 +148,7 @@ article.post > embed {
 	margin:0 auto 10px auto;*/
 	font-size:1.5em;
 	font-weight:100;
+	line-height:1.4em;
 }
 
 .main article.post ul{

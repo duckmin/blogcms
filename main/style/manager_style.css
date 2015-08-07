@@ -12,6 +12,10 @@
 	color:#190087;	
 }
 
+.folders > li > img {
+	margin-right:5px;
+}
+
 .folders, #template {
 	list-style-type:none;
 }

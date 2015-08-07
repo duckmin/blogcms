@@ -10,6 +10,15 @@ window.managerExtraActions = {
 //init tabs, code in extender_new_tabs.js
 addEvent( window, "load", function(){
 	var actions = {
+		"pictures":function( panel, tab ){
+			//initiate resources folder explorer 
+			var ul = createElement("ul",{
+				"class":"folders"
+			});
+			ul.innerHTML = bindMustacheString( resources_templates.folder, {file_path:constants.resources_directory} );
+			panel.appendChild(ul);
+			delete this.pictures;
+		},	
 		"posts":function( tab, panel ){
 			loadTablePage(); //tab_manager.js
 			delete this.posts;	

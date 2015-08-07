@@ -2,7 +2,8 @@ window.base_url=window.location.protocol+"//"+window.location.host ;
 window.constants={
 	"base_url":base_url,
 	"ajax_url":base_url+"/ajax/",
-	"ajax_in_progress":false
+	"ajax_in_progress":false,
+	"resources_directory":"/pics"
 }
 
 window.controller={

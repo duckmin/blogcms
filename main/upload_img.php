@@ -30,11 +30,11 @@
 					$server_path = 	$folder_path."/".$upload["name"];
 					$url_path =  $GLOBALS['base_url'].$server_path;			
 					if( $is_img ){
-						$li = FileGetter::pictureLi( $url_path, $server_path, $upload["name"] );
+						$li_data = FileGetter::getResourceInfo( "image", $url_path, $server_path, $upload["name"] );
 					}else{
-						$li = FileGetter::audioLi( $url_path, $server_path, $upload["name"] );
+						$li_data = FileGetter::getResourceInfo( "audio", $url_path, $server_path, $upload["name"] );
 					}					
-					$data = $li;
+					$data = $li_data;
 					
 				}else{
 					$result = "File Already Exists In This Folder";
@@ -54,7 +54,6 @@
 
 <script language="javascript" type="text/javascript">
 		
-	
 	window.top.window.uploadResponseAction(<?php echo json_encode( array( "result"=>$success, "message"=>$result, "data"=>$data ) ); ?> ); 
 
 </script> 

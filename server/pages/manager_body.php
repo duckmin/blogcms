@@ -138,12 +138,7 @@
 			</label>
 			<iframe style="display:none" id="upload_target" name="upload_target" src="#" ></iframe>
 		</form>
-		
-		<ul class='folders'>
-			<?php
-				echo FileGetter::folderLi( '/pics' );
-			?>
-		<ul>
+		<!-- explorer appended with JS -->
 	</section>
 	
 	<section data-tab='preview' >

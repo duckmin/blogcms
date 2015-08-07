@@ -3,24 +3,6 @@
 	
 	class FileGetter
 	{
-		const FOLDER_LI = "<li>
-			<img src=\"{{ base }}/style/resources/folder.png\" title='Show Folder Contents' data-filepath=\"{{ file_path }}\" onclick='listFile(this)' />
-			<img src=\"{{ base }}/style/resources/arrow-curve.png\" title='Upload to Folder' data-folderpath=\"{{ file_path }}\" onclick=\"folderUpload(this)\" />
-			<img class='hide' src=\"{{ base }}/style/resources/folder-add.png\" title='New Folder' data-folderpath=\"{{ file_path }}\" onclick='newFolder(this)' />
-			<span>{{ file_path }}</span>
-		</li>";
-		
-		const FILE_LI = "<li>
-			<img src=\"{{ base }}/style/resources/image.png\" title='Add Picture to Template' data-picturepath=\"{{ picture_path }}\" onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />
-			<img src=\"{{ base }}/style/resources/action_delete.png\" title='Delete Resource' data-filepath=\"{{ server_path }}\" onclick='deleteResource(this)' />				
-			{{ pic_name }}
-		</li>";
-		
-		const AUDIO_LI = "<li>
-			<img src=\"{{ base }}/style/resources/audio.png\" title='Add Audio to Template' data-audiopath=\"{{ audio_path }}\" onclick='audioClick(this)' />
-			<img src=\"{{ base }}/style/resources/action_delete.png\" title='Delete Resource' data-filepath=\"{{ server_path }}\" onclick='deleteResource(this)' />				
-			{{ audio_name }}
-		</li>";
 		
 		public static function listFolderContents( $path ){
 			$holder = array();
@@ -42,32 +24,24 @@
 			}
 		}
 		
-		public static function folderLi( $filepath ){
-			$info = array(
-				"base"=>$GLOBALS['base_url'],
-				"file_path"=>$filepath
+		public static function getDirectoryInfo( $dir_path ){
+			return array( 
+				"type"=>"folder",
+				"data"=>array(
+					"file_path"=>$dir_path
+				)
 			);
-			return TemplateBinder::bindTemplate( self::FOLDER_LI, $info );
 		}
 		
-		public static function pictureLi( $picture_path, $server_path, $pic_name ){
-			$info = array(
-				"base"=>$GLOBALS['base_url'],
-				"picture_path"=>$picture_path,
-				"server_path"=>$server_path,
-				"pic_name"=>$pic_name
+		public static function getResourceInfo( $type, $resource_path, $server_path, $resource_name ){
+			return array(
+				"type"=>$type,
+				"data"=>array(
+					"server_path"=>$server_path,
+					"resource_path"=>$resource_path,
+					"resource_name"=>$resource_name
+				)
 			);
-			return TemplateBinder::bindTemplate( self::FILE_LI, $info );
-		}
-		
-		public static function audioLi( $audio_path, $server_path, $audio_name ){
-			$info = array(
-				"base"=>$GLOBALS['base_url'],
-				"audio_path"=>$audio_path,
-				"server_path"=>$server_path,
-				"audio_name"=>$audio_name
-			);
-			return TemplateBinder::bindTemplate( self::AUDIO_LI, $info );
 		}
 		
 	};

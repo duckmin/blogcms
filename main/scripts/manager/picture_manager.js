@@ -1,4 +1,25 @@
 
+var resources_templates = {
+	"folder":"<li>"+
+		"<img src='"+constants.base_url+"/style/resources/folder.png' title='Show Folder Contents' data-filepath='{{ file_path }}' onclick='listFile(this)' />"+
+		"<img src='"+constants.base_url+"/style/resources/arrow-curve.png' title='Upload to Folder' data-folderpath='{{ file_path }}' onclick='folderUpload(this)' />"+
+		"<img class='hide' src='"+constants.base_url+"/style/resources/folder-add.png' title='New Folder' data-folderpath='{{ file_path }}' onclick='newFolder(this)' />"+
+		"<span>{{ file_path }}</span>"+
+	"</li>",
+	
+	"image":"<li class='file' >"+
+		"<img src='"+constants.base_url+"/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ resource_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
+		"<img src='"+constants.base_url+"/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+		
+		"{{ resource_name }}"+
+	"</li>",
+	
+	"audio":"<li class='file' >"+
+		"<img src='"+constants.base_url+"/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ resource_path }}' onclick='audioClick(this)' />"+
+		"<img src='"+constants.base_url+"/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+			
+		"{{ resource_name }}"+
+	"</li>"
+}
+
 function listFile( element ){
 	var parent_li = element.nearestParent( "li" ),
 	add_folder_img = parent_li.lastChildOfType( 'img' ),
@@ -8,10 +29,18 @@ function listFile( element ){
 		var path = element.getAttribute( 'data-filepath' );
 		
 		controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
-			if( d.length > 0 ){
+			var resp = JSON.parse(d),
+			lis = "";			
+			resp.forEach( function( item ){
+				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+					lis += bindMustacheString( resources_templates[item.type], item.data );
+				}
+			});			
+
+			if( resp.length > 0 ){
 				var list = createElement("ul", {
 					"class":"folders",
-					"innerHTML":d
+					"innerHTML":lis
 				})
 				parent_li.appendChild( list );
 				element.setAttribute( 'data-loaded', "" );
@@ -162,7 +191,12 @@ function uploadResponseAction( obj ){
 		ul = folder_element.nearestParent("li").getElementsByTagName("ul");
 		
 		if( ul.length > 0 ){
-			ul[0].innerHTML += obj.data;
+			//obj param has a data attribute and when the upload is successful there is an object in the data attribute with its own data attribute 
+			//to avoid confusion obj.data.data is what is used to bind template
+			var d = obj.data;
+			if( d.hasOwnProperty("type") && resources_templates.hasOwnProperty(d.type) ){
+				ul[0].innerHTML += bindMustacheString( resources_templates[d.type], d.data );
+			}
 		}else{
 			listFile( folder_element );
 		}

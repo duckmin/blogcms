@@ -6,7 +6,9 @@
 	$cat = $_GET["cat"];
 	
 	if( true ){
-
+		
+		header('Content-Type: application/json; charset=utf-8');
+		
 		try{		
 			$db = MongoConnection();
 			$db_getter = new MongoGetter( $db );
@@ -29,6 +31,7 @@
 			
 			$prev=( $page_num>1 )? true : false;
 			$data=array( "posts"=>json_encode( $modified_array ), "next"=>$next, "prev"=>$prev );
+			
 			echo json_encode( array( "result"=>true, "data"=>$data ) );
 			
 		}catch( MongoCursorException $e ) {

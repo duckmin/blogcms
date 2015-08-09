@@ -30,23 +30,25 @@ function listFile( element ){
 		
 		controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
 			var resp = JSON.parse(d),
-			lis = "";			
-			resp.forEach( function( item ){
-				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
-					lis += bindMustacheString( resources_templates[item.type], item.data );
-				}
-			});			
+			lis = "";					
 
 			if( resp.length > 0 ){
+			    resp.forEach( function( item ){
+    				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+    					lis += bindMustacheString( resources_templates[item.type], item.data );
+    				}
+    			});	
+    			
 				var list = createElement("ul", {
 					"class":"folders",
 					"innerHTML":lis
 				})
 				parent_li.appendChild( list );
-				element.setAttribute( 'data-loaded', "" );
-				element.src = src+= "folder-open.png"; 
-				add_folder_img.removeClass("hide");
+				
 			}
+			element.setAttribute( 'data-loaded', "" );
+			element.src = src+= "folder-open.png"; 
+			add_folder_img.removeClass("hide");
 		})
 		
 	}else{
@@ -220,9 +222,14 @@ function addFolderAction( e ){
 		controller.postJson( constants.ajax_url+'?action=13', send, function(d){
 			var resp = JSON.parse( d);
 			if( resp.result ){
-				var holder_ul = createElement("ul");
-				holder_ul.innerHTML = resp.data;
-				elm.nearestParent("li").replaceWith( holder_ul.firstElementChild ); //resp returns new folder li ready to go just replace box with DOM friendly li
+				var item = resp.data;
+				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+					var li = bindMustacheString( resources_templates[item.type], item.data ),
+					holder_ul = createElement("ul");
+					
+				    holder_ul.innerHTML = li;
+				    elm.nearestParent("li").replaceWith( holder_ul.firstElementChild ); //replace box with DOM friendly li
+				}
 			}else{
 				showAlertMessage( resp.message, false );
 			}

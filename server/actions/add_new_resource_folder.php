@@ -19,7 +19,7 @@
 				if( mkdir( $folder_pwd, 0774 ) ){
 					$message = "Folder Added";
 					$result = true;
-					$data = FileGetter::folderLi( $f_path, "0", "folderUpload" );
+					$data = FileGetter::getDirectoryInfo( $f_path );
 				}else{
 					$message = "Create Folder Failed";
 				}

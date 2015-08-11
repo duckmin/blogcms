@@ -11,14 +11,7 @@
 		
 		private function makeItem( $post_data_array ){
 			$element = "";
-			//echo var_dump( $post_data_array );
 			switch( $post_data_array[ "data-posttype" ] ){
-				
-				case "heading":
-					//not used as markdown can be used for headings
-					$text = strip_tags( $post_data_array[ "text" ] );
-					$element = "<h1>".$text."</h1>";
-					break;
 				
 				case "markdown":			
 					$text = $this->parsedown->text( strip_tags( $post_data_array[ "text" ] ) );
@@ -29,7 +22,7 @@
 					$src = strip_tags( $post_data_array[ "src" ] );
 					$alt_val = strip_tags( $post_data_array[ "alt" ] );
 					$alt = ( $alt_val !== "" )? $alt_val : "Image Failed to Load";
-					$element = "<img src='".$src."' alt=\"$alt\" />";
+					$element = "<img src=\"$src\" alt=\"$alt\" />";
 					break;
 					
 				case "audio":
@@ -41,7 +34,7 @@
 					
 				case "video":
 					$src = strip_tags( $post_data_array[ "src" ] );
-					$element = "<div class='iframe-embed' ><iframe src='".$src."' ></iframe></div>";
+					$element = "<div class=\"iframe-embed\" ><iframe src=\"$src\" ></iframe></div>";
 					break;
 					
 			}

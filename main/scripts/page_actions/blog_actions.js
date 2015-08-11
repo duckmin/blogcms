@@ -24,12 +24,31 @@ function convertTimeStamps( element ){
 	})
 }
 
+var blogloadaction = {};
+
+blogloadaction.makeEmbed = function(elm){
+   	var src = elm.src,
+   	flash_vars = 'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'+src+'","loop":false,"autoRewind":true}',
+   	embed = createElement("embed", {
+        flashvars:flash_vars,
+        pluginspage:'http://www.adobe.com/go/getflashplayer',
+        quality:'high',
+        allowscriptaccess:'always', 
+        allowfullscreen:'true', 
+        bgcolor:'#ffffff', 
+        src:'/scripts/FlowPlayerClassic.swf', 
+        type:'application/x-shockwave-flash'
+   	}),
+   	audio = elm.parentElement;
+    audio.replaceWith(embed);				
+}
+
 addEvent( window, "load", function(){
 	/*attributeActions( document.body, "data-blogaction", {
-		"search-clear":function(elm){
-			elm.addEvent( "focus", searchClear );
+		"audio":function(audio_element){
+			
 		}
-	})*/
+	});*/
 	
 	convertTimeStamps( document );
 })

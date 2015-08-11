@@ -34,8 +34,9 @@
 					
 				case "audio":
 					$src = strip_tags( $post_data_array[ "src" ] );
-					$flash_vars = 'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'.$src.'","loop":false,"autoRewind":true}';					
-					$element = "<embed flashvars='".$flash_vars."' wmode='transparent' pluginspage='http://www.adobe.com/go/getflashplayer' quality='high' allowscriptaccess='always' allowfullscreen='true' bgcolor='#ffffff' src='/scripts/FlowPlayerClassic.swf' type='application/x-shockwave-flash'>";
+					$element = "<audio   controls>
+                        <source onerror=\"blogloadaction.makeEmbed(this)\"  src=\"$src\" type=\"audio/mpeg\">
+                    </audio> ";
 					break;
 					
 				case "video":

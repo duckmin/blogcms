@@ -77,4 +77,26 @@ function getAlertMessageIcon( bool ){
 	return 	constants.base_url+"/style/resources/"+icon;
 }
 
+//shared with manager and blog pages
+/*
+    @elm audio element
+*/
+makeFlashAudioEmbed = function(elm){
+   	var src = elm.src,
+   	flash_vars = 'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'+src+'","loop":false,"autoRewind":true}',
+   	embed = createElement("embed", {
+        height:"22",
+        flashvars:flash_vars,
+        pluginspage:'http://www.adobe.com/go/getflashplayer',
+        quality:'high',
+        allowscriptaccess:'always', 
+        allowfullscreen:'true', 
+        bgcolor:'#ffffff', 
+        src:'/scripts/FlowPlayerClassic.swf', 
+        type:'application/x-shockwave-flash'
+   	}),
+   	audio = elm.parentElement;
+    audio.replaceWith(embed);				
+}
+
 

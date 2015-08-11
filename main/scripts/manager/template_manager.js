@@ -98,24 +98,27 @@
 		var container=element.nearestParent('div'),
 		input=container.querySelectorAll('input[name=src]')[0],
 		val = input.value,
-		embed = createElement("embed",{
-			"height":"22",
-			"width":"500",
-			"flashvars":'config={"autoPlay":false,"autoBuffering":false,"showFullScreenButton":false,"showMenu":false,"videoFile":"'+val+'","loop":false,"autoRewind":true}',
-			"pluginspage":"http://www.adobe.com/go/getflashplayer",
-			"quality":"high",
-			"allowscriptaccess":"always",
-			"allowfullscreen":"true",
-			"bgcolor":"#ffffff",
-			"src":"scripts/FlowPlayerClassic.swf",
-			"type":"application/x-shockwave-flash"
-		});		
-		frame=container.getElementsByTagName('embed')[0];
-		if( typeof frame === "undefined" ){
-			frame = container.appendChild( embed );
+		source = createElement("source", {
+		  "type":"audio/mpeg",
+		  "src":val
+		});
+		source.onerror = function(){
+		    makeFlashAudioEmbed(this);  
+		};
+		var audio = createElement("audio", {
+		  "controls":"",
+		  "child":source   
+		}),
+		last_element = container.lastElementChild,
+		last_type = last_element.nodeName.toLowerCase();
+		
+		if( last_type === "audio" || last_type === "embed" ){
+		   last_element.replaceWith( audio );
 		}else{
-			frame.replaceWith( embed );	
+		   container.appendChild( audio ); 
 		}
+		
+		
 	}	
 	
 	function previewVideo( e ){

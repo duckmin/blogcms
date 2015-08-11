@@ -35,7 +35,7 @@
 				case "audio":
 					$src = strip_tags( $post_data_array[ "src" ] );
 					$element = "<audio   controls>
-                        <source onerror=\"blogloadaction.makeEmbed(this)\"  src=\"$src\" type=\"audio/mpeg\">
+                        <source onerror=\"makeFlashAudioEmbed(this)\"  src=\"$src\" type=\"audio/mpeg\">
                     </audio> ";
 					break;
 					

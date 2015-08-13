@@ -8,20 +8,6 @@
 		{
 			$this->mongo_getter = $db_getter;
 			$this->post_views = $post_views;
-		}
-		
-		private function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base ){
-			$paginator="<ul class='paginator' >";
-			if( $page_num>1 ){
-				$back=$page_num-1;
-				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
-			}
-			$paginator.="<li class='current-cat' >".$page_num."</li>";
-			if( $amount_retrieved > $amount_per_page ){
-				$forward=$page_num+1;
-				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
-			}
-			return $paginator."</ul>";
 		}		
 		
 		public function getHomePagePosts( $page_num, $cat ){
@@ -40,7 +26,8 @@
 						$i++;
 					}
 				}
-				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
+				$paginator_template = file_get_contents( $GLOBALS['template_dir']."/paginator.txt" );
+				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template );
 				return $paginator.$str.$paginator;
 			}else{			
 				//no results return false and we will send them to 404 (paginator logic should not allow this to happen)
@@ -52,7 +39,8 @@
 			$str="";
 			$i = 0;			
 			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
-			$url_add = "search/".$cat."/".$search;
+            $s = urlencode( $search );			
+			$url_add = "search/$cat/$s";
 			$L = $posts_from_db->count(true);
 			
 			if( $L > 0 ){	
@@ -64,7 +52,8 @@
 						$i++;
 					}
 				}
-				$paginator = $this->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add );
+				$paginator_template = file_get_contents( $GLOBALS['template_dir']."/paginator.txt" );
+				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template );
 				return $paginator.$str.$paginator;
 			}else{
 				if( $page_num === 1 ){	

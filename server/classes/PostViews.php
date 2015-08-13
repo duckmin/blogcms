@@ -7,7 +7,37 @@
 		function __construct( Parsedown $parsedown )
 		{
 			$this->parsedown = $parsedown;
-		}		
+		}
+		
+		public function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base, $template ){
+			$data = array(
+                "base_url"=>$GLOBALS['base_url'],
+                "add_to_base"=>$add_to_base,
+                "current_page"=>$page_num
+			);
+			
+			if( $page_num > 1 ){
+			    $data["back_page"] = true; 
+                $data["last_page"] = $page_num-1;			    
+			}
+			
+			if( $amount_retrieved > $amount_per_page ){
+                $data["third_page"] = true;
+                $data["next_page"] = $page_num+1; 
+			}
+			return TemplateBinder::bindTemplate( $template, $data );
+			/*$paginator="<ul class='paginator' >";
+			if( $page_num>1 ){
+				$back=$page_num-1;
+				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
+			}
+			$paginator.="<li class='current-cat' >".$page_num."</li>";
+			if( $amount_retrieved > $amount_per_page ){
+				$forward=$page_num+1;
+				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
+			}
+			return $paginator."</ul>";*/
+		}			
 		
 		private function makeItem( $post_data_array ){
 			$element = "";

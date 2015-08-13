@@ -1,0 +1,7 @@
+<ul class="paginator">
+    ##back_page
+    <li><a href="{{ base_url }}/{{ add_to_base }}/{{ last_page }}">{{ last_page }}</a></li><!--
+    -->back_page##<li class="current-cat">{{ current_page }}</li>##third_page<!--
+    --><li><a href="{{ base_url }}/{{ add_to_base }}/{{ next_page }}">{{ next_page }}</a></li>
+    third_page##
+</ul>

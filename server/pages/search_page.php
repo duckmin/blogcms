@@ -50,7 +50,6 @@
 		}	
 	}else{ 
 		//wrong amount of URL params
-		echo "wrong amount of url params";
-		
+		goTo404();
 	}
 ?>

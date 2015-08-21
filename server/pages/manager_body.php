@@ -108,7 +108,7 @@
 			?>
 			<li>
 			    <input type='radio' name='blog_grid_sort' value='' />
-			    <input type="text" name="search" data-templateaction="post-search-input" value="" >
+			    <input type="text" name="search" placeholder="search all posts" data-templateaction="post-search-input" value="" >
 			</li>	
 		</ul>
 		<div id='post-space' class='main'>

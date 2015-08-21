@@ -32,20 +32,18 @@ function listFile( element ){
 			var resp = JSON.parse(d),
 			lis = "";					
 
-			if( resp.length > 0 ){
-			    resp.forEach( function( item ){
-    				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
-    					lis += bindMustacheString( resources_templates[item.type], item.data );
-    				}
-    			});	
-    			
-				var list = createElement("ul", {
-					"class":"folders",
-					"innerHTML":lis
-				})
-				parent_li.appendChild( list );
+		    resp.forEach( function( item ){
+				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+					lis += bindMustacheString( resources_templates[item.type], item.data );
+				}
+			});	
+			
+			var list = createElement("ul", {
+				"class":"folders",
+				"innerHTML":lis
+			})
+			parent_li.appendChild( list );
 				
-			}
 			element.setAttribute( 'data-loaded', "" );
 			element.src = src+= "folder-open.png"; 
 			add_folder_img.removeClass("hide");

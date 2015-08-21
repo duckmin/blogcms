@@ -49,6 +49,9 @@ if( isset( $_GET['action'] ) ){
 		case 14:
 	        $file = '/get_previous_post_html_from_timestamp.php';
 			break;
+		case 15:
+	        $file = '/get_post_html_by_id.php';
+			break;
 	}
 
 	include $GLOBALS['server_path']."/actions".$file;

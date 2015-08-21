@@ -392,6 +392,7 @@
 			"select-post-filter":function(elm){
 				elm.addEvent( "click", function(e){
 					POSTS_TABLE_PAGENUM = 1;
+					this.parentElement.querySelector("input[type='radio']").checked = true;
 					loadTablePage();
 				})
 			},
@@ -405,77 +406,99 @@
 //POSTS TAB EDIT FUNCS -----------------------------------------------------------------------------------------------------
 
 	window.POSTS_TABLE_PAGENUM = 1;
-	var edit_table_template="<tr data-postid='{{ id }}' >"+
-	"<td>"+
-		"<select name='category' multiple='' >{{ post_type_options }}</select>"+
-	"</td>"+
-	"<td><textarea name='description' >{{ description }}</textarea></td>"+
-	"<td>"+
-		"<input type='hidden' name='id' value='{{ id }}' />"+
-		"<input type='text' name='title' value='{{ title }}' />"+
-	"</td>"+	
-	"<td class='date' >{{ created }}<br> By: <b>{{ author }}</b></td>"+
-	"<td>"+
-		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
-		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+
-		"<a href='"+constants.base_url+"/post/{{ first_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}' target='_blank' >"+
-			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
-		"</a>"+
-		"<img src='"+constants.base_url+"/style/resources/clock.png' title='Make most recent post (move to top of the)' onclick='postMoveToTop( this )' />"+
-		"<img src='"+base_url+"/style/resources/action_delete.png' title='Delete Post' onclick='deletePostAction( this )' />"+
-	"</td>";
+	var edit_table_template="<table class='manage-table' >"+
+	"<thead>"+
+    	"<tr>"+
+    	    "<th>Category</th>"+
+    		"<th>Description</th>"+
+    		"<th>Title</th>"+
+    		"<th>Posted</th>"+
+    		"<th>Action</th>"+
+    	"</tr>"+
+	"</thead>"+
+	"<tbody>"+
+    	"<tr data-postid='{{ id }}' >"+
+    	"<td>"+
+    		"<select name='category' multiple='' >{{ post_type_options }}</select>"+
+    	"</td>"+
+    	"<td><textarea name='description' >{{ description }}</textarea></td>"+
+    	"<td>"+
+    		"<input type='hidden' name='id' value='{{ id }}' />"+
+    		"<input type='text' name='title' value='{{ title }}' />"+
+    	"</td>"+	
+    	"<td class='date' >{{ created }}<br> By: <b>{{ author }}</b></td>"+
+    	"<td>"+
+    		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
+    		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+
+    		"<a href='"+constants.base_url+"/post/{{ first_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}' target='_blank' >"+
+    			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
+    		"</a>"+
+    		"<img src='"+constants.base_url+"/style/resources/clock.png' title='Make most recent post (move to top of the)' onclick='postMoveToTop( this )' />"+
+    		"<img src='"+base_url+"/style/resources/action_delete.png' title='Delete Post' onclick='deletePostAction( this )' />"+
+    	"</td>"+
+    	"</tr>"+
+	"</tbody>"+
+	"</table>";
 	
 	window.loadTablePage = function(){
+		//alert('d');
 		var section = document.querySelector('section[data-tab=posts]'),
-		tbody = section.querySelector('table > tbody'),
-		nav = section.querySelector('ul.button-list'),
+		post_space = section.querySelector('#post-space'),
+		//nav = section.querySelector('ul.button-list'),
 		category_selection = section.querySelector('ul.inline-list'),
 		nav_body = documentFragment(),
 		cat_form_class = new FormClass( category_selection ),
 		//get value of the radio filter and add to URL so mongo can sort					
 		cat_value = cat_form_class.getValues().blog_grid_sort;	
-			
+		console.log( category_selection );	
 		controller.getText( constants.ajax_url+'?action=4&p='+POSTS_TABLE_PAGENUM+'&cat='+cat_value, function(d){
 			if( d.length > 0 ){
 				var json = JSON.parse( d );
 				if( json.result === true ){
-					var post_data = JSON.parse( json.data.posts ),
-					inside_tbody="";
+					var post_data = json.data.posts,
+					inside_main = "";
 					post_data.forEach( function( single_row ){
-						inside_tbody += bindMustacheString( edit_table_template, single_row );
+						inside_main += single_row.post_html;
+						inside_main += bindMustacheString( edit_table_template, single_row.post_data );
 					})
 					
+					post_space.innerHTML = inside_main;
+					setMultiSelects( post_space );
+					
 					if( json.data.prev===true ){
-						var prev=createElement('li',{
-							text:"Prev",
-							events:{
+						var prev = createElement('nav',{
+                            text:"Page "+( POSTS_TABLE_PAGENUM - 1 ),
+                            events:{
 								"click":function(){
 									POSTS_TABLE_PAGENUM -= 1;
 									loadTablePage();
 								}
-							}
+							}						
 						});
-						nav_body.appendChild( prev  )
+						post_space.appendChild(prev);
 					}
 					
+					//append current page marker
+					var current = createElement('nav',{
+					    "class":"current",
+					    text:"Current Page "+POSTS_TABLE_PAGENUM
+					});
+					post_space.appendChild(current);
+					
 					if( json.data.next===true ){
-						var next=createElement('li',{
-							text:"Next",
-							events:{
+						var next = createElement('nav',{
+                            text:"Page "+( POSTS_TABLE_PAGENUM + 1 ),
+                            events:{
 								"click":function(){
 									POSTS_TABLE_PAGENUM += 1;
 									loadTablePage();
 								}
-							}
+							}						
 						});
-						nav_body.appendChild( next )
+						post_space.appendChild(next);
 					}
 					
-					tbody.innerHTML = inside_tbody;
-					setMultiSelects( tbody );
-					nav.removeChildren();
-					nav.appendChild( nav_body );
-					
+					window.scroll(0, document.querySelector("ul.tab-top").offsetTop );
 				}else{
 					showAlertMessage( json.message, json.result );
 				}
@@ -489,6 +512,15 @@
 			form_obj=new FormClass( tr ),
 			form_values=form_obj.getValues();
 			return form_values;
+		},
+		getPostHtml:function( id, cat, callback ){
+		    controller.getText( constants.ajax_url+'?action=15&id='+id+'&cat='+cat, function(post_html){
+	            callback( post_html );
+	            /*var post_tab_posting = gEBI(id);
+	            if( post_tab_posting ! == null ){
+	                 
+	            } */ 
+		    });
 		}
 	}
 	
@@ -497,6 +529,23 @@
 		
 		controller.postJson( constants.ajax_url+'?action=3&procedure=2', form_values, function(d){
 			var resp = JSON.parse( d);
+			if( resp.result ){
+			   var post = element.nearestParentClass("manage-table").previousElementSibling,
+			   id = post.getAttribute("id"),
+			   category = post.getAttribute("data-postcategory");
+			   table_actions.getPostHtml( id, category, function(post_html){
+    			   if( post_html.length > 0 ){
+    			       var edited_post = createElement("div", {
+    				      innerHTML:post_html 
+    				   }).firstElementChild;
+    				   var replaced_post = post.replaceWith(edited_post),
+    				   replaced_post_link = replaced_post.querySelector("ul.post-head > li:first-child a[href]").href,
+    				   link_to_post_on_posts_tab = element.nearestParent("td").querySelector("a[href]");
+    				   //if the title was edited the link will be different to post, grab the link from the posts and change link on table to it
+    				   link_to_post_on_posts_tab.href = replaced_post_link;
+    		       } 
+    		   });	        
+			}
 			showAlertMessage( resp.message, resp.result );
 		})
 	}
@@ -506,13 +555,18 @@
 		showConfirm( message, false, element, function(elm){ //calback function fired if yes is selected
 			var form_values=table_actions.getTrValues( element ),
 			send={ "id":form_values.id };
-			controller.postJson( constants.ajax_url+'?action=5', send, function(d){
-				var resp = JSON.parse( d);
-				if( resp.result ){
-					loadTablePage();
-				}
-				showAlertMessage( resp.message, resp.result );
-			})
+			//make sure we are not deleting post being edited
+			if( edit_mode.id_in_edit !== form_values.id ){
+    			controller.postJson( constants.ajax_url+'?action=5', send, function(d){
+    				var resp = JSON.parse( d);
+    				if( resp.result ){
+    					loadTablePage();
+    				}
+    				showAlertMessage( resp.message, resp.result );
+    			})
+		    }else{
+		        showAlertMessage( "This post is currently being edited can not delete, please disable edit mode before removing this post", false );
+		    }
 		})	
 	}
 	
@@ -524,17 +578,16 @@
 			if( d !== "" ){
 				var resp = JSON.parse( d ),
 				frag = documentFragment();
+				edit_mode.enable( form_values.id );
 				resp.forEach(function( post ){
 					var post_type = post["data-posttype"],
 					li = templatetype[ post_type ](),
 					form_class = new FormClass( li );
 					form_class.bindValues( post );
 					frag.appendChild( li );
-					edit_mode.enable( form_values.id );
 				});
 				
 				gEBI("template").removeChildren().appendChild(frag);
-				//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 				window.location.hash = "#template";
 			}else{
 				showAlertMessage( "No Data For Post", false );
@@ -549,7 +602,6 @@
 			var form_values=table_actions.getTrValues( element ),
 			send={ "id":form_values.id };
 			controller.postJson( constants.ajax_url+'?action=8', send, function(d){
-				//var resp = JSON.parse( d);
 				if( d !== "" ){
 					var resp = JSON.parse( d );
 					showAlertMessage( resp.message, resp.result );
@@ -569,10 +621,39 @@
 				
 				var resp = JSON.parse( d);
 				if( resp.result){
-					edit_mode.disable(); 
+					//if post being edited is in view on posts tab ajax back the id_in_edit
+                    //to get post HTML then relace HTML of post on posts tab with edited version
+                    //the tab_actions posts function must be overwritten so it will scroll to edited post
+                    //before edit mode is disabled,  then we overwrite tab_actions.posts back to original function
+					var post_on_post_tab_being_edited = gEBI(edit_mode.id_in_edit);
+
+					if( post_on_post_tab_being_edited !== null ){
+					   var post_category = post_on_post_tab_being_edited.getAttribute("data-postcategory");
+					   table_actions.getPostHtml( edit_mode.id_in_edit, post_category, function(post_html){
+    					   if( post_html.length > 0 ){
+        					   var edited_post = createElement("div", {
+        					      innerHTML:post_html 
+        					   }).firstElementChild;
+        					   post_on_post_tab_being_edited.replaceWith(edited_post);
+        					   tab_actions.posts = function( tab, panel ){
+        					       managerExtraActions.posts_tab_action( tab, panel );
+        					       edit_mode.disable();
+        					       tab_actions.posts = managerExtraActions.posts_tab_action;
+        					   }
+        					   window.location.hash = "#posts" ;
+    				       }else{
+    				           window.location.hash = "#template";
+					           edit_mode.disable();  
+    				       }
+					   });
+					   
+					}else{
+					   window.location.hash = "#template";
+					   edit_mode.disable();    
+					}
+
 					gEBI('template').removeChildren();
-					//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
-					window.location.hash = "#template";
+					
 				}
 				showAlertMessage( resp.message, resp.result );
 			})

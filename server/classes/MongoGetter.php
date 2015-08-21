@@ -54,7 +54,7 @@
 				$filter["category"] = $cat;	
 			}
 			$collection = $this->db->posts;	
-			$fields = array( "_id"=>true, "category"=>true, "title"=>true, "description"=>true, "lastModified"=>true, "author"=>true );				
+			$fields = array( "_id"=>true, "post_data"=>true, "category"=>true, "title"=>true, "description"=>true, "lastModified"=>true, "author"=>true );				
 			$cursor = $collection->find( $filter, $fields )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );
 			return $cursor;
 		}

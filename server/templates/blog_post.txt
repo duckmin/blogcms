@@ -1,4 +1,4 @@
-<article class="post {{ page_category }}">
+<article ##show_id id="{{ id }}" data-postcategory="{{ page_category }}" show_id## class="post {{ page_category }}">
 	<ul class="post-head" >
 		<li><b><a href="{{ base }}/post/{{ page_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}">{{ title }}</a></b></li>
 		<li data-ts="{{ time_stamp }}" >{{ created }}</li>

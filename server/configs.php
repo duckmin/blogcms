@@ -11,7 +11,7 @@ $GLOBALS['url_parts'] = preg_split( "/\//", preg_replace( "/\/$/", "", substr( $
 //audio and video files allowed to be uploaded through the manager
 //if adding new type add a new permitted extension & mime type
 $GLOBALS["upload_vars"] = array(
-	"allowed_image_extensions"=>array("gif", "jpeg", "jpg", "png"),
+	"allowed_image_extensions"=>array("gif", "jpeg", "jpg", "png", "JPG"),
 	"allowed_audio_extensions"=>array("mp3"),
 	"allowed_mimetypes"=>array("image/jpeg", "image/gif", "image/jpg", "image/png", "audio/mpeg"),
 	"max_kb_img_upload"=>500,
@@ -26,10 +26,10 @@ $GLOBALS['mongo_db_name'] = "blog";
 $GLOBALS['manager_keyword'] = "manager";
 
 //# of posts that show up per page
-$GLOBALS['amount_on_main_page'] = 3;
+$GLOBALS['amount_on_main_page'] = 5;
 
 //# of posts that show up on the "posts" tab in the manager
-$GLOBALS['amount_on_manger_tab'] = 8;
+$GLOBALS['amount_on_manger_tab'] = 2;
 
 //minutes until cache file expires
 $GLOBALS['max_page_cache_mins'] = -5; //turned off for dev turn on for prod to resonable amount of mins
@@ -76,8 +76,8 @@ function goTo404(){
 }
 
 
-//mongo connection string cqan be changed here
+//mongo connection string can be changed here
 function MongoConnection(){
-	return new MongoClient("mongodb:///tmp/mongodb-27017.sock");
+	return new MongoClient(/*"mongodb:///tmp/mongodb-27017.sock"*/);
 }
 ?>

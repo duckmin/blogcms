@@ -49,7 +49,7 @@ header > ul > li:first-child{
 	border-left:2px solid tomato;
 }
 
-header > ul > li, section.main > ul.paginator > li{
+header > ul > li, .main > ul.paginator > li{
 	background-color: white;
 }
 
@@ -57,7 +57,7 @@ header > ul > li > a {
 	color:inherit;
 }
 
-section.main > ul.paginator > li{
+.main > ul.paginator > li{
 	border-width:1px ;
 	border-style:solid;
 	border-color:black;
@@ -66,20 +66,20 @@ section.main > ul.paginator > li{
 	position:relative;
 }
 
-section.main > ul.paginator > li > a, section.main > ul.paginator > li.current-cat{
+.main > ul.paginator > li > a, .main > ul.paginator > li.current-cat{
 	padding:0 0.8rem;
 }
 
-section.main > ul.paginator > li.current-cat, section.main > ul.paginator > li:hover{
+.main > ul.paginator > li.current-cat, .main > ul.paginator > li:hover{
 	background-color:lightblue;
 }
 
-section.main > ul.paginator > li:first-child{
+.main > ul.paginator > li:first-child{
 	border-top-left-radius:5px;
 	border-bottom-left-radius:5px;
 }
 
-section.main > ul.paginator > li:last-child{
+.main > ul.paginator > li:last-child{
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	border-right:1px solid black;
@@ -98,12 +98,12 @@ header > ul > li > form input.gray-text{
 	color:lightgray;
 }
 
-header a, section.main article.post > ul.post-head a{
+header a, .main article.post > ul.post-head a{
 	text-decoration:none;
 }
 
 
-section.main {
+.main {
 	
 }
 
@@ -117,7 +117,7 @@ article.post{
 }
 
 
-section.main > article:first-of-type{
+.main > article:first-of-type{
 	margin-top:0;
 }
 
@@ -217,74 +217,74 @@ blockquote > p{
 	margin-left:10px;
 }
 
-section.main article.post > ul.post-head {
+.main article.post > ul.post-head {
 	border-top:1px dotted black;
 	border-bottom:1px dotted black;
 	margin:0 -1rem;
 	padding:3px 1rem;
 }
 
-section.main article.post > ul.post-head > li {
+.main article.post > ul.post-head > li {
 	margin-right:10px;
 }
 
-section.main article.post > ul.post-head > li[data-ts], section.main article.post > ul.post-head > li:last-child{
+.main article.post > ul.post-head > li[data-ts], .main article.post > ul.post-head > li:last-child{
 	font-size:0.8em	
 }
  /*Last child is li that holds author*/
-section.main article.post > ul.post-head > li:last-child{
+.main article.post > ul.post-head > li:last-child{
 	
 }
 
-section.main article.post > ul.post-head > li:last-child > span{
+.main article.post > ul.post-head > li:last-child > span{
 	color:blue;
 	font-weight:bold;
 }
 
-section.main > ul.paginator:first-child{
+.main > ul.paginator:first-child{
 	margin:0rem 0 1rem 0;
 }
 
-section.main > ul.paginator:last-child{
+.main > ul.paginator:last-child{
 	margin-top:1rem;
 	margin-bottom:2rem;
 }
 
-section.main > ul.paginator, section.main article.post > ul.post-head, header > ul {
+.main > ul.paginator, .main article.post > ul.post-head, header > ul {
 	list-style-type:none;
 }
 
-section.main > ul.paginator > li, section.main article.post > ul.post-head > li, header > ul > li{
+.main > ul.paginator > li, .main article.post > ul.post-head > li, header > ul > li{
 	display:inline-block;
 	
 }
 
-section.main > ul.paginator > li {
+.main > ul.paginator > li {
 	font-size:1.9rem;
 }
 
-section.main > ul.paginator > li:nth-child(1){
+.main > ul.paginator > li:nth-child(1){
 	margin-left:1rem;
 }
 /*
-section.main > ul.paginator > li:nth-child(2){
+.main > ul.paginator > li:nth-child(2){
 	margin-left:20px;
 }
 */
 
-section.main > ul.paginator > li.current-page-select{
+.main > ul.paginator > li.current-page-select{
 	background-color:blue;
 }
 
 
 
-section.main > ul.paginator > li a{
+.main > ul.paginator > li a{
 	color:inherit;
 	text-decoration:none;
 	min-height:2rem;
 }
 
-section.main > nav {
+.main > nav {
 	width:100%;
 	border:1px dotted black;
 	margin-bottom:2rem;
@@ -294,7 +294,7 @@ section.main > nav {
 	background-color:azure;
 }
 
-section.main > nav > a {
+.main > nav > a {
 	font-size:1.2em;
 }
 

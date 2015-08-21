@@ -117,7 +117,7 @@ section[data-tab='template'] > ul:first-child{
 	margin-top:10px;
 }
 
-section[data-tab='preview']{
+section[data-tab='preview'], section[data-tab='posts']{
 	background-color:white;
 	padding:0 1em 0 1em;
 }
@@ -126,7 +126,7 @@ section[data-tab='preview'] ul.button-list {
 	margin:10px 0;
 }
 
-section[data-tab='preview'], section[data-tab='analytics']{
+section[data-tab='preview'], section[data-tab='posts'], section[data-tab='analytics']{
 	border-left:none;
 	border-right:none;
 	border-bottom:none;
@@ -136,8 +136,12 @@ section[data-tab='analytics']{
 	background-color:white;
 }
 
-section[data-tab='posts'] > ul.inline-list, section[data-tab='analytics'] > ul.inline-list {
+section[data-tab='analytics'] > ul.inline-list {
 	margin:10px;
+}
+
+section[data-tab='posts'] > ul.inline-list {
+	margin:20px 0;
 }
 
 section[data-tab='posts'] > ul.button-list {
@@ -173,18 +177,28 @@ section[data-tab='analytics'] > div{
 }
 
 ul.form-list > li {
-	margin-right:20px;	
+	
 }
 
 ul.form-list > li > span {
     font-size: 1.1em;
-   
+}
+
+section[data-tab='posts'] ul.form-list > li > span {
+   padding:5px 10px;
+   font-weight: 700; 
+   margin-right:5px;
 }
 
 ul.form-list > li > input[type='radio'] {
-    left: 3px;
-    position: relative;
-    top: 2px;
+    display:none;
+}
+
+ul.form-list > li > input[type='radio']:checked + span, section[data-tab='posts'] ul.form-list > li > span:hover {
+    background-color: black;
+    border-radius:4px;
+    color:white;
+    cursor: pointer;
 }
 
 ul.form-list > li > input[type='text'] {
@@ -210,6 +224,29 @@ ul.form-list > li > input[type='text'] {
 .manage-table {
 	width:100%;
 	border-collapse:collapse;
+	border:1px solid black;
+	background-color: lightgoldenrodyellow;
+}
+
+/*no shadow on posts tab so table can align underneath*/
+section[data-tab='posts'] article.post {
+    box-shadow:none;   
+    border-right:1px dotted black;
+    margin-top:4rem;
+}
+
+/* reduce the margin of .ain first-child (post) */
+div#post-space > article:first-child{
+    margin-top:0.5rem;    
+}
+
+/* reduce margin between next navs */
+.main > nav + nav {
+    margin-top:-1rem;
+}
+
+.main > nav.current{
+    background-color:salmon;   
 }
 
 .manage-table tr td{
@@ -235,28 +272,32 @@ td.date {
 	text-align:center;
 }
 
-.manage-table td img{
-	margin-right:3px;
+.manage-table thead th{
+	font-weight:600;
+	color:black;
+	font-size:0.8em;
+	padding:0.5em;    
 }
 
-.manage-table thead{
-	
-	color:blue;
+.manage-table tbody tr td:nth-child(2){
+    padding-right:0.5rem;
 }
 
-.manage-table tbody tr:nth-child(odd){
-	background-color:white;
+.manage-table tbody tr td:last-child img{
+	margin-left:calc( 50% - 8px );
+	margin-bottom:5px;
+	display:block;
 }
 
-.manage-table tbody tr:hover{
-	background-color:yellow;
+.manage-table tbody tr td:last-child img:hover{
+    cursor:pointer;
 }
 
 .list-nav, .inline-list{
 	list-style-type:none;
 }
 
-.list-nav li, .inline-list li{
+.list-nav > li, .inline-list > li{
 	display:inline-block;
 }
 
@@ -287,22 +328,15 @@ ul.multi-replace{
 	overflow-y:auto;
 	border:1px solid black;
 	margin-top:15px;
-} 
-   
-ul.multi-replace{
 	list-style-type:none;
+	border-radius:3px;
 }
 
 ul.multi-replace > li{
 	border-top:1px solid black;
 	text-align:center;
 	padding:2px 0;
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	background-color:white;
 }
 
 ul.multi-replace > li:first-child{
@@ -310,7 +344,8 @@ ul.multi-replace > li:first-child{
 }
    
 ul.multi-replace > li.selected-multi{
-	background-color:green;
+	background-color:blue;
+	color:white;
 }
 
 ul.multi-replace > li:hover{

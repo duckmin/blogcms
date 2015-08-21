@@ -4,12 +4,20 @@ window.managerExtraActions = {
 		showConfirm( message, false, null, function(elm){ 
 			gEBI('logout').submit();
 		})
-	}
+	},
+	"posts_tab_action":function( tab, panel ){
+	    if( edit_mode.active() ){
+	        var posts_tab_being_edited = gEBI(edit_mode.id_in_edit);
+	        if( posts_tab_being_edited !== null ){
+	            window.scroll(0, posts_tab_being_edited.offsetTop);
+	        }   
+	    }  
+	}	
 }
 
 //init tabs, code in extender_new_tabs.js
 addEvent( window, "load", function(){
-	var actions = {
+	window.tab_actions = {
 		"pictures":function( panel, tab ){
 			//initiate resources folder explorer 
 			var ul = createElement("ul",{
@@ -20,8 +28,9 @@ addEvent( window, "load", function(){
 			delete this.pictures;
 		},	
 		"posts":function( tab, panel ){
+			//load table page once then overwrite this funtion and check for a post being edited and scroll to it 
 			loadTablePage(); //tab_manager.js
-			delete this.posts;	
+			this.posts = managerExtraActions.posts_tab_action;
 		},
 		"analytics":function( panel, tab ){
 			var unique_url_ul = panel.querySelector("div.left > ul");			
@@ -30,7 +39,7 @@ addEvent( window, "load", function(){
 			delete this.analytics;	
 		}	
 	}		
-	window.tabset = new TabSet( document.body, actions );
+	window.tabset = new TabSet( document.body, tab_actions );
 	tabset.init();
 })
 

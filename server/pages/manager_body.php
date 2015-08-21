@@ -100,26 +100,15 @@
 	
 	<section data-tab='posts' >
 		<ul class="inline-list form-list" >
-			<li><span>all</span><input type='radio' name='blog_grid_sort' data-templateaction="select-post-filter" value='' checked="" /></li>				
+			<li><input type='radio' name='blog_grid_sort' value='' checked="" /><span data-templateaction="select-post-filter" >all</span></li>				
 			<?php
 				foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
-					echo "<li><span>".$post_type."</span><input type='radio' name='blog_grid_sort' data-templateaction='select-post-filter' value='".$post_type."' /></li>";		
+					echo "<li><input type='radio' name='blog_grid_sort' value='$post_type' /><span data-templateaction='select-post-filter' >$post_type</span></li>";		
 				}
 			?>	
 		</ul>
-		<table class="manage-table">
-			<thead>
-				<tr>
-					<th>Category</th>
-					<th>Description</th>
-					<th>Title</th>
-					<th>Posted</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+		<div id='post-space' class='main'>
+		</div>
 		<ul class='button-list' >
 		
 		</ul>

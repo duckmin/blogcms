@@ -45,6 +45,14 @@
 			return $cursor;
 		}
 		
+		public function getPostsFromDbBySearch( $page_num, $search ){
+			$count = ( $page_num-1 )*$GLOBALS['amount_on_manger_tab'];
+			$skip = $GLOBALS['amount_on_manger_tab']+1;
+			$collection = $this->db->posts;			
+			$cursor = $collection->find( array( '$text'=>array( '$search'=>$search ) ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );
+			return $cursor;
+		}
+		
 		public function getBlogManagePosts( $page_num, $cat ){  //for manage get_post_info.php
 		
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_manger_tab'];

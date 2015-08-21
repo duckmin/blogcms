@@ -105,7 +105,11 @@
 				foreach( $GLOBALS['post_categories'] as $key => $post_type ){ 
 					echo "<li><input type='radio' name='blog_grid_sort' value='$post_type' /><span data-templateaction='select-post-filter' >$post_type</span></li>";		
 				}
-			?>	
+			?>
+			<li>
+			    <input type='radio' name='blog_grid_sort' value='' />
+			    <input type="text" name="search" data-templateaction="post-search-input" value="" >
+			</li>	
 		</ul>
 		<div id='post-space' class='main'>
 		</div>

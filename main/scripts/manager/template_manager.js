@@ -393,8 +393,21 @@
 				elm.addEvent( "click", function(e){
 					POSTS_TABLE_PAGENUM = 1;
 					this.parentElement.querySelector("input[type='radio']").checked = true;
+					this.nearestParent("ul").querySelector("input[name='search']").value = ""; //blank out seach so its not used in loadTablePage
 					loadTablePage();
 				})
+			},
+			"post-search-input":function(elm){
+				elm.addEvent( "focus", function(e){
+					POSTS_TABLE_PAGENUM = 1;
+					this.parentElement.querySelector("input[type='radio']").checked = true;
+				});
+				
+				elm.addEvent( "keyup", function(e){
+					if( this.value.length > 0 ){
+                        searcher.searchAction();
+				    }
+				});
 			},
 			"date-picker":function(elm){
 				//initialize date picks in calendar.js
@@ -440,20 +453,39 @@
 	"</tbody>"+
 	"</table>";
 	
-	window.loadTablePage = function(){
-		//alert('d');
-		var section = document.querySelector('section[data-tab=posts]'),
+	window.searcher = {
+	    "frozen":false,
+	    "searchAction":function(){
+	        if( !this.frozen ){
+                var self = this;	           
+	            loadTablePage(function(json){
+	               self.frozen = true;
+	               setTimeout(function(){
+                        self.frozen = false;	               
+	               },250)
+	            });
+	        }
+	    }
+	       
+	};
+	
+	window.loadTablePage = function( callback ){
+		var cb = callback || function(){},
+		section = document.querySelector('section[data-tab=posts]'),
 		post_space = section.querySelector('#post-space'),
-		//nav = section.querySelector('ul.button-list'),
 		category_selection = section.querySelector('ul.inline-list'),
 		nav_body = documentFragment(),
 		cat_form_class = new FormClass( category_selection ),
 		//get value of the radio filter and add to URL so mongo can sort					
-		cat_value = cat_form_class.getValues().blog_grid_sort;	
-		console.log( category_selection );	
-		controller.getText( constants.ajax_url+'?action=4&p='+POSTS_TABLE_PAGENUM+'&cat='+cat_value, function(d){
+		cat_form_values = cat_form_class.getValues();
+		cat_value = cat_form_values.blog_grid_sort;	
+		//if search is set append this to the URL and cat will be "",  the get_post_info service knows when search isset to bring back search results
+		//and the cat must be blank to use categories from the post_info and not the URL
+		var search_str = ( cat_form_values.search.length > 0 )? "&search="+cat_form_values.search : "";	
+		controller.getText( constants.ajax_url+'?action=4&p='+POSTS_TABLE_PAGENUM+'&cat='+cat_value+search_str, function(d){
 			if( d.length > 0 ){
 				var json = JSON.parse( d );
+				cb(json); //run callback (only used for search)
 				if( json.result === true ){
 					var post_data = json.data.posts,
 					inside_main = "";

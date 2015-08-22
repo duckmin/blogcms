@@ -9,7 +9,7 @@
 			$this->parsedown = $parsedown;
 		}
 		
-		public function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base, $template ){
+		public function paginator( $page_num, $amount_retrieved, $amount_per_page, $add_to_base, $template, $reverse_sort_applied ){
 			$data = array(
                 "base_url"=>$GLOBALS['base_url'],
                 "add_to_base"=>$add_to_base,
@@ -26,7 +26,6 @@
                 $data["next_page"] = $page_num+1; 
 			}
 			
-			$reverse_sort_applied = ( isset($_COOKIE["sort"]) && (int)$_COOKIE["sort"] === 1 )? true : false;
 			//what class of sort icon is to decide how to display, cookie is set with JS in blog_actions.js
 			$data["sort_title"] = ( !$reverse_sort_applied )? "Sort Oldest To Newest" : "Sort Newest To Oldest";
 			$data["sort_class"] = ( !$reverse_sort_applied )? "" : "sorted";

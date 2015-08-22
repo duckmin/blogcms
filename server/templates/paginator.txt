@@ -4,7 +4,5 @@
     -->back_page##<li class="current-cat">{{ current_page }}</li>##third_page<!--
     --><li><a href="{{ base_url }}/{{ add_to_base }}/{{ next_page }}">{{ next_page }}</a></li>
     third_page##
-    
     <li class="{{ sort_class }}" title="{{ sort_title }}" data-blogaction="sort" ><a></a></li>
-    
 </ul>

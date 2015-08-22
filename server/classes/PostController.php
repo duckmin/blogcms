@@ -17,7 +17,8 @@
 		public function getHomePagePosts( $page_num, $cat ){
 			$str="";
 			$i = 0;
-			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat, $this->sortOldestToNewest() );
+			$reverse_sort_applied = $this->sortOldestToNewest();
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat,$reverse_sort_applied  );
 			$url_add = $cat;
 			$L = $posts_from_db->count(true);
 			
@@ -31,7 +32,7 @@
 					}
 				}
 				$paginator_template = file_get_contents( $GLOBALS['template_dir']."/paginator.txt" );
-				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template );
+				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template, $reverse_sort_applied );
 				return $paginator.$str.$paginator;
 			}else{			
 				//no results return false and we will send them to 404 (paginator logic should not allow this to happen)
@@ -41,8 +42,9 @@
 		
 		public function getSearchPagePosts( $page_num, $cat, $search ){
 			$str="";
-			$i = 0;			
-			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search, $this->sortOldestToNewest() );
+			$i = 0;	
+			$reverse_sort_applied = $this->sortOldestToNewest();		
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search, $reverse_sort_applied );
             $s = urlencode( $search );			
 			$url_add = "search/$cat/$s";
 			$L = $posts_from_db->count(true);
@@ -57,7 +59,7 @@
 					}
 				}
 				$paginator_template = file_get_contents( $GLOBALS['template_dir']."/paginator.txt" );
-				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template );
+				$paginator = $this->post_views->paginator( $page_num, $L, $GLOBALS['amount_on_main_page'], $url_add, $paginator_template, $reverse_sort_applied );
 				return $paginator.$str.$paginator;
 			}else{
 				if( $page_num === 1 ){	

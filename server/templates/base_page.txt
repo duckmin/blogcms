@@ -19,10 +19,10 @@
 </head>
 
 <body>
-	<div class='wrapper' >
+	<main class='wrapper' >
 		<header>
 			<h1>Duckmins BlogCMS</h1>
-			<form method="GET" action="{{ base }}/submit-search/" >
+			<form method="GET" data-blogaction="search-submit" action="{{ base }}/submit-search/" >
 				<input type="hidden" name="cat" value="{{ category }}" />						
 				<input type="text" name="search" placeholder="{{ search_placeholder }}" value="{{ search_value }}" />
 				<input type="submit" value="" />
@@ -35,6 +35,6 @@
 		<section class='main'>		
 			{{ body }}
 		</section>
-	</div>
+	</main>
 </body>
 </html>

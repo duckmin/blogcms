@@ -30,7 +30,7 @@
 			$modified_array=array();
 			$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );
 			foreach( $posts as $row ){ 			
-                $post_cat = ( strlen($cat) > 0 )? $cat : $row["category"][0]; //when viewing all posts cat will be empty string so use base cat				
+                $post_cat = ( strlen($cat) > 0 )? $cat : $row["category"][0]; //when viewing all posts/search cat will be empty string so use base cat				
 				$modified_row = $post_views->generateModifedListingForPostInfo( $row );	
                 $row["show_id"] = true; //show_id on template, so manager page JavaScript can identify them
                 $post_html = $post_views->makePostHtmlFromData( $row, $post_cat, $post_template );				

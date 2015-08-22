@@ -8,12 +8,16 @@
 		{
 			$this->mongo_getter = $db_getter;
 			$this->post_views = $post_views;
+		}
+		
+		private function sortOldestToNewest(){
+		    return ( isset($_COOKIE["sort"]) && (int)$_COOKIE["sort"] === 1 )? true : false;   
 		}		
 		
 		public function getHomePagePosts( $page_num, $cat ){
 			$str="";
 			$i = 0;
-			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat );
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategory( $page_num, $cat, $this->sortOldestToNewest() );
 			$url_add = $cat;
 			$L = $posts_from_db->count(true);
 			
@@ -38,7 +42,7 @@
 		public function getSearchPagePosts( $page_num, $cat, $search ){
 			$str="";
 			$i = 0;			
-			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search );
+			$posts_from_db = $this->mongo_getter->getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search, $this->sortOldestToNewest() );
             $s = urlencode( $search );			
 			$url_add = "search/$cat/$s";
 			$L = $posts_from_db->count(true);

@@ -25,18 +25,13 @@
                 $data["third_page"] = true;
                 $data["next_page"] = $page_num+1; 
 			}
+			
+			$reverse_sort_applied = ( isset($_COOKIE["sort"]) && (int)$_COOKIE["sort"] === 1 )? true : false;
+			//what class of sort icon is to decide how to display, cookie is set with JS in blog_actions.js
+			$data["sort_title"] = ( !$reverse_sort_applied )? "Sort Oldest To Newest" : "Sort Newest To Oldest";
+			$data["sort_class"] = ( !$reverse_sort_applied )? "" : "sorted";
+			
 			return TemplateBinder::bindTemplate( $template, $data );
-			/*$paginator="<ul class='paginator' >";
-			if( $page_num>1 ){
-				$back=$page_num-1;
-				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$back."' >".$back."</a></li>";
-			}
-			$paginator.="<li class='current-cat' >".$page_num."</li>";
-			if( $amount_retrieved > $amount_per_page ){
-				$forward=$page_num+1;
-				$paginator.="<li><a href='".$GLOBALS['base_url']."/".$add_to_base."/".$forward."' >".$forward."</a></li>";
-			}
-			return $paginator."</ul>";*/
 		}			
 		
 		private function makeItem( $post_data_array ){
@@ -157,11 +152,18 @@
 		}
 		
 		public function getCatHeaderList( $cat = "" ){
+			$categories = $GLOBALS['post_categories'];
+			$count = count($categories);
 			$str = "";			
-			for( $i = 0; $i < count( $GLOBALS['header_categories'] ); $i++ ) {
-				$current_cat = $GLOBALS['header_categories'][ $i ];				
-				$added_class = ( $cat === $current_cat )? "class=current-cat" : "";
-				$str.='<li '.$added_class.' ><a href="/'.$current_cat.'/1">'.ucwords( $current_cat ).'</a></li>';
+			$li_tmplt = '<li class="{{ added_class }}" ><a href="/{{ current_cat }}/1/" data-blogaction="category-link" >{{ uc_cat }}</a></li>';
+			for( $i = 0; $i < $count; $i++ ) {
+				$current_cat = $categories[ $i ];
+				$data = array(
+				    "current_cat"=>$current_cat,			
+                    "uc_cat"=>ucwords( $current_cat ),				
+				    "added_class"=>( $cat === $current_cat )? "current-cat" : ""
+				);
+				$str .= TemplateBinder::bindTemplate( $li_tmplt, $data );
 			}
 			return $str; //just the lis of the list
 		}

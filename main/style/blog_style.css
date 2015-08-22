@@ -50,7 +50,7 @@ header > ul > li:first-child{
 }
 
 header > ul > li, .main > ul.paginator > li{
-	background-color: white;
+	/*background-color: white;*/
 }
 
 header > ul > li > a {
@@ -66,7 +66,7 @@ header > ul > li > a {
 	position:relative;
 }
 
-.main > ul.paginator > li > a, .main > ul.paginator > li.current-cat{
+ul.paginator > li > a, .main > ul.paginator > li.current-cat{
 	padding:0 0.8rem;
 }
 
@@ -79,10 +79,47 @@ header > ul > li > a {
 	border-bottom-left-radius:5px;
 }
 
-.main > ul.paginator > li:last-child{
+.main > ul.paginator > li:nth-last-child(2){
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	border-right:1px solid black;
+	margin-right:1em;
+}
+
+/*sort*/
+ul.paginator > li:nth-last-child(1){
+	border-right:1px solid;
+	border-radius:5px;
+	/*background-image: url("resources/time_forward.png");
+	background-position: center center;
+    background-repeat: no-repeat;*/
+}
+
+/* for a rotateable bg image */
+ul.paginator > li:nth-last-child(1):before{
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index:1;
+    background-image: url("resources/time_forward.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/*hide sort on botom for better look */
+.main > ul:last-child > li:nth-last-child(1) {
+    display:none;   
+}
+
+ul.paginator > li:nth-last-child(1).sorted:before{
+    transform: rotate(180deg);
+}
+
+ul.paginator > li:nth-last-child(1) > a{
+    padding:0 1.2rem;
 }
 
 header > ul > li.current-cat, header > ul > li:hover {
@@ -334,8 +371,7 @@ blockquote > p{
 	
 	.main article.post img{
 		margin-left:-0.5rem;
-		width:calc( 100% + 1rem );
-		max-width:none;
+		max-width:calc( 100% + 1rem );
 	}
 	
 	.main article.post{

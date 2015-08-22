@@ -96,7 +96,10 @@ munchin ass niga shit mein!
 	
 	//TEST TO GET TIMESTAMP OF ONE POST AND GET THE NEXT POST BACK IN TIME
 	//$time = 1427140819000/1000;	
-	$d = new MongoDate(time());
+	//$d = new MongoDate(time());
 	//echo time();
-	var_dump($d);
+	//var_dump($d);
+	
+	echo var_dump( isset($_COOKIE["sort"]) );
+	echo var_dump((int)$_COOKIE["sort"]);
 ?>

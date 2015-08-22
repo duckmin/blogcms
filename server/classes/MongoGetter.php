@@ -29,19 +29,21 @@
 			return $cursor;
 		}*/
 		
-		public function getHomePagePostsFromDbByCategory( $page_num, $cat ){
+		public function getHomePagePostsFromDbByCategory( $page_num, $cat, $reverse_sort ){
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;
+			$sort = ($reverse_sort)? 1 : -1;
 			$collection = $this->db->posts;			
-			$cursor = $collection->find( array( "category"=>$cat ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );		
+			$cursor = $collection->find( array( "category"=>$cat ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => $sort ) );		
 			return $cursor;
 		}
 		
-		public function getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search ){
+		public function getHomePagePostsFromDbByCategoryAndSearch( $page_num, $cat, $search, $reverse_sort ){
 			$count = ( $page_num-1 )*$GLOBALS['amount_on_main_page'];
 			$skip = $GLOBALS['amount_on_main_page']+1;
+			$sort = ($reverse_sort)? 1 : -1;
 			$collection = $this->db->posts;			
-			$cursor = $collection->find( array( "category"=>$cat, '$text'=>array( '$search'=>$search ) ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => -1 ) );
+			$cursor = $collection->find( array( "category"=>$cat, '$text'=>array( '$search'=>$search ) ) )->limit($skip)->skip($count)->sort( array( 'lastModified' => $sort ) );
 			return $cursor;
 		}
 		

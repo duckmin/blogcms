@@ -1,11 +1,11 @@
 <?php
 	//included in index.php which has configs.php included already
 	$base = $GLOBALS['base_url'];
-	$url = $_SERVER["REQUEST_URI"];
+	$sort_add = ( isset($_COOKIE["sort"]) && (int)$_COOKIE["sort"] === 1 )? "**" : "*"; //add 2 * if reverse sorted or 1 * if not, so the correct page can be cached   
+	$url = $_SERVER["REQUEST_URI"].$sort_add;
 	$cache = new CacheController( $GLOBALS['cache_dir'], $url );
 	
 	if( !$cache->urlInCache() || $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) ){
-		//$par_count is defined in index.php
 		$_GET['cat'] = ( $url_parts[0] !== "" )? $url_parts[0] : $GLOBALS['post_categories'][0]; //cat is first url part or the default cat	
 		$_GET['page'] = ( $part_count > 1 )? (int)$url_parts[ $part_count-1 ] : 1; //page is always last part of url or 1		
 		
@@ -48,9 +48,7 @@
 			goTo404();
 		}	
 	}else{ 
-	   // echo var_dump( $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) );
-		echo $cache->pullUrlContentFromCache();
-		//echo "pulled from cache";
-		
+	    //DEBUG - echo var_dump( $cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) );
+		echo $cache->pullUrlContentFromCache();		
 	}
 ?>

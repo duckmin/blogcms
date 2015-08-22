@@ -26,7 +26,7 @@ $GLOBALS['mongo_db_name'] = "blog";
 $GLOBALS['manager_keyword'] = "manager";
 
 //# of posts that show up per page
-$GLOBALS['amount_on_main_page'] = 5;
+$GLOBALS['amount_on_main_page'] = 2;
 
 //# of posts that show up on the "posts" tab in the manager
 $GLOBALS['amount_on_manger_tab'] = 2;
@@ -44,15 +44,6 @@ $GLOBALS['max_folder_path_length'] = 1000;
 //new category names must not contain any spaces or special chars 
 //only A-z 0-9 -_
 $GLOBALS['post_categories'] = json_decode( file_get_contents( $GLOBALS['server_path']."/includes/categories.json" ), true );
-
-//header categries are the ones which show up in the header of the site
-//you may not want every single category to show up in the header so you can define
-//which ones do here
-$GLOBALS['header_categories'] = $GLOBALS['post_categories']/*array(
-	$GLOBALS['post_categories'][0],
-	$GLOBALS['post_categories'][1],
-	$GLOBALS['post_categories'][2]
-)*/;
 
 function returnMessage( $success, $message, $data ){
 	$holder = Array( 'result'=>$success, 'message'=>$message, 'data'=>$data );

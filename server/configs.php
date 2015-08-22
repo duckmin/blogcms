@@ -26,10 +26,13 @@ $GLOBALS['mongo_db_name'] = "blog";
 $GLOBALS['manager_keyword'] = "manager";
 
 //# of posts that show up per page
-$GLOBALS['amount_on_main_page'] = 2;
+$GLOBALS['amount_on_main_page'] = 4;
 
 //# of posts that show up on the "posts" tab in the manager
 $GLOBALS['amount_on_manger_tab'] = 2;
+
+//this is modified in classes/PostController.php, do not turn to true from this page!
+$GLOBALS['lazy_load_images'] = false;
 
 //minutes until cache file expires
 $GLOBALS['max_page_cache_mins'] = -5; //turned off for dev turn on for prod to resonable amount of mins
@@ -61,9 +64,9 @@ function myAutoloader( $className )
 }
 
 function goTo404(){
-	$redirect_url = $GLOBALS['server_path']."/pages/404.php";
+	$error_box = $GLOBALS['server_path']."/pages/404.php";
 	header( $_SERVER["SERVER_PROTOCOL"]." 404 Not Found" );	
-	include($redirect_url );	
+	include $error_box;	
 }
 
 

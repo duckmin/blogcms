@@ -95,6 +95,10 @@ ul.paginator > li:nth-last-child(1){
     background-repeat: no-repeat;*/
 }
 
+ul.paginator > li:nth-last-child(1):hover{
+    cursor:pointer;
+}
+
 /* for a rotateable bg image */
 ul.paginator > li:nth-last-child(1):before{
     content: "";

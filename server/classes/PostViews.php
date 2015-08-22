@@ -46,7 +46,12 @@
 					$src = strip_tags( $post_data_array[ "src" ] );
 					$alt_val = strip_tags( $post_data_array[ "alt" ] );
 					$alt = ( $alt_val !== "" )? $alt_val : "Image Failed to Load";
-					$element = "<img src=\"$src\" alt=\"$alt\" />";
+					if( $GLOBALS['lazy_load_images'] ){ 
+					//lazy loading images option is for blog.php when blog_scroll_actions.js is loaded on page to load images when post is in view
+					   $element = "<img data-src=\"$src\" src=\"\" alt=\"$alt\" />";
+				    }else{
+				       $element = "<img src=\"$src\" alt=\"$alt\" />";
+				    }
 					break;
 					
 				case "audio":
@@ -154,7 +159,7 @@
 			$categories = $GLOBALS['post_categories'];
 			$count = count($categories);
 			$str = "";			
-			$li_tmplt = '<li class="{{ added_class }}" ><a href="/{{ current_cat }}/1/" data-blogaction="category-link" >{{ uc_cat }}</a></li>';
+			$li_tmplt = '<li class="{{ added_class }}" ><a href="/{{ current_cat }}/1" data-blogaction="category-link" >{{ uc_cat }}</a></li>';
 			for( $i = 0; $i < $count; $i++ ) {
 				$current_cat = $categories[ $i ];
 				$data = array(

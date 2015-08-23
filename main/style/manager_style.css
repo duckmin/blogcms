@@ -1,10 +1,27 @@
 .folders {
-	margin-left:10px;
+	padding-left:10px;
 }
 
 .folders > li {
 	vertical-align: middle;
 	margin-top:4px;	
+}
+
+.folders > li > img:nth-of-type(2).open{
+    transform: rotate(180deg);
+}
+
+.folders > li > img[src='/style/resources/folder.png'] + img + img  {
+    display:none;
+}
+
+.folders > li > img[src='/style/resources/folder-open.png'] + img + img  {
+    display:inline;
+}
+
+.folders > li > img[src='/style/resources/folder-open.png'] ~ span  {
+    font-weight: 700;
+    text-decoration: underline;
 }
 
 .folders > li > span {
@@ -110,8 +127,37 @@
 	background-image:url('../style/resources/action_delete.png');
 }
 
+section[data-tab='pictures']{
+    padding-bottom:0px;    
+}
+
 section[data-tab='pictures'] form {
 	margin:10px;
+}
+
+section[data-tab='pictures'] > div {
+	display: inline-block;
+	min-height:300px;
+	max-height:600px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	vertical-align: top;
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	border-bottom:none;
+}
+
+section[data-tab='pictures'] > div:nth-of-type(1){
+    width:calc( 30% - 1px );
+	border-left:none;
+}
+
+section[data-tab='pictures'] > div:nth-of-type(2){
+    width:70%;
+	border-right:none;
+	/* so border between 2 divs is not 2px wide, they overlap */
+	margin-left:-1px;
 }
 
 section[data-tab='template'] > ul:first-child{

@@ -131,7 +131,7 @@
 			</label>
 			<iframe style="display:none" id="upload_target" name="upload_target" src="#" ></iframe>
 		</form>
-		<!-- explorer appended with JS -->
+		<div></div><div id="pic-files" ></div>
 	</section>
 	
 	<section data-tab='preview' >

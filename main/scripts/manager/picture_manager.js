@@ -1,70 +1,93 @@
 
 var resources_templates = {
 	"folder":"<li>"+
-		"<img src='"+constants.base_url+"/style/resources/folder.png' title='Show Folder Contents' data-filepath='{{ file_path }}' onclick='listFile(this)' />"+
-		"<img src='"+constants.base_url+"/style/resources/arrow-curve.png' title='Upload to Folder' data-folderpath='{{ file_path }}' onclick='folderUpload(this)' />"+
-		"<img class='hide' src='"+constants.base_url+"/style/resources/folder-add.png' title='New Folder' data-folderpath='{{ file_path }}' onclick='newFolder(this)' />"+
-		"<span>{{ file_path }}</span>"+
+		"<img src='/style/resources/folder.png' title='Show Folder Contents' data-filepath='{{ file_path }}' onclick='listFile(this)' />"+
+		"<img src='/style/resources/arrow_top.png' title='Upload to Folder' onclick='toggleFolders(this)' />"+
+		"<img src='/style/resources/folder-add.png' title='New Folder' data-folderpath='{{ file_path }}' onclick='newFolder(this)' />"+
+		"<span>{{ base_name }}</span>"+
 	"</li>",
 	
 	"image":"<li class='file' >"+
-		"<img src='"+constants.base_url+"/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ resource_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
-		"<img src='"+constants.base_url+"/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+		
+		"<img src='/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ resource_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
+		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+		
 		"{{ resource_name }}"+
 	"</li>",
 	
 	"audio":"<li class='file' >"+
-		"<img src='"+constants.base_url+"/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ resource_path }}' onclick='audioClick(this)' />"+
-		"<img src='"+constants.base_url+"/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+			
+		"<img src='/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ resource_path }}' onclick='audioClick(this)' />"+
+		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+			
 		"{{ resource_name }}"+
 	"</li>"
 }
 
 function listFile( element ){
 	var parent_li = element.nearestParent( "li" ),
-	add_folder_img = parent_li.lastChildOfType( 'img' ),
-	src = constants.base_url+"/style/resources/";
+	parent_div = element.nearestParent("div"),
+	base = "/style/resources/";
 	
-	if( element.hasAttribute( 'data-filepath' ) && !element.hasAttribute( 'data-loaded' ) ){
-		var path = element.getAttribute( 'data-filepath' );
-		
-		controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
-			var resp = JSON.parse(d),
-			lis = "";					
+    if( element.getAttribute("src") !== base+"folder-open.png" ){	
+    	var path = element.getAttribute( 'data-filepath' );
+    	controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
+    	    //make folder input used for upload the value of folder contents in view
+    	    var input = gEBI( 'upload-path' );
+    	    input.value = path;
+    	    
+    	    //if there is a img with folder-open.png src change it to folder closed
+    		var open_img = parent_div.querySelector("li > img[src='"+base+"folder-open.png']");
+    		( open_img !== null )? open_img.src = base+"folder.png" : false;
+    		//change current src to folder open, this will also unhide add directory button
+    		element.src = base+"folder-open.png"; //will unhide 
+    		
+    		var resp = JSON.parse(d), dirs = "", files = "", li;					
+    	    resp.forEach( function( item ){
+    			if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+    				li = bindMustacheString( resources_templates[item.type], item.data );
+    				if( item.type !== "folder"){
+    				   files += li;    
+    				}else{
+    				   dirs += li;    
+    				}
+    			}
+    		});	
+    		
+    		if( !element.hasAttribute( 'data-loaded' ) ){
+    			var list = createElement("ul", {
+    				"class":"folders",
+    				"innerHTML":dirs
+    			});
+    			parent_li.appendChild( list );
+    		    element.setAttribute( 'data-loaded', "" );
+    		    parent_li.querySelector("img:nth-of-type(2)").addClass("open");
+    	    }
+    		
+    		//always put files in the window
+    		var files_list = createElement("ul", {
+    			"class":"folders",
+    			"innerHTML":files
+    		});
+            gEBI("pic-files").innerHTML = files_list.outerHTML;
+    	})
+    }
+}
 
-		    resp.forEach( function( item ){
-				if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
-					lis += bindMustacheString( resources_templates[item.type], item.data );
-				}
-			});	
-			
-			var list = createElement("ul", {
-				"class":"folders",
-				"innerHTML":lis
-			})
-			parent_li.appendChild( list );
-				
-			element.setAttribute( 'data-loaded', "" );
-			element.src = src+= "folder-open.png"; 
-			add_folder_img.removeClass("hide");
-		})
-		
-	}else{
-		var ul = parent_li.getElementsByTagName('ul')[0],
-		current_display = ul.style.display, display;
-
-		if( current_display === "" || current_display === "block" ){
-			display = "none";
-			src += "folder.png";
-			add_folder_img.addClass("hide");
-		}else{
-			display = "block";
-			src += "folder-open.png"
-			add_folder_img.removeClass("hide");;
-		}
-		ul.style.display = display;
-		element.src = src;
-	}
+function toggleFolders(element){
+    var parent_li = element.nearestParent( "li" ),
+    ul = parent_li.querySelector("ul.folders");
+	if( ul !== null ){
+    	var current_display = ul.style.display, display;
+    	if( current_display === "" || current_display === "block" ){
+    		display = "none";
+    		element.removeClass("open");
+    	}else{
+    		display = "block";
+    		element.addClass("open");
+    	}
+    	ul.style.display = display;
+    }else{
+        //if ul is null files have not been listed 
+        var folder_open_img = parent_li.querySelector("img:nth-of-type(1)");
+        listFile( folder_open_img );
+    }
 }
 
 function deleteResource( elm ){
@@ -144,17 +167,6 @@ function newFolder( element ){
 		
 		folder_list.prepend( add_folder_li );	
 	}
-	
-	//tab_actions.tabShow( document.querySelector('[data-tab=template]') ), //from extender_tabs.js
-	//window.location.hash = "#template";
-	//template_item = templatetype[ "audio" ]( path );
-	//gEBI("template").appendChild( template_item );
-}
-
-function folderUpload( element ){
-	var path = element.getAttribute( 'data-folderpath' ),
-	input = gEBI( 'upload-path' );
-	input.value = path;
 }
 
 function savePopupFolderClickAction( element ){
@@ -185,23 +197,15 @@ function imageUploadValidator(){
 
 function uploadResponseAction( obj ){
 	if( obj.result === true ){
-		var folder_input = gEBI( 'upload-path' ),
-		folder_path = folder_input.value,
-		folder_element = document.querySelector('[data-filepath="'+folder_path+'"]'),
-		ul = folder_element.nearestParent("li").getElementsByTagName("ul");
-		
-		if( ul.length > 0 ){
-			//obj param has a data attribute and when the upload is successful there is an object in the data attribute with its own data attribute 
-			//to avoid confusion obj.data.data is what is used to bind template
-			var d = obj.data;
-			if( d.hasOwnProperty("type") && resources_templates.hasOwnProperty(d.type) ){
-				ul[0].innerHTML += bindMustacheString( resources_templates[d.type], d.data );
-			}
-		}else{
-			listFile( folder_element );
+		//obj param has a data attribute and when the upload is successful there is an object in the data attribute with its own data attribute 
+		//to avoid confusion obj.data.data is what is used to bind template
+		var d = obj.data;
+		if( d.hasOwnProperty("type") && resources_templates.hasOwnProperty(d.type) ){
+			var file_li = bindMustacheString( resources_templates[d.type], d.data );
+			gEBI("pic-files").querySelector("ul.folders").innerHTML += file_li;
 		}
+
 		//clear form 
-		folder_input.value = "";
 		document.querySelector("input[type='file']").value = "";
 	}else{
 		showAlertMessage( obj.message, obj.result );

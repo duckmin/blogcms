@@ -23,8 +23,8 @@ addEvent( window, "load", function(){
 			var ul = createElement("ul",{
 				"class":"folders"
 			});
-			ul.innerHTML = bindMustacheString( resources_templates.folder, {file_path:constants.resources_directory} );
-			panel.appendChild(ul);
+			ul.innerHTML = bindMustacheString( resources_templates.folder, {base_name:constants.resources_directory.substr(1), file_path:constants.resources_directory} );
+			panel.querySelector("div:nth-of-type(1)").appendChild(ul);
 			delete this.pictures;
 		},	
 		"posts":function( tab, panel ){

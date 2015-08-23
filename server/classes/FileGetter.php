@@ -25,10 +25,12 @@
 		}
 		
 		public static function getDirectoryInfo( $dir_path ){
+			$path_info = pathinfo( $dir_path );
 			return array( 
 				"type"=>"folder",
 				"data"=>array(
-					"file_path"=>$dir_path
+					"file_path"=>$dir_path,
+					"base_name"=>$path_info["basename"]
 				)
 			);
 		}

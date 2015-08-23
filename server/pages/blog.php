@@ -7,7 +7,7 @@
 	
 	if( $cache->urlInCache() && !$cache->cacheMinutesOverLimit( $GLOBALS['max_page_cache_mins'] ) ){   
 	    echo $cache->pullUrlContentFromCache();
-	    echo "cached";
+	    //echo "cached";
         exit;	
     }
     

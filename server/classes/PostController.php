@@ -22,8 +22,7 @@
 			$url_add = $cat;
 			$L = $posts_from_db->count(true);
 			
-			if( $L > 0 ){
-			    $GLOBALS['lazy_load_images'] = true; //turn on lazy loading when this is called from pages/blog.php	 
+			if( $L > 0 ){ 
 				$post_template = file_get_contents( $GLOBALS['template_dir']."/blog_post.txt" );		
 				foreach( $posts_from_db as $single ){				
 					if( $i < $GLOBALS['amount_on_main_page'] ){

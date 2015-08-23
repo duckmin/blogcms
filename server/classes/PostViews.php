@@ -3,7 +3,8 @@
 	
 	class PostViews
 	{
-
+        public $lazy_load_imgs = false;
+        
 		function __construct( Parsedown $parsedown )
 		{
 			$this->parsedown = $parsedown;
@@ -46,7 +47,7 @@
 					$src = strip_tags( $post_data_array[ "src" ] );
 					$alt_val = strip_tags( $post_data_array[ "alt" ] );
 					$alt = ( $alt_val !== "" )? $alt_val : "Image Failed to Load";
-					if( $GLOBALS['lazy_load_images'] ){ 
+					if( $this->lazy_load_imgs){ 
 					//lazy loading images option is for blog.php when blog_scroll_actions.js is loaded on page to load images when post is in view
 					   $element = "<img data-src=\"$src\" src=\"\" alt=\"$alt\" />";
 				    }else{

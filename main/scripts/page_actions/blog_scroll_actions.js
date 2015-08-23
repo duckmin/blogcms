@@ -11,6 +11,7 @@
     
     function scrollerMotion(e){
         var item = document.querySelector(".main > article:not([data-loaded])"); //get article not loaded yet
+        console.log(item);
         if( item !== null ){
             var space_above_post = item.offsetTop,
             win_height = window.innerHeight,

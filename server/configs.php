@@ -31,9 +31,6 @@ $GLOBALS['amount_on_main_page'] = 4;
 //# of posts that show up on the "posts" tab in the manager
 $GLOBALS['amount_on_manger_tab'] = 2;
 
-//this is modified in classes/PostController.php, do not turn to true from this page!
-$GLOBALS['lazy_load_images'] = false;
-
 //minutes until cache file expires
 $GLOBALS['max_page_cache_mins'] = -5; //turned off for dev turn on for prod to resonable amount of mins
 

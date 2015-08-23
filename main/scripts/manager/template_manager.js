@@ -443,7 +443,7 @@
     	"<td>"+
     		"<img src='"+constants.base_url+"/style/resources/save.png' title='Save Changes' onclick='saveChangesAction( this )' />"+
     		"<img src='"+constants.base_url+"/style/resources/pencil.png' title='Edit Post' onclick='editPostAction( this )' />"+
-    		"<a href='"+constants.base_url+"/post/{{ first_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}' target='_blank' >"+
+    		"<a href='"+constants.base_url+"/post/{{ page_category }}/{{ year }}/{{ month }}/{{ day }}/{{ safe_title }}' target='_blank' >"+
     			"<img src='"+constants.base_url+"/style/resources/application.png' title='View Post' />"+
     		"</a>"+
     		"<img src='"+constants.base_url+"/style/resources/clock.png' title='Make most recent post (move to top of the)' onclick='postMoveToTop( this )' />"+
@@ -603,28 +603,33 @@
 	}
 	
 	window.editPostAction = function( element ){
-		var form_values=table_actions.getTrValues( element ),
-		send={ "id":form_values.id };
-		controller.postJson( constants.ajax_url+'?action=6', send, function(d){
-			//var resp = JSON.parse( d);
-			if( d !== "" ){
-				var resp = JSON.parse( d ),
-				frag = documentFragment();
-				edit_mode.enable( form_values.id );
-				resp.forEach(function( post ){
-					var post_type = post["data-posttype"],
-					li = templatetype[ post_type ](),
-					form_class = new FormClass( li );
-					form_class.bindValues( post );
-					frag.appendChild( li );
-				});
-				
-				gEBI("template").removeChildren().appendChild(frag);
-				window.location.hash = "#template";
-			}else{
-				showAlertMessage( "No Data For Post", false );
-			}
-		})
+		var form_values=table_actions.getTrValues( element );
+		if( edit_mode.active() && edit_mode.id_in_edit === form_values.id ){
+		    //this post is currently being edited switch to manager
+		    window.location.hash = "#template";
+		}else{
+    		var send={ "id":form_values.id };
+    		controller.postJson( constants.ajax_url+'?action=6', send, function(d){
+    			//var resp = JSON.parse( d);
+    			if( d !== "" ){
+    				var resp = JSON.parse( d ),
+    				frag = documentFragment();
+    				edit_mode.enable( form_values.id );
+    				resp.forEach(function( post ){
+    					var post_type = post["data-posttype"],
+    					li = templatetype[ post_type ](),
+    					form_class = new FormClass( li );
+    					form_class.bindValues( post );
+    					frag.appendChild( li );
+    				});
+    				
+    				gEBI("template").removeChildren().appendChild(frag);
+    				window.location.hash = "#template";
+    			}else{
+    				showAlertMessage( "No Data For Post", false );
+    			}
+    		})
+        }
 	
 	}
 	

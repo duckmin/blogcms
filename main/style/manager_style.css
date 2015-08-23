@@ -45,7 +45,7 @@
 	display:inline-block;
 	height:16px;
 	width:16px;
-	background-color:white;
+	
 	margin-left:4px;
 	background-repeat:no-repeat;
 	border-radius:3px;
@@ -58,6 +58,7 @@
 
 .tmplt-forum-container{
 	padding-bottom:10px;
+	background-color: lemonchiffon;
 }
 
 .tmplt-forum-container h5, .tmplt-forum-container h6 {

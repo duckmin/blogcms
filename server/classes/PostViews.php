@@ -149,10 +149,10 @@
 		}				
 		
 		//for actions/get_post_info.php we must modify the posting to put in the form
-		public function generateModifedListingForPostInfo( $row ){
+		public function generateModifedListingForPostInfo( $row, $page_cat ){
 			$row = $this->convertRowValues( $row );
 			$row["post_type_options"] = $this->getSelectedOption( $row['category'] );
-			$row["first_category"] = $row['category'][0]; //for link to post on manager tab
+			$row["page_category"] = $page_cat; //for link to post on manager tab
 			return $row;
 		}
 		

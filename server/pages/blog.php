@@ -40,9 +40,10 @@
 	if( $mongo_results ){
     	$template = file_get_contents( $GLOBALS['template_dir']."/base_page.txt" );
     	$title = $cat." page ".$page." - ".$_SERVER['HTTP_HOST'];		
-    	$desc	= 	$_SERVER['HTTP_HOST']." - browse ".$cat." page ".$page;
-		$scripts = "<script src='/scripts/page_actions/main_analytics.js'></script>
-            <script src='/scripts/page_actions/blog_scroll_actions.js'></script>";
+    	$desc= $_SERVER['HTTP_HOST']." - browse ".$cat." page ".$page;
+		$scripts = "<script src='/scripts/page_actions/main_analytics.js'></script>";
+        $scripts .="<script src='/scripts/page_actions/blog_scroll_actions.js'></script>";
+		
 		$tmplt_data = array();
 		$tmplt_data["title"] = $title;
 		$tmplt_data["description"] = $desc;

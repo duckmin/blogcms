@@ -11,7 +11,7 @@
         exit;	
     }
     
-    if( $part_count !== 2 ){
+    if( $part_count > 2 ){
 	    goTo404();
 	    exit;
 	}	

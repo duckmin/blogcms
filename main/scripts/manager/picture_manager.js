@@ -8,13 +8,13 @@ var resources_templates = {
 	"</li>",
 	
 	"image":"<li class='file' >"+
-		"<img src='/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ resource_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
+		"<img src='/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ server_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
 		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+		
 		"<span>{{ resource_name }}</span>"+
 	"</li>",
 	
 	"audio":"<li class='file' >"+
-		"<img src='/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ resource_path }}' onclick='audioClick(this)' />"+
+		"<img src='/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ server_path }}' onclick='audioClick(this)' />"+
 		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+			
 		"<span>{{ resource_name }}</span>"+
 	"</li>"

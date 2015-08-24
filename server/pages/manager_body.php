@@ -120,16 +120,16 @@
 		
 	<section data-tab='pictures' >
 		<form id="img-upload-form" action="/upload_img.php" method="post" enctype="multipart/form-data" target="upload_target" onsubmit="return imageUploadValidator();" >
-			<b><label>Folder:  
-				<input id='upload-path' name="folder_path" readonly  type="text" />
-			</label></b>
-			<b><label>File:  
-				<input type="file" name="new_img" />
-			</label></b>
-			<label>
-				<input type="submit" name="submitBtn" style="padding:0 5px" value="Upload" />
-			</label>
-			<iframe style="display:none" id="upload_target" name="upload_target" src="#" ></iframe>
+    		<ul class="inline-list form-list" >
+    			<li>
+    			     <span>Folder:</span>
+                    <input id='upload-path' name="folder_path" readonly  type="text" />
+    			   
+    			</li>
+    			<li><span>File:</span><input type="file" name="new_img" /></li>
+    			<li><input type="submit" name="submitBtn" style="padding:0 5px" value="Upload" /></li>				
+    		</ul>
+    		<iframe style="display:none" id="upload_target" name="upload_target" src="#" ></iframe>
 		</form>
 		<div></div><div id="pic-files" ></div>
 	</section>

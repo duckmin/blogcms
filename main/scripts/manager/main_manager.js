@@ -23,7 +23,12 @@ addEvent( window, "load", function(){
 			var ul = createElement("ul",{
 				"class":"folders"
 			});
-			ul.innerHTML = bindMustacheString( resources_templates.folder, {base_name:constants.resources_directory.substr(1), file_path:constants.resources_directory} );
+			var item = {
+			    type:"folder",
+			    base_name:constants.resources_directory.substr(1), 
+			    file_path:constants.resources_directory
+			};
+			ul.innerHTML = bindMustacheString( resources_templates[item.type], item );
 			panel.querySelector("div:nth-of-type(1)").appendChild(ul);
 			delete this.pictures;
 		},	
@@ -44,14 +49,12 @@ addEvent( window, "load", function(){
 })
 
 addEvent( window, "load", function(){
-	//tab_actions.tabShow( document.querySelector('[data-tab=template]') );
 	setMultiSelects( document.querySelector('#save-preview-popup') );
 	
-	attributeActions( document.body, "data-loadaction", {
-			
-			"logout":function(elm){
-				elm.addEvent( "click", managerExtraActions.logout )
-			}
+	attributeActions( document.body, "data-loadaction", {	
+		"logout":function(elm){
+			elm.addEvent( "click", managerExtraActions.logout )
+		}
 	});
 });
 

@@ -1,8 +1,8 @@
 
 var resources_templates = {
-	"folder":"<li>"+
-		"<img src='/style/resources/folder.png' title='Show Folder Contents' data-filepath='{{ file_path }}' onclick='listFile(this)' />"+
-		"<img src='/style/resources/arrow_top.png' title='Upload to Folder' onclick='toggleFolders(this)' />"+
+	"folder":"<li data-filepath='{{ file_path }}' >"+
+		"<img src='/style/resources/folder.png' title='Show Folder Contents' onclick='resources_action.listFiles(this)' />"+
+		"<img src='/style/resources/arrow_top.png' title='Show Sub Directories' onclick='resources_action.listSubDirectories(this)' />"+
 		"<img src='/style/resources/folder-add.png' title='New Folder' data-folderpath='{{ file_path }}' onclick='newFolder(this)' />"+
 		"<span>{{ base_name }}</span>"+
 	"</li>",
@@ -20,61 +20,72 @@ var resources_templates = {
 	"</li>"
 }
 
-function listFile( element ){
-	var parent_li = element.nearestParent( "li" ),
-	parent_div = element.nearestParent("div"),
-	base = "/style/resources/";
-	
-    if( element.getAttribute("src") !== base+"folder-open.png" ){	
-    	var path = element.getAttribute( 'data-filepath' );
-    	controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(d){
-    	    //make folder input used for upload the value of folder contents in view
-    	    var input = gEBI( 'upload-path' );
-    	    input.value = path;
-    	    
-    	    //if there is a img with folder-open.png src change it to folder closed
-    		var open_img = parent_div.querySelector("li > img[src='"+base+"folder-open.png']");
-    		( open_img !== null )? open_img.src = base+"folder.png" : false;
-    		//change current src to folder open, this will also unhide add directory button
-    		element.src = base+"folder-open.png"; //will unhide 
-    		
-    		var resp = JSON.parse(d), dirs = "", files = "", li;					
-    	    resp.forEach( function( item ){
-    			if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
-    				li = bindMustacheString( resources_templates[item.type], item.data );
-    				if( item.type !== "folder"){
-    				   files += li;    
-    				}else{
-    				   dirs += li;    
-    				}
-    			}
-    		});	
-    		
-    		if( !element.hasAttribute( 'data-loaded' ) ){
-    			var list = createElement("ul", {
-    				"class":"folders",
-    				"innerHTML":dirs
-    			});
-    			parent_li.appendChild( list );
-    		    element.setAttribute( 'data-loaded', "" );
-    		    parent_li.querySelector("img:nth-of-type(2)").addClass("open");
-    	    }
-    		
-    		//always put files in the window
-    		var files_list = createElement("ul", {
-    			"class":"folders",
-    			"innerHTML":files
-    		});
-            gEBI("pic-files").innerHTML = files_list.outerHTML;
-    	})
+var resources_action = {
+    getDirListing:function(path, callback){
+        controller.getText( constants.ajax_url+'?action=0&dir_path='+path, function(listing){
+            callback( JSON.parse(listing) );
+        });
+    },
+    makeLis:function( resp, bind_type ){
+        //bind_type is callback using the item.type attr must return boolean
+        var lis = "";
+        resp.forEach( function( item ){
+			if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+				if( bind_type( item.type ) ){
+				   lis += bindMustacheString( resources_templates[item.type], item.data );
+				}
+			}
+		});
+		return lis;
     }
 }
 
-function toggleFolders(element){
+resources_action.listFiles = function(element){
+    var base = "/style/resources/";
+    if( element.getAttribute("src") === base+"folder-open.png" ){
+        //listing in window currently do nothing
+        return;
+    }  
+    var parent_div = element.nearestParent("div"),
+    parent_li = element.nearestParent( "li" ),
+    path = parent_li.getAttribute( 'data-filepath' );
+    //make folder input used for upload the value of folder contents in view
+    var input = gEBI( 'upload-path' );
+    input.value = path;
+    //if there is a img with folder-open.png src change it to folder closed
+	var open_img = parent_div.querySelector("li > img[src='"+base+"folder-open.png']");
+	( open_img !== null )? open_img.src = base+"folder.png" : false;
+	//change current src to folder open, this will also unhide add directory button
+	element.src = base+"folder-open.png";
+    
+    this.getDirListing(path, function( resp ){
+        var files = this.makeLis( resp, function(bind_type){ return (bind_type !== "folder")?true:false; } ),
+		files_list = createElement("ul", {
+			"class":"folders",
+			"innerHTML":files
+		});
+        gEBI("pic-files").innerHTML = files_list.outerHTML;	
+    }.bind(this));
+}
+
+resources_action.listSubDirectories = function(element){
     var parent_li = element.nearestParent( "li" ),
-    ul = parent_li.querySelector("ul.folders");
-	if( ul !== null ){
-    	var current_display = ul.style.display, display;
+    ul = parent_li.querySelector("ul.folders"),
+    path = parent_li.getAttribute( 'data-filepath' );
+    
+    if( ul === null && !element.hasAttribute("data-loaded") ){
+        this.getDirListing(path, function( resp ){
+            var folders = this.makeLis( resp, function(bind_type){ return (bind_type === "folder")?true:false; } ),
+    		folders_list = createElement("ul", {
+    			"class":"folders",
+    			"innerHTML":folders
+    		});
+            parent_li.appendChild( folders_list );
+		    element.setAttribute( 'data-loaded', "" );
+		    element.addClass("open");
+        }.bind(this));
+    }else{
+        var current_display = ul.style.display, display;
     	if( current_display === "" || current_display === "block" ){
     		display = "none";
     		element.removeClass("open");
@@ -83,10 +94,6 @@ function toggleFolders(element){
     		element.addClass("open");
     	}
     	ul.style.display = display;
-    }else{
-        //if ul is null files have not been listed 
-        var folder_open_img = parent_li.querySelector("img:nth-of-type(1)");
-        listFile( folder_open_img );
     }
 }
 

@@ -11,11 +11,11 @@
     transform: rotate(180deg);
 }
 
-.folders > li > img[src='/style/resources/folder.png'] + img + img  {
+.folders > li > img:nth-child(2) + img  {
     display:none;
 }
 
-.folders > li > img[src='/style/resources/folder-open.png'] + img + img  {
+.folders > li > img:nth-child(2).open + img  {
     display:inline;
 }
 

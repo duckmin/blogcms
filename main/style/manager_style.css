@@ -7,15 +7,15 @@
 	margin-top:4px;	
 }
 
-.folders > li > img:nth-of-type(2).open{
+.folders > li.dir > img:nth-of-type(2).open{
     transform: rotate(180deg);
 }
 
-.folders > li > img:nth-child(2) + img  {
+.folders > li.dir > img:nth-child(2) + img  {
     display:none;
 }
 
-.folders > li > img:nth-child(2).open + img  {
+.folders > li.dir > img:nth-child(2).open + img  {
     display:inline;
 }
 
@@ -25,12 +25,13 @@
 }
 
 .folders > li > span {
-	margin-left:5px;
 	color:#190087;	
+	vertical-align: baseline;
 }
 
 .folders > li > img {
 	margin-right:5px;
+	vertical-align: sub;
 }
 
 .folders, #template {

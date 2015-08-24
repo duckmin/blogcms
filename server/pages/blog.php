@@ -27,7 +27,7 @@
 		$db_getter = new MongoGetter( $db ); 
 		$parsedown = new Parsedown();				
     	$post_views = new PostViews( $parsedown );
-    	$post_views->lazy_load_imgs = true; //turn on image lazy loading	
+    	$post_views->lazy_load_imgs = true; //turn on image lazy loading, false to turn off	
     	$post_controller = new PostController( $db_getter, $post_views );
 		$mongo_results = $post_controller->getHomePagePosts( $page, $cat ); //false if no result set
 	}catch( MongoException $e ){
@@ -42,7 +42,7 @@
     	$title = $cat." page ".$page." - ".$_SERVER['HTTP_HOST'];		
     	$desc= $_SERVER['HTTP_HOST']." - browse ".$cat." page ".$page;
 		$scripts = "<script src='/scripts/page_actions/main_analytics.js'></script>";
-        $scripts .="<script src='/scripts/page_actions/blog_scroll_actions.js'></script>";
+        $scripts .=( $post_views->lazy_load_imgs )? "<script src='/scripts/page_actions/blog_scroll_actions.js'></script>" : "";
 		
 		$tmplt_data = array();
 		$tmplt_data["title"] = $title;

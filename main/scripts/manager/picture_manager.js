@@ -1,6 +1,6 @@
 
 var resources_templates = {
-	"folder":"<li data-filepath='{{ file_path }}' >"+
+	"folder":"<li class='dir' data-filepath='{{ file_path }}' >"+
 		"<img src='/style/resources/folder.png' title='Show Folder Contents' onclick='resources_action.listFiles(this)' />"+
 		"<img src='/style/resources/arrow_top.png' title='Show Sub Directories' onclick='resources_action.listSubDirectories(this)' />"+
 		"<img src='/style/resources/folder-add.png' title='New Folder' data-folderpath='{{ file_path }}' onclick='newFolder(this)' />"+
@@ -10,13 +10,13 @@ var resources_templates = {
 	"image":"<li class='file' >"+
 		"<img src='/style/resources/image.png' title='Add Picture to Template' data-picturepath='{{ resource_path }}' onclick='pictureClick(this)' onmouseover='imageOver(this)' onmouseout='imageOut(this)' />"+
 		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+		
-		"{{ resource_name }}"+
+		"<span>{{ resource_name }}</span>"+
 	"</li>",
 	
 	"audio":"<li class='file' >"+
 		"<img src='/style/resources/audio.png' title='Add Audio to Template' data-audiopath='{{ resource_path }}' onclick='audioClick(this)' />"+
 		"<img src='/style/resources/action_delete.png' title='Delete Resource' data-filepath='{{ server_path }}' onclick='deleteResource(this)' />"+			
-		"{{ resource_name }}"+
+		"<span>{{ resource_name }}</span>"+
 	"</li>"
 }
 
@@ -26,16 +26,19 @@ var resources_action = {
             callback( JSON.parse(listing) );
         });
     },
+    itemHasTemplate:function(item){
+        return ( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) )?true:false;
+    },
     makeLis:function( resp, bind_type ){
         //bind_type is callback using the item.type attr must return boolean
         var lis = "";
         resp.forEach( function( item ){
-			if( item.hasOwnProperty("type") && resources_templates.hasOwnProperty(item.type) ){
+			if( this.itemHasTemplate(item) ){
 				if( bind_type( item.type ) ){
 				   lis += bindMustacheString( resources_templates[item.type], item.data );
 				}
 			}
-		});
+		}.bind(this));
 		return lis;
     }
 }
